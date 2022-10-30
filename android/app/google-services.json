@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "800304663206",
+    "project_id": "thanh-pho-bao-loc",
+    "storage_bucket": "thanh-pho-bao-loc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800304663206:android:b58028719be3d64e5ec267",
+        "android_client_info": {
+          "package_name": "com.example.thanh_pho_bao_loc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800304663206-ds8i68oe4heek68lesmdsnm4omqu37h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcTsK8I_nbloTBomfXtmnCgWIhzJIcfwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800304663206-ds8i68oe4heek68lesmdsnm4omqu37h2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
