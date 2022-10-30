@@ -6,9 +6,10 @@ abstract class IUserRepository {
   Future<void> createUser(user_entity.User user);
   Stream<List<user_entity.User>> getAllUser();
   Future<user_entity.User?> getUserByID(String id);
+  Future<user_entity.User?> getUserByEmail(String email);
   Future<void> updateUser(user_entity.User user);
   Future<void> deleteUser(String id);
-  Future<void> createUserByEmailAndPassword(
+  Future<void> createUserByEmailPassword(
     SignInUpByEmailPasswordRequest request,
     BuildContext context,
   );

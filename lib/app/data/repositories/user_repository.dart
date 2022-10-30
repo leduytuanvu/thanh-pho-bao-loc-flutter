@@ -81,15 +81,19 @@ class UserRepository extends IUserRepository {
   }
 
   @override
-  Future<void> createUserByEmailAndPassword(
-      SignInUpByEmailPasswordRequest request, BuildContext context) async {
+  Future<void> createUserByEmailPassword(
+    SignInUpByEmailPasswordRequest request,
+    BuildContext context,
+  ) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: request.email!,
         password: request.password!,
       );
-      await AuthRepository().sendEmailVerification(context: context);
+      if (credential.user != null) {
+        await AuthRepository().sendEmailVerification(context: context);
+      } else {}
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         log('The password provided is too weak.');
@@ -98,6 +102,30 @@ class UserRepository extends IUserRepository {
       }
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  @override
+  Future<user_entity.User?> getUserByEmail(String email) async {
+    try {
+      final docUser = FirebaseFirestore.instance
+          .collection('users')
+          .where("email", isEqualTo: email);
+      // log(docUser.toString());
+      // final snapshot = await docUser.snapshots().first.then((value) => value.);
+      final snapshot = await docUser.get()
+.then(snap => {
+    snap.forEach(doc => {
+        console.log(doc.data());
+    });
+});
+      // if (snapshot.first.!=null) {
+      //   return user_entity.User.fromJson(snapshot.data()!);
+      // }
+      return null;
+    } catch (e) {
+      log('USER REPOSITORY : $e');
+      rethrow;
     }
   }
 }
