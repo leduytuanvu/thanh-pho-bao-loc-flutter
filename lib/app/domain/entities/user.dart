@@ -1,3 +1,6 @@
+import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
+import 'package:thanh_pho_bao_loc/app/core/extensions/extensions.dart';
+
 class User {
   String? id;
   String? fullName;
@@ -7,28 +10,29 @@ class User {
   String? uid;
   String? username;
   String? passsword;
-  String? status;
+  Status? status;
   String? birthday;
   String? lastSeen;
   String? lastLogin;
-  String? accountStatus;
-  String? gender;
+  StatusAccount? statusAccount;
+  Gender? gender;
 
-  User(
-      {this.id,
-      this.fullName,
-      this.email,
-      this.phone,
-      this.image,
-      this.uid,
-      this.username,
-      this.passsword,
-      this.status,
-      this.birthday,
-      this.lastSeen,
-      this.lastLogin,
-      this.accountStatus,
-      this.gender});
+  User({
+    this.id,
+    this.fullName,
+    this.email,
+    this.phone,
+    this.image,
+    this.uid,
+    this.username,
+    this.passsword,
+    this.status,
+    this.birthday,
+    this.lastSeen,
+    this.lastLogin,
+    this.statusAccount,
+    this.gender,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,12 +43,12 @@ class User {
     uid = json['uid'];
     username = json['username'];
     passsword = json['passsword'];
-    status = json['status'];
+    status = json['status'].toString().stringToStatus;
     birthday = json['birthday'];
     lastSeen = json['lastSeen'];
     lastLogin = json['lastLogin'];
-    accountStatus = json['accountStatus'];
-    gender = json['gender'];
+    statusAccount = json['statusAccount'].toString().stringToStatusAccount;
+    gender = json["gender"].toString().stringToGender;
   }
 
   Map<String, dynamic> toJson() {
@@ -57,12 +61,12 @@ class User {
     data['uid'] = uid;
     data['username'] = username;
     data['passsword'] = passsword;
-    data['status'] = status;
+    data['status'] = status!.statusToString;
     data['birthday'] = birthday;
     data['lastSeen'] = lastSeen;
     data['lastLogin'] = lastLogin;
-    data['accountStatus'] = accountStatus;
-    data['gender'] = gender;
+    data['statusAccount'] = statusAccount!.statusAccountToString;
+    data['gender'] = gender!.genderToString;
     return data;
   }
 }

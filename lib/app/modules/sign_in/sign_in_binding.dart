@@ -12,7 +12,8 @@ class SignInBinding extends Bindings {
           userRepository: Get.find(),
         ));
     Get.lazyPut(() => ForgotPasswordController());
-    Get.lazyPut(() => SignUpController(userRepository: Get.find()));
+    Get.lazyPut(() => SignUpController(
+        userRepository: Get.find(), authRepository: Get.find()));
     Get.lazyPut(() => UserRepository());
   }
 }

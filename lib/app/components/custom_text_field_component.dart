@@ -47,6 +47,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               onTap: widget.function,
               child: Icon(
                 widget.icon,
+                size: 20.sp,
                 color: Colors.grey.shade800,
               ),
             ),

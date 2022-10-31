@@ -1,17 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
 
-void showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(
+void showSnackBar({BuildContext? context, String? message, Color? color}) {
+  ScaffoldMessenger.of(context!).showSnackBar(
     SnackBar(
+      elevation: 5,
+      backgroundColor: Colors.white,
+      behavior: SnackBarBehavior.floating,
+      margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       content: Text(
-        text,
+        message!,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: GoogleFonts.montserrat().fontFamily,
-          color: Colors.red.shade400,
-          fontSize: 16,
+          color: color,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
         ),
       ),
     ),

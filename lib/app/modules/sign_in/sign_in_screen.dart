@@ -14,7 +14,6 @@ class SignInScreen extends GetWidget<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    bool isChecked = false;
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -46,43 +45,13 @@ class SignInScreen extends GetWidget<SignInController> {
                           controller: controller.passwordTextController,
                           obscureText:
                               controller.isShowPassword.value ? false : true,
-                          function: () {
-                            controller.isShowPassword.value =
-                                !controller.isShowPassword.value;
-                          },
+                          function: () => controller.setIsShowPassword(),
                           icon: controller.isShowPassword.value
                               ? Icons.visibility
                               : Icons.visibility_off,
                         )),
                   ),
-                  SizedBox(height: 5.h),
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.end,
-                  //     children: [
-                  //       Text(
-                  //         'Show password',
-                  //         style: TextStyle(
-                  //           fontFamily: GoogleFonts.montserrat().fontFamily,
-                  //           color: Colors.white,
-                  //           fontSize: 12.sp,
-                  //         ),
-                  //       ),
-                  //       Obx(() => Checkbox(
-                  //             checkColor: Colors.white,
-                  //             // fillColor: MaterialStateProperty.resolveWith(getColor),
-                  //             fillColor: MaterialStateProperty.all(
-                  //                 AppColors.buttonRadient3),
-                  //             value: controller.isShowPassword.value,
-                  //             onChanged: (bool? value) {
-                  //               controller.isShowPassword.value = value!;
-                  //             },
-                  //           )),
-                  //     ],
-                  //   ),
-                  // ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 35.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.w),
                     child: GradientButtonWidget(
@@ -132,9 +101,7 @@ class SignInScreen extends GetWidget<SignInController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () async {
-                          await controller.signInGoogle(context: context);
-                        },
+                        onTap: () async => await controller.signInGoogle(),
                         child: SizedBox(
                           height: 22.w,
                           width: 22.w,
@@ -165,7 +132,7 @@ class SignInScreen extends GetWidget<SignInController> {
                     ? Container(
                         height: size.height,
                         width: size.width,
-                        color: Colors.white.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.6),
                         child: Center(
                           child: Lottie.asset(
                             'assets/videos/loading.json',

@@ -8,7 +8,7 @@ class HomeController extends GetxController {
   HomeController({required this.authRepository});
   signOut({BuildContext? context}) {
     try {
-      authRepository.signOut(context: context!);
+      authRepository.signOut();
     } catch (e) {}
   }
 }

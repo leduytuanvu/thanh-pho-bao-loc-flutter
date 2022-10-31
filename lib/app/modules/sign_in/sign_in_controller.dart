@@ -1,72 +1,59 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/core/services/local_storage_service.dart';
+import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
+import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
 import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 
+// SIGN IN STATE
 enum SignInState {
   initial,
   loading,
 }
 
 class SignInController extends GetxController {
+  // ATTRIBUTES
   final AuthRepository authRepository;
   final UserRepository userRepository;
 
+  // CRONTRUCTOR
   SignInController({
     required this.authRepository,
     required this.userRepository,
   });
 
+  // OBSERVABLES
   var signInState = SignInState.initial.obs;
   var isShowPassword = false.obs;
 
+  // TEXT CONTROLLER
   final emailOrPhoneTextController = TextEditingController();
   final passwordTextController = TextEditingController();
 
-  void goToSignUpScreen() {
-    Get.offAllNamed(Routers.signUpScreen);
-  }
+  // GO TO SIGN UP SCREEN
+  void goToSignUpScreen() => Get.offAllNamed(Routers.signUpScreen);
 
-  Future<void> signInGoogle({BuildContext? context}) async {
-    try {
-      signInState(SignInState.loading);
-      var user = await authRepository.signInWithGoogle(context: context!);
-      if (user != null) {
-        var userTmp = await userRepository.getUserByID(user.uid);
-        if (userTmp != null) {
-          LocalStorageService.setUser = userTmp;
-        } else {
-          var userEntity = user_entity.User(
-            id: user.uid,
-            email: user.email ?? "",
-            fullName: user.displayName ?? "",
-            phone: user.phoneNumber ?? "",
-            image: user.photoURL ?? "",
-            accountStatus: "active",
-            birthday: "",
-            gender: "",
-            lastLogin: "",
-            lastSeen: "",
-            passsword: "",
-            status: "active",
-            uid: user.uid,
-            username: "",
-          );
-          userRepository.createUser(userEntity);
-          LocalStorageService.setUser = userEntity;
-        }
-
-        Get.offAllNamed(Routers.homeScreen);
-      }
-      signInState(SignInState.initial);
-    } catch (e) {
-      log(e.toString());
-      signInState(SignInState.initial);
+  // SIGN IN WITH GOOGLE
+  Future<void> signInGoogle() async {
+    signInState(SignInState.loading);
+    var baseResponse = await authRepository.signInWithGoogle();
+    if (baseResponse.statusAction == StatusAction.success &&
+        baseResponse.data != null) {
+      Get.offAllNamed(Routers.homeScreen);
     }
+    showSnackBar(
+      context: Get.context,
+      message: baseResponse.message,
+      color: baseResponse.statusAction == StatusAction.success
+          ? Colors.green
+          : Colors.red,
+    );
+
+    signInState(SignInState.initial);
   }
 
   Future<void> createUser({BuildContext? context}) async {
@@ -82,7 +69,5 @@ class SignInController extends GetxController {
     }
   }
 
-  void setIsShowPassword() {
-    // isShowPassword(true);
-  }
+  void setIsShowPassword() => isShowPassword(!isShowPassword.value);
 }

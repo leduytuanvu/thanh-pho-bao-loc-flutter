@@ -46,6 +46,7 @@ dependencies:
   shared_preferences: ^2.0.15
   firebase_storage: ^11.0.3
   cloud_firestore: ^4.0.3
+  animated_snack_bar: ^0.3.0
 
 dev_dependencies:
   flutter_test:

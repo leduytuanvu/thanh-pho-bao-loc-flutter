@@ -70,7 +70,8 @@ class SignUpScreen extends GetWidget<SignUpController> {
                     GradientButtonWidget(
                         title: 'SIGN UP',
                         function: () {
-                          controller.signUpByEmailPassword(context: context);
+                          // controller.signUpByEmailPassword(context: context);
+                          controller.signUpByPhonePassword(context: context);
                         }),
                     SizedBox(height: 20.h),
                     Row(

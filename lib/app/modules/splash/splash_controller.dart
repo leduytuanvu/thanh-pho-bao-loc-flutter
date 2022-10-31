@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:thanh_pho_bao_loc/app/core/services/local_storage_service.dart';
+import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
 import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
 
 class SplashController extends GetxController {
@@ -19,7 +20,7 @@ class SplashController extends GetxController {
         Get.offAllNamed(Routers.signInScreen);
       }
     } catch (e) {
-      log('SPLASH CONTROLLER : $e');
+      showSnackBar(context: Get.context, message: e.toString());
     }
   }
 }

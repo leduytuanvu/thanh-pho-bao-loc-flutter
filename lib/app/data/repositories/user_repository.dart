@@ -1,13 +1,15 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 import 'package:thanh_pho_bao_loc/app/domain/repositories/user_repository.dart';
-import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_up_by_email_password_request.dart';
+import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_sign_up_request.dart';
+import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
 
 class UserRepository extends IUserRepository {
+  // CREATE USER IN FIRESTORE
   @override
   Future<void> createUser(user_entity.User user) async {
     try {
@@ -16,7 +18,6 @@ class UserRepository extends IUserRepository {
       final userJson = user.toJson();
       await docUser.set(userJson);
     } catch (e) {
-      log('USER REPOSITORY : $e');
       rethrow;
     }
   }
@@ -32,7 +33,6 @@ class UserRepository extends IUserRepository {
               .toList());
       return list;
     } catch (e) {
-      log('USER REPOSITORY : $e');
       rethrow;
     }
   }
@@ -47,7 +47,6 @@ class UserRepository extends IUserRepository {
       }
       return null;
     } catch (e) {
-      log('USER REPOSITORY : $e');
       rethrow;
     }
   }
@@ -81,18 +80,16 @@ class UserRepository extends IUserRepository {
   }
 
   @override
-  Future<void> createUserByEmailPassword(
-    SignInUpByEmailPasswordRequest request,
-    BuildContext context,
-  ) async {
+  Future<void> createUserByEmailPassword(SignInSignUpRequest request) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: request.email!,
+        email: request.emailOrPhone!,
         password: request.password!,
       );
       if (credential.user != null) {
-        await AuthRepository().sendEmailVerification(context: context);
+        // SEND EMAIL VERYFILE
+        await AuthRepository().sendEmailVerification();
       } else {}
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -105,27 +102,71 @@ class UserRepository extends IUserRepository {
     }
   }
 
+// GET USER BY EMAIL
   @override
-  Future<user_entity.User?> getUserByEmail(String email) async {
+  Future<BaseResponse> getUserByEmail(String email) async {
+    BaseResponse baseResponse = BaseResponse(
+      data: null,
+      message: 'GET USER BY EMAIL FAILURE',
+      statusAction: StatusAction.failure,
+      statusCode: null,
+    );
     try {
-      final docUser = FirebaseFirestore.instance
-          .collection('users')
-          .where("email", isEqualTo: email);
-      // log(docUser.toString());
-      // final snapshot = await docUser.snapshots().first.then((value) => value.);
-      final snapshot = await docUser.get()
-.then(snap => {
-    snap.forEach(doc => {
-        console.log(doc.data());
-    });
-});
-      // if (snapshot.first.!=null) {
-      //   return user_entity.User.fromJson(snapshot.data()!);
-      // }
+      var docUser = await FirebaseFirestore.instance
+          .collection("users")
+          .where("email", isEqualTo: email)
+          .get();
+      if (docUser.docs.isNotEmpty) {
+        baseResponse.data = user_entity.User.fromJson(
+          docUser.docs.first.data(),
+        );
+        baseResponse.message = "GET USER BY EMAIL SUCCESS";
+        baseResponse.statusAction = StatusAction.success;
+      }
+    } catch (e) {
+      baseResponse.message = e.toString();
+    }
+    return baseResponse;
+  }
+
+  @override
+  Future<user_entity.User?> getUserByPhone(String phone) async {
+    try {
+      var docUser = await FirebaseFirestore.instance
+          .collection("users")
+          .where("phone", isEqualTo: phone)
+          .get();
+      if (docUser.docs.isNotEmpty) {
+        return user_entity.User.fromJson(docUser.docs.first.data());
+      }
+
       return null;
     } catch (e) {
       log('USER REPOSITORY : $e');
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> createUserByPhonePassword(SignInSignUpRequest request) async {
+    try {
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: request.emailOrPhone!,
+        password: request.password!,
+      );
+      if (credential.user != null) {
+        // SEND EMAIL VERYFILE
+        await AuthRepository().sendEmailVerification();
+      } else {}
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        log('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        log('The account already exists for that email.');
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }
