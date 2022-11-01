@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/state_manager.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/home_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thanh_pho_bao_loc/app/modules/message/message_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/profile_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/search/search_screen.dart';
 
 class BottomBarScreen extends GetWidget<BottomBarController> {
   const BottomBarScreen({super.key});
@@ -11,50 +16,26 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
   @override
   Widget build(BuildContext context) {
     // final HideNavbar hiding = HideNavbar();
-    loadMore() async {
+    Future<void> loadMore() async {
       // controller.loadMore(true);
       await Future.delayed(const Duration(seconds: 2));
       // controller.loadMore(false);
     }
 
-    //   bottomNavigationBar: ValueListenableBuilder(
-    //     valueListenable: hiding.visible,
-    //     builder: (context, bool value, child) => AnimatedContainer(
-    //       duration: const Duration(milliseconds: 500),
-    //       height: value ? kBottomNavigationBarHeight : 0.0,
-    //       child: Wrap(
-    //         children: <Widget>[
-    //           BottomNavigationBar(
-    //             type: BottomNavigationBarType.fixed,
-    //             backgroundColor: Colors.blue,
-    //             fixedColor: Colors.white,
-    //             unselectedItemColor: Colors.white,
-    //             items: const [
-    //               BottomNavigationBarItem(
-    //                   icon: Icon(Icons.search), label: "Home"),
-    //               BottomNavigationBarItem(
-    //                   icon: Icon(Icons.search), label: "Home"),
-    //               BottomNavigationBarItem(
-    //                   icon: Icon(Icons.search), label: "Home"),
-    //               BottomNavigationBarItem(
-    //                   icon: Icon(Icons.search), label: "Home"),
-    //             ],
-    //             currentIndex: controller.index.value,
-    //             onTap: (index) {
-    //               controller.index.value = index;
-    //             },
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
+    var listScreen = [
+      const HomeScreen(),
+      const SearchScreen(),
+      const MessageScreen(),
+      const ProfileScreen(),
+    ];
+
     return Scaffold(
       body: RefreshIndicator(
-        displacement: 169,
+        displacement: 100.h,
         onRefresh: () => loadMore(),
         child: CustomScrollView(
-          controller: controller.scrollController.value,
+          // controller: hiding.controller,
+          controller: controller.scrollController,
           slivers: <Widget>[
             // SliverPersistentHeader(
             //   delegate:C ,
@@ -65,55 +46,14 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      HomeScreen(),
-                      Container(
-                        height: 500,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.red,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 500,
-                        color: Colors.red,
-                      ),
-                      // const HomeADSCarouselSliderWidget(),
-                      const SizedBox(height: 4),
-                      // const HomeListFilterWidget(),
-                      const SizedBox(height: 6),
-                      // const HomeListProductWidget(),
-                      // Obx(() {
-                      //   if (controller.loadMore.value) {
-                      //     return const CircularProgressIndicator(
-                      //       color: Colors.black,
-                      //       // value: 20,
-                      //     );
-                      //   } else {
-                      //     return const SizedBox.shrink();
-                      //   }
-                      // }),
-                      const SizedBox(height: 100),
-                    ],
-                  );
+                  // return Column(
+                  //   children: [
+                  //     listScreen[controller.index.value],
+                  //   ],
+                  // );
+                  return Obx(() => SizedBox(
+                        child: listScreen[controller.index.value],
+                      ));
                 },
                 childCount: 1,
               ),
@@ -122,32 +62,61 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
         ),
       ),
       bottomNavigationBar: ValueListenableBuilder(
-        valueListenable: controller.visible.value,
+        valueListenable: controller.visible,
         builder: (context, bool value, child) => AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           height: value ? kBottomNavigationBarHeight : 0.0,
           child: Wrap(
             children: <Widget>[
-              BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.blue,
-                fixedColor: Colors.white,
-                unselectedItemColor: Colors.white,
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search), label: "Home"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search), label: "Home"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search), label: "Home"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search), label: "Home"),
-                ],
-                currentIndex: controller.index.value,
-                onTap: (index) {
-                  controller.index.value = index;
-                },
-              ),
+              Obx(() => BottomNavigationBar(
+                    type: BottomNavigationBarType.fixed,
+                    backgroundColor: Colors.blue,
+                    fixedColor: Colors.white,
+                    unselectedItemColor: Colors.white,
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.search,
+                          color: controller.index.value == 0
+                              ? Colors.red
+                              : Colors.black,
+                        ),
+                        label: "Home",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.search,
+                          color: controller.index.value == 1
+                              ? Colors.red
+                              : Colors.black,
+                        ),
+                        label: "Home",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.search,
+                          color: controller.index.value == 2
+                              ? Colors.red
+                              : Colors.black,
+                        ),
+                        label: "Home",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(
+                          Icons.search,
+                          color: controller.index.value == 3
+                              ? Colors.red
+                              : Colors.black,
+                        ),
+                        label: "Home",
+                      ),
+                    ],
+                    currentIndex: controller.index.value,
+                    onTap: (index) {
+                      controller.index(index);
+                      log(index.toString() + " INDEX NE");
+                    },
+                  )),
             ],
           ),
         ),
@@ -155,34 +124,3 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
     );
   }
 }
-
-// class HideNavbar {
-//   final ScrollController controller = ScrollController();
-//   final ValueNotifier<bool> visible = ValueNotifier<bool>(true);
-
-//   HideNavbar() {
-//     visible.value = true;
-//     controller.addListener(
-//       () {
-//         if (controller.position.userScrollDirection ==
-//             ScrollDirection.reverse) {
-//           if (visible.value) {
-//             visible.value = false;
-//           }
-//         }
-
-//         if (controller.position.userScrollDirection ==
-//             ScrollDirection.forward) {
-//           if (!visible.value) {
-//             visible.value = true;
-//           }
-//         }
-//       },
-//     );
-//   }
-
-//   void dispose() {
-//     controller.dispose();
-//     visible.dispose();
-//   }
-// }

@@ -9,11 +9,13 @@ class MessageScreen extends GetWidget<MessageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Center(
+    return SafeArea(
+      child: Center(
         child: Container(
           color: Colors.red,
+          child: Column(children: [
+            Text('MESSAGE'),
+          ]),
         ),
       ),
     );
