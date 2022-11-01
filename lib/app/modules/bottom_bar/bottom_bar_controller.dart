@@ -1,12 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 
 class BottomBarController extends GetxController {
   var index = 0.obs;
 
-  var scrollController = ScrollController();
+  var scrollController = ScrollController().obs;
+  var visible = ValueNotifier<bool>(true).obs;
+
+  ScrollController tmp = ScrollController();
 
   @override
   void onInit() {
@@ -14,6 +17,7 @@ class BottomBarController extends GetxController {
 
     log('vo ne');
   }
+
   // final AuthRepository authRepository;
   // BottomBarController({required this.authRepository});
   // signOut({BuildContext? context}) {
@@ -21,4 +25,24 @@ class BottomBarController extends GetxController {
   //     authRepository.signOut(context: context!);
   //   } catch (e) {}
   // }
+  HideNavbar() {
+    visible.value = ValueNotifier<bool>(true);
+    scrollController.addListener(
+      () {
+        if (scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse) {
+          if (visible.value) {
+            visible.value = false;
+          }
+        }
+
+        if (scrollController.position.userScrollDirection ==
+            ScrollDirection.forward) {
+          if (!visible.value) {
+            visible.value = true;
+          }
+        }
+      },
+    );
+  }
 }
