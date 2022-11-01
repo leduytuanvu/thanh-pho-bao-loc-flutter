@@ -1,18 +1,12 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/core/services/local_storage_service.dart';
-import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/repositories/auth_repository.dart';
-import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_sign_up_request.dart';
+import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
-import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
 import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 
 class AuthRepository extends IAuthRepository {
@@ -28,7 +22,7 @@ class AuthRepository extends IAuthRepository {
       data: null,
       statusCode: null,
       statusAction: StatusAction.failure,
-      message: 'SIGN IN WITH GOOGLE FAILURE',
+      message: 'SIGN IN WITH GOOGLE FAILED !',
     );
     try {
       // SIGN IN GOOGLE
@@ -48,38 +42,41 @@ class AuthRepository extends IAuthRepository {
 
         final User? userFirebase = userCredential.user;
 
-        if (userFirebase != null) {
-          // CREATE USER ENTITY
-          var userEntity = user_entity.User(
-            id: userFirebase.uid,
-            email: userFirebase.email ?? "",
-            fullName: userFirebase.displayName ?? "",
-            phone: userFirebase.phoneNumber ?? "",
-            image: userFirebase.photoURL ??
-                "https://www.freeiconspng.com/thumbs/account-icon/account-icon-8.png",
-            statusAccount: StatusAccount.active,
-            birthday: "",
-            gender: Gender.empty,
-            lastLogin: "",
-            lastSeen: "",
-            passsword: userFirebase.uid,
-            status: Status.empty,
-            uid: userFirebase.uid,
-            username: userFirebase.uid,
-          );
-          BaseResponse baseResponseGetUserByEmail =
-              await UserRepository().getUserByEmail(userFirebase.email!);
-          if (baseResponseGetUserByEmail.statusAction == StatusAction.failure) {
-            // CREATE USER IN FIRESTORE
-            UserRepository().createUser(userEntity);
-          }
-          // SAVE USER TO LOCAL STORAGE
-          LocalStorageService.setUser = userEntity;
+        if (userFirebase?.emailVerified == false) {
+          baseResponse.message = 'PLEASE VERIFY YOUR EMAIL !';
+        } else {
+          if (userFirebase != null) {
+            // CREATE USER ENTITY
+            var userEntity = user_entity.User.fromFirebase(userFirebase);
+            BaseResponse baseResponseGetUserByEmail =
+                await UserRepository().getUserByEmail(userFirebase.email!);
+            if (baseResponseGetUserByEmail.statusAction ==
+                StatusAction.failure) {
+              // CREATE USER IN FIRESTORE
 
-          // SET RESULT
-          baseResponse.data = userEntity;
-          baseResponse.statusAction = StatusAction.success;
-          baseResponse.message = 'SIGN IN WITH GOOGLE SUCCESS';
+              BaseResponse baseResponseCreateUser =
+                  await UserRepository().createUserInFirestore(userEntity);
+              if (baseResponseCreateUser.statusAction == StatusAction.success &&
+                  baseResponseCreateUser.data != null) {
+                // SAVE USER TO LOCAL STORAGE
+                LocalStorageService.setUser = userEntity;
+                // SET RESULT
+                baseResponse.data = userEntity;
+                baseResponse.statusAction = StatusAction.success;
+                baseResponse.message = 'SIGN IN SUCCESS !';
+              } else {
+                baseResponse.message =
+                    baseResponseCreateUser.message.toString().toUpperCase();
+              }
+            } else {
+              // SAVE USER TO LOCAL STORAGE
+              LocalStorageService.setUser = userEntity;
+              // SET RESULT
+              baseResponse.data = userEntity;
+              baseResponse.statusAction = StatusAction.success;
+              baseResponse.message = 'SIGN IN SUCCESS !';
+            }
+          }
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -91,44 +88,71 @@ class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<void> signOut() async {
+  Future<BaseResponse> signOut() async {
+    var baseResponse = BaseResponse(
+      data: null,
+      statusCode: null,
+      statusAction: StatusAction.failure,
+      message: 'SIGN OUT FAILED !',
+    );
     try {
       await FirebaseAuth.instance.signOut();
       LocalStorageService.clearAllData();
-      Get.offAllNamed(Routers.signInScreen);
+      baseResponse.statusAction = StatusAction.success;
+      baseResponse.message = 'SIGN OUT SUCCESS !';
     } catch (e) {
-      Get.snackbar('ERROR', e.toString());
+      baseResponse.message = e.toString().toUpperCase();
     }
+    return baseResponse;
   }
 
   @override
-  Future<User?> signInWithEmailPassword({
-    required SignInSignUpRequest request,
+  Future<BaseResponse> signInWithEmailPassword({
+    required SignInRequest request,
   }) async {
+    var baseResponse = BaseResponse(
+      data: null,
+      statusCode: null,
+      statusAction: StatusAction.failure,
+      message: 'SIGN IN FAILURE',
+    );
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: request.emailOrPhone!,
+        email: request.email!,
         password: request.password!,
       );
-      return credential.user;
+      baseResponse.data = credential.user;
+      baseResponse.statusAction = StatusAction.success;
+      baseResponse.message = 'SIGN IN SUCCESS';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        log('No user found for that email.');
+        baseResponse.message = e.message.toString().toUpperCase();
       } else if (e.code == 'wrong-password') {
-        log('Wrong password provided for that user.');
+        baseResponse.message = e.message.toString().toUpperCase();
+      } else {
+        baseResponse.message = e.message.toString().toUpperCase();
       }
-      return null;
     }
+    return baseResponse;
   }
 
   @override
-  Future<void> sendEmailVerification() async {
+  Future<BaseResponse> sendEmailVerification() async {
+    var baseResponse = BaseResponse(
+      data: null,
+      statusCode: null,
+      statusAction: StatusAction.failure,
+      message: 'SEND EMAIL VERIFICATION FAILURE',
+    );
     try {
       final user = FirebaseAuth.instance.currentUser;
       await user!.sendEmailVerification();
-      showSnackBar(context: Get.context, message: "Email verification sent");
+      baseResponse.statusAction = StatusAction.success;
+      baseResponse.data = user;
+      baseResponse.message = 'SEND EMAIL VERIFICATION SUCCESS';
     } catch (e) {
-      log(e.toString());
+      baseResponse.message = e.toString().toUpperCase();
     }
+    return baseResponse;
   }
 }

@@ -27,7 +27,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade900,
+        color: Colors.grey.shade200,
         borderRadius: BorderRadius.circular(100.r),
       ),
       child: Padding(
@@ -38,26 +38,29 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
           decoration: InputDecoration(
             hintStyle: TextStyle(
               fontFamily: GoogleFonts.montserrat().fontFamily,
-              fontSize: 13.sp,
-              color: Colors.grey.shade800,
+              fontSize: 15.sp,
+              color: Colors.black12,
             ),
             border: InputBorder.none,
             hintText: ' ${widget.hint}',
             suffixIcon: GestureDetector(
               onTap: widget.function,
-              child: Icon(
-                widget.icon,
-                size: 20.sp,
-                color: Colors.grey.shade800,
+              child: Container(
+                color: Colors.transparent,
+                child: Icon(
+                  widget.icon,
+                  size: 20.sp,
+                  color: Colors.grey.shade300,
+                ),
               ),
             ),
           ),
           style: TextStyle(
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            fontSize: 14.sp,
-            color: Colors.white,
+            fontSize: 15.sp,
+            color: Colors.black87,
           ),
-          cursorColor: Colors.grey.shade700,
+          cursorColor: Colors.black26,
           cursorWidth: 1.w,
           cursorHeight: 15.h,
           textAlignVertical: TextAlignVertical.center,

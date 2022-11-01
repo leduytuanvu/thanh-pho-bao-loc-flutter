@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart' as firebase;
+import 'package:flutter/foundation.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/core/extensions/extensions.dart';
 
@@ -9,7 +11,7 @@ class User {
   String? image;
   String? uid;
   String? username;
-  String? passsword;
+  String? password;
   Status? status;
   String? birthday;
   String? lastSeen;
@@ -25,7 +27,7 @@ class User {
     this.image,
     this.uid,
     this.username,
-    this.passsword,
+    this.password,
     this.status,
     this.birthday,
     this.lastSeen,
@@ -42,13 +44,33 @@ class User {
     image = json['image'];
     uid = json['uid'];
     username = json['username'];
-    passsword = json['passsword'];
+    password = json['password'];
     status = json['status'].toString().stringToStatus;
     birthday = json['birthday'];
     lastSeen = json['lastSeen'];
     lastLogin = json['lastLogin'];
     statusAccount = json['statusAccount'].toString().stringToStatusAccount;
     gender = json["gender"].toString().stringToGender;
+  }
+
+  factory User.fromFirebase(firebase.User? user) {
+    return User(
+      id: user!.uid,
+      email: user.email ?? "",
+      fullName: user.displayName ?? "",
+      phone: user.phoneNumber ?? "",
+      image: user.photoURL ??
+          "https://www.freeiconspng.com/thumbs/account-icon/account-icon-8.png",
+      statusAccount: StatusAccount.active,
+      birthday: "",
+      gender: Gender.empty,
+      lastLogin: "",
+      lastSeen: "",
+      password: "",
+      status: Status.empty,
+      uid: user.uid,
+      username: "",
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -60,7 +82,7 @@ class User {
     data['image'] = image;
     data['uid'] = uid;
     data['username'] = username;
-    data['passsword'] = passsword;
+    data['password'] = password;
     data['status'] = status!.statusToString;
     data['birthday'] = birthday;
     data['lastSeen'] = lastSeen;

@@ -47,6 +47,7 @@ dependencies:
   firebase_storage: ^11.0.3
   cloud_firestore: ^4.0.3
   animated_snack_bar: ^0.3.0
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/videos/
+    - assets/svgs/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

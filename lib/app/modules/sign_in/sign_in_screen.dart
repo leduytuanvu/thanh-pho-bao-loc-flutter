@@ -31,10 +31,10 @@ class SignInScreen extends GetWidget<SignInController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.w),
                     child: CustomTextFieldWidget(
-                      hint: 'Email or phone number',
+                      hint: 'Email',
                       function: () {},
                       icon: null,
-                      controller: controller.emailOrPhoneTextController,
+                      controller: controller.emailTextController,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -55,33 +55,43 @@ class SignInScreen extends GetWidget<SignInController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.w),
                     child: GradientButtonWidget(
-                        title: 'SIGN IN',
-                        function: () {
-                          controller.createUser(context: context);
-                        }),
+                      title: 'SIGN IN',
+                      function: () {
+                        controller.signInByEmailPassword();
+                      },
+                    ),
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 5.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'You do not have account. ',
+                        'You do not have account.',
                         style: TextStyle(
                           fontFamily: GoogleFonts.montserrat().fontFamily,
-                          color: Colors.white,
-                          fontSize: 12.sp,
+                          color: Colors.black87,
+                          fontSize: 15.sp,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           controller.goToSignUpScreen();
                         },
-                        child: Text(
-                          'Sign up now',
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.montserrat().fontFamily,
-                            color: AppColors.buttonRadient3,
-                            fontSize: 12.sp,
+                        child: Container(
+                          alignment: Alignment.center,
+                          // height: 30.h,
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5.w, vertical: 15.h),
+                            child: Text(
+                              'Sign up now',
+                              style: TextStyle(
+                                fontFamily: GoogleFonts.montserrat().fontFamily,
+                                color: AppColors.buttonRadient3,
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -102,24 +112,48 @@ class SignInScreen extends GetWidget<SignInController> {
                     children: [
                       GestureDetector(
                         onTap: () async => await controller.signInGoogle(),
-                        child: SizedBox(
-                          height: 22.w,
-                          width: 22.w,
-                          child: Image.asset(AppIcons.signInGoogle),
+                        child: Container(
+                          color: Colors.transparent,
+                          height: 45.w,
+                          width: 45.w,
+                          child: Padding(
+                            padding: EdgeInsets.all(6.0.w),
+                            child: Image.asset(
+                              AppIcons.signInGoogle,
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(width: 16.w),
-                      SizedBox(
-                        height: 22.w,
-                        width: 22.w,
-                        child: Image.asset(AppIcons.signInFacebook),
-                      ),
-                      SizedBox(width: 16.w),
-                      SizedBox(
-                        height: 22.w,
-                        width: 22.w,
-                        child: Image.asset(AppIcons.signInTwitter),
-                      ),
+                      // SizedBox(width: 8.w),
+                      // GestureDetector(
+                      //   onTap: () async => await controller.signInGoogle(),
+                      //   child: Container(
+                      //     color: Colors.transparent,
+                      //     height: 45.w,
+                      //     width: 45.w,
+                      //     child: Padding(
+                      //       padding: EdgeInsets.all(6.0.w),
+                      //       child: Image.asset(
+                      //         AppIcons.signInFacebook,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(width: 8.w),
+                      // GestureDetector(
+                      //   onTap: () async => await controller.signInGoogle(),
+                      //   child: Container(
+                      //     color: Colors.transparent,
+                      //     height: 45.w,
+                      //     width: 45.w,
+                      //     child: Padding(
+                      //       padding: EdgeInsets.all(6.0.w),
+                      //       child: Image.asset(
+                      //         AppIcons.signInTwitter,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 120.h),

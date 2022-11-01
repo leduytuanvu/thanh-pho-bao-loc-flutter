@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_text_styles.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_text_field_component.dart';
@@ -28,14 +27,14 @@ class SignUpScreen extends GetWidget<SignUpController> {
                 child: Column(
                   children: [
                     Lottie.asset(
-                      'assets/videos/funny12.json',
-                      height: 270.w,
-                      width: 270.w,
+                      'assets/videos/funny17.json',
+                      height: 240.w,
+                      width: 240.w,
                     ),
-                    // SizedBox(height: 30.h),
+                    SizedBox(height: 5.h),
                     CustomTextFieldWidget(
-                      hint: 'Email or phone number',
-                      controller: controller.phoneOrEmailTextController,
+                      hint: 'Email',
+                      controller: controller.emailTextController,
                       obscureText: false,
                       function: () {},
                       icon: null,
@@ -66,35 +65,44 @@ class SignUpScreen extends GetWidget<SignUpController> {
                               ? Icons.visibility
                               : Icons.visibility_off,
                         )),
-                    SizedBox(height: 32.h),
+                    SizedBox(height: 35.h),
                     GradientButtonWidget(
                         title: 'SIGN UP',
                         function: () {
-                          // controller.signUpByEmailPassword(context: context);
-                          controller.signUpByPhonePassword(context: context);
+                          controller.signUpByEmailPassword();
                         }),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 5.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'You already have an account. ',
+                          'You already have an account.',
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
-                            color: Colors.white,
-                            fontSize: 12,
+                            color: Colors.black87,
+                            fontSize: 15,
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
                             controller.goToSignInScreen();
                           },
-                          child: Text(
-                            'Sign in now',
-                            style: TextStyle(
-                              fontFamily: GoogleFonts.montserrat().fontFamily,
-                              color: AppColors.buttonRadient3,
-                              fontSize: 12,
+                          child: Container(
+                            alignment: Alignment.center,
+                            // height: 30.h,
+                            color: Colors.transparent,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 5.w, vertical: 15.h),
+                              child: Text(
+                                'Sign in now',
+                                style: TextStyle(
+                                  fontFamily:
+                                      GoogleFonts.montserrat().fontFamily,
+                                  color: AppColors.buttonRadient3,
+                                  fontSize: 15,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -107,14 +115,16 @@ class SignUpScreen extends GetWidget<SignUpController> {
             ),
           ),
           Obx(() => SizedBox(
-                child: controller.signUpState.value == SignInState.loading
+                child: controller.signUpState.value == SignUpState.loading
                     ? Container(
                         height: size.height,
                         width: size.width,
-                        color: Colors.white.withOpacity(0.3),
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.black26,
+                        color: Colors.black.withOpacity(0.6),
+                        child: Center(
+                          child: Lottie.asset(
+                            'assets/videos/loading.json',
+                            height: 250.w,
+                            width: 250.w,
                           ),
                         ),
                       )

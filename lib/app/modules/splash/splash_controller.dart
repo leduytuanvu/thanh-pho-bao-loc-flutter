@@ -15,7 +15,7 @@ class SplashController extends GetxController {
     try {
       var user = LocalStorageService.getUser();
       if (user != null) {
-        Get.offAllNamed(Routers.homeScreen);
+        Get.offAllNamed(Routers.bottomBarScreen);
       } else {
         Get.offAllNamed(Routers.signInScreen);
       }
