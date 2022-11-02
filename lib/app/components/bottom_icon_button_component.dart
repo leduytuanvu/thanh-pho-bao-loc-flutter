@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BottomIconBottomWidget extends GetWidget<BottomBarController> {
+class BottomIconBottomComponent extends GetWidget<BottomBarController> {
   final int index;
   final String image;
   final String lable;
-  const BottomIconBottomWidget({
+  const BottomIconBottomComponent({
     super.key,
     required this.index,
     required this.image,

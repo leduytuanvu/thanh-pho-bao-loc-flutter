@@ -11,6 +11,7 @@ import 'package:thanh_pho_bao_loc/app/modules/profile/profile_screen.dart';
 // import 'package:thanh_pho_bao_loc/app/modules/profile/search_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/search_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/search_screen.dart';
+// import 'package:thanh_pho_bao_loc/app/modules/search/search_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_up/sign_up_binding.dart';

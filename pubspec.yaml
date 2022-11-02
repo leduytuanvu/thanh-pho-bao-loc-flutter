@@ -48,6 +48,8 @@ dependencies:
   cloud_firestore: ^4.0.3
   animated_snack_bar: ^0.3.0
   flutter_svg: ^1.1.6
+  dropdown_button2: ^1.8.9
+  circular_profile_avatar: ^2.0.5
 
 dev_dependencies:
   flutter_test:

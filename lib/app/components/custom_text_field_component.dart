@@ -39,7 +39,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             hintStyle: TextStyle(
               fontFamily: GoogleFonts.montserrat().fontFamily,
               fontSize: 15.sp,
-              color: Colors.black12,
+              color: Colors.black26,
             ),
             border: InputBorder.none,
             hintText: ' ${widget.hint}',
@@ -50,7 +50,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                 child: Icon(
                   widget.icon,
                   size: 20.sp,
-                  color: Colors.grey.shade300,
+                  color: Colors.black12,
                 ),
               ),
             ),
