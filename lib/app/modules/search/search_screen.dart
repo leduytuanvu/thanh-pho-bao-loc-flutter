@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,9 +70,43 @@ class SearchScreen extends GetWidget<SearchController> {
               ],
             ),
           ),
-          ListView(
-            shrinkWrap: true,
-            children: const [],
+          // ListView(
+          //   shrinkWrap: true,
+          //   children: const [],
+          // ),
+          StreamBuilder(
+            stream: FirebaseFirestore.instance.collection("users").snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.data!.docs.isNotEmpty) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      Map<String, dynamic> data =
+                          snapshot.data!.docs[index].data();
+                      return Column(
+                        children: [
+                          Text(data['id']),
+                          // Text(snapshot.data!.docs[index]["fullName"]),
+                          // Text(data['fullName']),
+                          Text(data['email']),
+                          Text(data['image']),
+                          Text(data['status']),
+                          Text(data['statusAccount']),
+                          Text(data['fullName']),
+                        ],
+                      );
+                    },
+                    itemCount: snapshot.data!.docs.length,
+                  );
+                } else {
+                  return Center();
+                }
+              }
+              return Container();
+            },
           )
         ],
       ),
