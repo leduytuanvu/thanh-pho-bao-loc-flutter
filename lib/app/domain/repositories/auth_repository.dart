@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_request.dart';
-import 'package:thanh_pho_bao_loc/app/domain/requests/sign_up_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
 
 abstract class IAuthRepository {

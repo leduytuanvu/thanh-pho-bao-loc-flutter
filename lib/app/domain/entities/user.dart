@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
-import 'package:flutter/foundation.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/core/extensions/extensions.dart';
 

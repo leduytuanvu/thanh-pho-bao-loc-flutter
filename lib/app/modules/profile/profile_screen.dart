@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 
 class ProfileScreen extends GetWidget<ProfileController> {
@@ -12,7 +11,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
       child: Center(
         child: Container(
           color: Colors.red,
-          child: Column(children: [
+          child: Column(children: const [
             Text('PROFILE'),
           ]),
         ),

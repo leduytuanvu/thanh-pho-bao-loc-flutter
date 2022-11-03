@@ -1,16 +1,46 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:thanh_pho_bao_loc/app/components/custom_circle_camera_component.dart';
 
 class ListDiscoverComponent extends StatelessWidget {
   const ListDiscoverComponent({super.key});
 
   List<Widget> getList() {
+    List<String> listImage = [
+      "assets/images/demo1.png",
+      "assets/images/demo2.png",
+      "assets/images/demo3.png",
+      "assets/images/demo4.png",
+      "assets/images/demo5.png",
+    ];
     List<Widget> list = [];
     for (int i = 0; i < 5; i++) {
+      if (i == 0) {
+        list.add(
+          Padding(
+            padding: EdgeInsets.only(
+              left: i == 0 ? 10.w : 8.w,
+              right: i == 4 ? 10.w : 0,
+            ),
+            child: Container(
+              width: 135.w,
+              height: 179.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.black45.withOpacity(0.2),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.add,
+                  size: 60.sp,
+                  color: Colors.black.withOpacity(0.1),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
       list.add(
         Padding(
           padding: EdgeInsets.only(
@@ -21,74 +51,45 @@ class ListDiscoverComponent extends StatelessWidget {
             decoration: BoxDecoration(
               color: i % 2 == 0 ? Colors.green : Colors.blue,
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                image: AssetImage('assets/images/photo1.png'),
-                fit: BoxFit.fill,
+              image: DecorationImage(
+                image: AssetImage(listImage[i]),
+                fit: BoxFit.cover,
               ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(right: 6.w, top: 5.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: Colors.white,
-                          gradient: const LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                              Color(0XFFF78361),
-                              // AppColors.buttonRadient2,
-                              Color(0xFFF54B64),
-                            ],
-                          ),
-                        ),
-                        height: 18.h,
-                        width: 48.w,
-                        child: Row(
-                          children: [
-                            SizedBox(width: 5.w),
-                            Icon(Icons.camera, size: 12.sp),
-                            const Spacer(),
-                            Text('LIVE', style: TextStyle(fontSize: 12.sp)),
-                            SizedBox(width: 5.w),
-                          ],
-                        ),
-                      ),
-                    ],
+                  padding: EdgeInsets.all(8.0.w),
+                  child: CustomCircleAvatarComponent(
+                    height: 30.w,
+                    width: 30.w,
+                    color1: Colors.white,
+                    color2: Colors.blue,
+                    padding: 2.w,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 6.w, bottom: 6.h),
-                  child: Row(
-                    children: [
-                      CircularProfileAvatar(
-                        '',
-                        borderColor: Color(0xFFFF2D55),
-                        // backgroundColor: Colors.transparent,\
+                SizedBox(width: 5.w),
 
-                        borderWidth: 2,
-                        elevation: 2,
-                        radius: 14.r,
-                        child: const FlutterLogo(),
-                      ),
-                      SizedBox(width: 5.w),
-                      Text(
-                        'Le Duy Tuan Vu',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: GoogleFonts.montserrat().fontFamily,
+                // color: Colors.amber,
+                Padding(
+                  padding: EdgeInsets.all(8.0.w),
+                  child: Text(
+                    'Le Duy Tuan Vu',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      color: Colors.white,
+                      shadows: const [
+                        Shadow(
+                          blurRadius: 4.0,
                           color: Colors.white,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -100,7 +101,7 @@ class ListDiscoverComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 185.h,
       // color: Colors.red,
       child: Padding(

@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/search_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,7 +45,7 @@ class SearchFilterComponent extends GetWidget<SearchController> {
                 child: Row(
                   children: [
                     Text(controller.selectItem.value),
-                    Icon(Icons.arrow_drop_down),
+                    const Icon(Icons.arrow_drop_down),
                   ],
                 ),
               ),

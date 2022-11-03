@@ -1,44 +1,50 @@
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SearchHeaderComponent extends GetWidget {
+class SearchHeaderComponent extends StatelessWidget {
   const SearchHeaderComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: SizedBox(
-        height: 45.h,
+      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+      child: Container(
+        color: Colors.green,
         child: Row(
           children: [
             Expanded(
               child: Container(
+                height: 40.w,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(100.0.r),
                 ),
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.only(right: 10.w, left: 10.w),
+                  padding: EdgeInsets.only(
+                    right: 10.w,
+                    left: 10.w,
+                  ),
                   child: Row(
                     children: [
-                      SizedBox(width: 5.w),
+                      SizedBox(width: 2.w),
                       Icon(
                         Icons.search,
                         color: Colors.black26,
                         size: 22.sp,
                       ),
-                      SizedBox(width: 10.w),
+                      SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
-                          'Search by name',
+                          'Search by name, email, phone number ...',
                           style: TextStyle(
-                              fontFamily: GoogleFonts.montserrat().fontFamily,
-                              color: Colors.black26),
+                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            color: Colors.black26,
+                            fontSize: 15.sp,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -46,18 +52,91 @@ class SearchHeaderComponent extends GetWidget {
                 ),
               ),
             ),
-            SizedBox(width: 4.w),
-            CircularProfileAvatar(
-              '',
-              borderColor: Colors.black26,
-              borderWidth: 2,
-              elevation: 2,
-              radius: 22.r,
-              child: const FlutterLogo(),
-            ),
+            SizedBox(width: 5.w),
+            Container(
+              width: 40.w,
+              height: 40.w,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(
+                  100.r,
+                ),
+              ),
+              child: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            )
           ],
         ),
       ),
     );
   }
 }
+// class SearchHeaderComponent extends StatelessWidget {
+
+//     return Padding(
+//       padding: EdgeInsets.only(left: 10.w, right: 10.w),
+//       child: Container(
+//         color: Colors.green,
+//         child: Row(
+//           children: [
+//             Expanded(
+//               child: Container(
+//                 height: 40.w,
+//                 decoration: BoxDecoration(
+//                   color: Colors.grey.shade200,
+//                   borderRadius: BorderRadius.circular(100.0.r),
+//                 ),
+//                 alignment: Alignment.center,
+//                 child: Padding(
+//                   padding: EdgeInsets.only(
+//                     right: 10.w,
+//                     left: 10.w,
+//                   ),
+//                   child: Row(
+//                     children: [
+//                       SizedBox(width: 2.w),
+//                       Icon(
+//                         Icons.search,
+//                         color: Colors.black26,
+//                         size: 22.sp,
+//                       ),
+//                       SizedBox(width: 8.w),
+//                       Expanded(
+//                         child: Text(
+//                           'Search by name, email, phone number ...',
+//                           style: TextStyle(
+//                             fontFamily: GoogleFonts.montserrat().fontFamily,
+//                             color: Colors.black26,
+//                             fontSize: 15.sp,
+//                           ),
+//                           maxLines: 1,
+//                           overflow: TextOverflow.ellipsis,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             SizedBox(width: 5.w),
+//             Container(
+//               width: 40.w,
+//               height: 40.w,
+//               decoration: BoxDecoration(
+//                 color: Colors.grey.shade300,
+//                 borderRadius: BorderRadius.circular(
+//                   100.r,
+//                 ),
+//               ),
+//               child: const Icon(
+//                 Icons.person,
+//                 color: Colors.white,
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+// }

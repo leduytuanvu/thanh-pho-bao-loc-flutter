@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void showOTPDialog({
@@ -10,14 +9,14 @@ void showOTPDialog({
     context: context,
     barrierDismissible: false,
     builder: (context) => AlertDialog(
-      title: Text('Enter OTP'),
+      title: const Text('Enter OTP'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: textEditingController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Enter OTP',
             ),
           ),
@@ -26,7 +25,7 @@ void showOTPDialog({
       actions: [
         TextButton(
           onPressed: onPressed,
-          child: Text('Verify'),
+          child: const Text('Verify'),
         ),
       ],
     ),

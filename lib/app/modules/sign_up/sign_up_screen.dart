@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
-import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_text_field_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_up/sign_up_controller.dart';

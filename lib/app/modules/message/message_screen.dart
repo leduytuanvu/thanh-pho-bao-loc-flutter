@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/message_controller.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 
 class MessageScreen extends GetWidget<MessageController> {
   const MessageScreen({super.key});
@@ -13,7 +11,7 @@ class MessageScreen extends GetWidget<MessageController> {
       child: Center(
         child: Container(
           color: Colors.red,
-          child: Column(children: [
+          child: Column(children: const [
             Text('MESSAGE'),
           ]),
         ),

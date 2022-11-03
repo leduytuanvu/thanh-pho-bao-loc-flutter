@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
@@ -8,7 +7,6 @@ import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
 import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
-import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 
 // SIGN IN STATE
 enum SignInState {
