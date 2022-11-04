@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_text_styles.dart';
 
 class GradientButtonWidget extends StatelessWidget {
-  final String? title;
+  final String title;
   final Function()? function;
-  final double? height;
-  final double? width;
+  final double height;
+  final double width;
+  final double fontSize;
 
   const GradientButtonWidget({
     super.key,
@@ -15,6 +16,7 @@ class GradientButtonWidget extends StatelessWidget {
     required this.function,
     this.height = 50,
     this.width = 100,
+    required this.fontSize,
   });
 
   @override
@@ -50,8 +52,12 @@ class GradientButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(100.r),
           ),
           child: Text(
-            title!,
-            style: AppTextStyles.button,
+            title,
+            style: TextStyle(
+              fontFamily: GoogleFonts.montserrat().fontFamily,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+            ),
           ),
         ),
       ),

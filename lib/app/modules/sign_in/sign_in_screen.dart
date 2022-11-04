@@ -55,6 +55,7 @@ class SignInScreen extends GetWidget<SignInController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 32.w),
                     child: GradientButtonWidget(
+                      fontSize: 15.sp,
                       title: 'SIGN IN',
                       function: () {
                         controller.signInByEmailPassword();

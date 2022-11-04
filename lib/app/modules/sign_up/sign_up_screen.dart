@@ -66,6 +66,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
                         )),
                     SizedBox(height: 35.h),
                     GradientButtonWidget(
+                        fontSize: 15.sp,
                         title: 'SIGN UP',
                         function: () {
                           controller.signUpByEmailPassword();

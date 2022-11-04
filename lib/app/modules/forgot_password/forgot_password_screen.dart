@@ -99,6 +99,7 @@ class ForgotPasswordScreen extends GetWidget<ForgotPasswordController> {
                 Obx(() =>
                     SizedBox(height: controller.sentCode.value ? 30.h : 20.h)),
                 Obx(() => GradientButtonWidget(
+                      fontSize: 15.sp,
                       title: !controller.sentCode.value
                           ? 'SEND'
                           : 'CHANGE PASSWORD',

@@ -13,7 +13,6 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
 
   @override
   Widget build(BuildContext context) {
-    // final HideNavbar hiding = HideNavbar();
     Future<void> loadMore() async {
       // controller.loadMore(true);
       await Future.delayed(const Duration(seconds: 2));

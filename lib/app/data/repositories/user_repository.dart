@@ -34,33 +34,34 @@ class UserRepository extends IUserRepository {
     return baseResponse;
   }
 
-  @override
-  Future<BaseResponse> getAllUser() async {
-    var response = BaseResponse(
-      statusCode: null,
-      message: "GET ALL USER FAILURE",
-      data: null,
-      statusAction: StatusAction.failure,
-    );
-    try {
-      // Stream<List<user_entity.User>> list = FirebaseFirestore.instance
-      //     .collection('users')
-      //     .snapshots()
-      //     .map((snapshot) => snapshot.docs
-      //         .map((e) => user_entity.User.fromJson(e.data()))
-      //         .toList());
-      // Stream<List<user_entity.User>> list = FirebaseFirestore.instance
-      //     .collection('users')
-      //     .snapshots()
-      //     .transform(Utils.transformer(user_entity.User.fromJson));
-      // response.data = list;
-      response.statusAction = StatusAction.success;
-      response.message = "GET ALL USER SUCCESS";
-    } catch (e) {
-      response.message = e.toString().toUpperCase();
-    }
-    return response;
-  }
+  // @override
+  // Future<BaseResponse> getAllUser() async {
+  //   var response = BaseResponse(
+  //     statusCode: null,
+  //     message: "GET ALL USER FAILURE",
+  //     data: null,
+  //     statusAction: StatusAction.failure,
+  //   );
+  //   try {
+  //     // Stream<List<user_entity.User>> list = FirebaseFirestore.instance
+  //     //     .collection('users')
+  //     //     .snapshots()
+  //     //     .map((snapshot) => snapshot.docs
+  //     //         .map((e) => user_entity.User.fromJson(e.data()))
+  //     //         .toList());
+  //     // Stream<List<user_entity.User>> list = FirebaseFirestore.instance
+  //     //     .collection('users')
+  //     //     .snapshots()
+  //     //     .transform(Utils.transformer(user_entity.User.fromJson));
+  //     response.data =
+  //         FirebaseFirestore.instance.collection("users").snapshots();
+  //     response.statusAction = StatusAction.success;
+  //     response.message = "GET ALL USER SUCCESS";
+  //   } catch (e) {
+  //     response.message = e.toString().toUpperCase();
+  //   }
+  //   return response;
+  // }
 
   // @override
   // Future<user_entity.User?> getUserByID(String id) async {

@@ -8,13 +8,38 @@ class ProfileScreen extends GetWidget<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
-        child: Container(
-          color: Colors.red,
-          child: Column(children: const [
-            Text('PROFILE'),
-          ]),
-        ),
+      child: Column(
+        children: [
+          // const ProfileHeaderComponent(),
+          // const ProfileBodyComponent(),
+          const SizedBox(height: 10),
+          GestureDetector(
+            child: Container(
+              height: 400,
+              color: Colors.red,
+            ),
+          ),
+          Container(
+            height: 400,
+            color: Colors.blue,
+          ),
+          Container(
+            height: 400,
+            color: Colors.green,
+          ),
+          Container(
+            height: 400,
+            color: Colors.red,
+          ),
+          Container(
+            height: 400,
+            color: Colors.blue,
+          ),
+          Container(
+            height: 400,
+            color: Colors.green,
+          ),
+        ],
       ),
     );
   }

@@ -68,6 +68,16 @@ class HomeScreen extends GetWidget<HomeController> {
               color: Colors.black12,
               thickness: 10,
             ),
+            GestureDetector(
+              onTap: () {
+                controller.signOut();
+              },
+              child: Container(
+                height: 100,
+                color: Colors.black,
+                child: const Text('SIGN OUT'),
+              ),
+            )
             // GestureDetector(
             //   onTap: () async {
             //     await controller.signOut();

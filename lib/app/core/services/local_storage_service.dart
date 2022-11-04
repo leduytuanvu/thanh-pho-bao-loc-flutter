@@ -51,9 +51,8 @@ class LocalStorageService extends GetxService {
   static set setUser(user_entity.User user) {
     try {
       var response = jsonEncode(user);
-      log('asdf');
-      log('asdf');
-      log('asdf');
+      // var response = user.toString();
+
       _sharedPreferences!.setString(
         AppStringConstants.sharedReferenceUser,
         response,

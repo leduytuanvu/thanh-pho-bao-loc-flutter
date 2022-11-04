@@ -5,15 +5,17 @@ class CustomCircleAvatarComponent extends StatelessWidget {
   final double height;
   final double width;
   final Color color1;
-  final Color color2;
+  final String image;
   final double padding;
+  final bool isNetwork;
   const CustomCircleAvatarComponent({
     super.key,
     required this.height,
     required this.width,
     required this.color1,
-    required this.color2,
+    required this.image,
     required this.padding,
+    this.isNetwork = true,
   });
 
   @override
@@ -27,18 +29,18 @@ class CustomCircleAvatarComponent extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.all(padding),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100.r),
-            color: color2,
-          ),
-          child: Center(
-            child: Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 20.sp,
-            ),
-          ),
+        // child: Container(
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(100.r),
+        //     // color: color2,
+        //   ),
+        //   child: Image.network(image, fit: BoxFit.cover),
+        // ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100.r),
+          child: isNetwork
+              ? Image.network(image, fit: BoxFit.cover)
+              : Image.asset(image, fit: BoxFit.cover),
         ),
       ),
     );

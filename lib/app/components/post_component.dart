@@ -119,12 +119,23 @@ class PostComponent extends StatelessWidget {
         Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 14.w, top: 12.w, bottom: 8.w),
+              padding: EdgeInsets.only(left: 16.w, top: 16.h, bottom: 10.w),
               child: Image.asset(
                 "assets/images/heart.png",
                 height: 20.w,
                 width: 20.w,
                 color: Colors.black45,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 6.w, top: 5.h),
+              child: Text(
+                '234',
+                style: TextStyle(
+                  fontFamily: GoogleFonts.montserrat().fontFamily,
+                  fontSize: 16.sp,
+                  letterSpacing: 1.2.w,
+                ),
               ),
             ),
             //

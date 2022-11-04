@@ -16,7 +16,7 @@ abstract class IUserRepository {
   // SIGN UP BY EMAIL AND PASSWORD
   Future<BaseResponse> signUpByEmailPassword(SignUpRequest request);
 
-  // Stream<List<user_entity.User>> getAllUser();
+  // Future<BaseResponse> getAllUser();
   // Future<user_entity.User?> getUserByID(String id);
   // Future<void> updateUser(user_entity.User user);
   // Future<void> deleteUser(String id);

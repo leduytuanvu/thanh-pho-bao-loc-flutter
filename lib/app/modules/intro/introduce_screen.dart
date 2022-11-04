@@ -71,6 +71,7 @@ class IntroduceScreen extends GetWidget<IntroduceController> {
                   child: Column(
                     children: [
                       GradientButtonWidget(
+                        fontSize: 15.sp,
                         title: 'GET STARTED',
                         function: () {
                           int index = controller.index.value;
