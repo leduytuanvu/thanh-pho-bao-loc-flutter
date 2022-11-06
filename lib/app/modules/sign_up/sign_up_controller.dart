@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
-import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/requests/sign_up_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
-import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
+import '../../core/utils/export.dart';
 
 enum SignUpState {
   initial,
@@ -30,7 +27,7 @@ class SignUpController extends GetxController {
 
   void goToSignInScreen() => Get.toNamed(Routers.signInScreen);
 
-  Future<void> signUpByEmailPassword() async {
+  Future<void> signUpWithEmailPassword() async {
     FocusManager.instance.primaryFocus?.unfocus();
     signUpState(SignUpState.loading);
     SignUpRequest signUpRequest = SignUpRequest(
@@ -39,7 +36,7 @@ class SignUpController extends GetxController {
       rePassword: rePasswordTextController.text,
     );
     BaseResponse baseResponse =
-        await userRepository.signUpByEmailPassword(signUpRequest);
+        await authRepository.signUpWithEmailPassword(request: signUpRequest);
     if (baseResponse.statusAction == StatusAction.success &&
         baseResponse.data != null) {
       Get.offAllNamed(Routers.signInScreen);

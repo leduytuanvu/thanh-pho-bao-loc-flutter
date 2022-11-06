@@ -1,7 +1,5 @@
-import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/core/services/local_storage_service.dart';
-import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
-import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
+import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
+import '../../core/utils/export.dart';
 
 class SplashController extends GetxController {
   @override
@@ -11,15 +9,11 @@ class SplashController extends GetxController {
   }
 
   Future<void> validateSession() async {
-    try {
-      var user = LocalStorageService.getUser();
-      if (user != null) {
-        Get.offAllNamed(Routers.bottomBarScreen);
-      } else {
-        Get.offAllNamed(Routers.signInScreen);
-      }
-    } catch (e) {
-      showSnackBar(context: Get.context, message: e.toString());
+    var response = LocalStorageService.getUser();
+    if (response.statusAction == StatusAction.success) {
+      Get.offAllNamed(Routers.bottomBarScreen);
+    } else {
+      Get.offAllNamed(Routers.signInScreen);
     }
   }
 }

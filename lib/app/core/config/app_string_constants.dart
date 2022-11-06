@@ -1,5 +1,4 @@
-class AppStringConstants {
-  AppStringConstants._();
+class AppString {
+  AppString._();
   static String sharedReferenceUser = 'USER';
-  static String sharedReferenceID = 'ID';
 }

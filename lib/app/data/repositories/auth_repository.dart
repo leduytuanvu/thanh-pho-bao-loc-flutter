@@ -1,31 +1,32 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
-import 'package:thanh_pho_bao_loc/app/core/services/local_storage_service.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_request.dart';
+import 'package:thanh_pho_bao_loc/app/domain/requests/sign_up_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
 import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
+import '../../core/utils/export.dart';
 
 class AuthRepository extends IAuthRepository {
+  // INITIALIZER FIREBASE
   @override
   Future<FirebaseApp> initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
 
+  // SIGN IN WITH GOOGLE
   @override
   Future<BaseResponse> signInWithGoogle() async {
     BaseResponse baseResponse = BaseResponse(
       data: null,
       statusCode: null,
       statusAction: StatusAction.failure,
-      message: 'SIGN IN WITH GOOGLE FAILED !',
+      message: 'Sign in with google failed !',
     );
     try {
-      // SIGN IN GOOGLE
       FirebaseAuth auth = FirebaseAuth.instance;
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleSignInAccount;
@@ -43,50 +44,215 @@ class AuthRepository extends IAuthRepository {
         final User? userFirebase = userCredential.user;
 
         if (userFirebase?.emailVerified == false) {
-          baseResponse.message = 'PLEASE VERIFY YOUR EMAIL !';
+          baseResponse.message = 'Please veryfy your email !';
         } else {
           if (userFirebase != null) {
             // CREATE USER ENTITY
             var userEntity = user_entity.User.fromFirebase(userFirebase);
-            BaseResponse baseResponseGetUserByEmail =
-                await UserRepository().getUserByEmail(userFirebase.email!);
+            BaseResponse baseResponseGetUserByEmail = await UserRepository()
+                .getUserByEmail(email: userFirebase.email!);
             if (baseResponseGetUserByEmail.statusAction ==
                 StatusAction.failure) {
               // CREATE USER IN FIRESTORE
-
               BaseResponse baseResponseCreateUser =
-                  await UserRepository().createUserInFirestore(userEntity);
-              if (baseResponseCreateUser.statusAction == StatusAction.success &&
-                  baseResponseCreateUser.data != null) {
+                  await UserRepository().createUserInFirebase(user: userEntity);
+              if (baseResponseCreateUser.statusAction == StatusAction.success) {
                 // SAVE USER TO LOCAL STORAGE
-                LocalStorageService.setUser = userEntity;
-                // SET RESULT
-                baseResponse.data = userEntity;
-                baseResponse.statusAction = StatusAction.success;
-                baseResponse.message = 'SIGN IN SUCCESS !';
+                var responseLocal = LocalStorageService.setUser(userEntity);
+                if (responseLocal.statusAction == StatusAction.failure) {
+                  baseResponse.message = responseLocal.message;
+                } else {
+                  baseResponse.data = userEntity;
+                  baseResponse.statusAction = StatusAction.success;
+                  baseResponse.message = 'Sign in with google success !';
+                }
               } else {
                 baseResponse.message =
-                    baseResponseCreateUser.message.toString().toUpperCase();
+                    baseResponseCreateUser.message.toString();
               }
             } else {
               // SAVE USER TO LOCAL STORAGE
-              LocalStorageService.setUser = userEntity;
+              var responseLocal = LocalStorageService.setUser(userEntity);
               // SET RESULT
-              baseResponse.data = userEntity;
-              baseResponse.statusAction = StatusAction.success;
-              baseResponse.message = 'SIGN IN SUCCESS !';
+              if (responseLocal.statusAction == StatusAction.failure) {
+                baseResponse.message = responseLocal.message;
+              } else {
+                baseResponse.data = userEntity;
+                baseResponse.statusAction = StatusAction.success;
+                baseResponse.message = 'Sign in with google success !';
+              }
             }
           }
         }
       }
     } on FirebaseAuthException catch (e) {
-      baseResponse.message = e.message!.toUpperCase();
+      baseResponse.message = e.message!;
     } catch (e) {
-      baseResponse.message = e.toString().toUpperCase();
+      baseResponse.message = e.toString();
     }
     return baseResponse;
   }
 
+  // SIGN UP BY EMAIL AND PASSWORD
+  @override
+  Future<BaseResponse> signUpWithEmailPassword({
+    required SignUpRequest request,
+  }) async {
+    var baseResponse = BaseResponse(
+      data: null,
+      message: 'Sign up with email and password failed !',
+      statusAction: StatusAction.failure,
+      statusCode: null,
+    );
+    try {
+      BaseResponse responseGetUserByEmail =
+          await UserRepository().getUserByEmail(email: request.email!);
+      if (responseGetUserByEmail.statusAction == StatusAction.success) {
+        baseResponse.message = 'This email already exist !';
+      } else {
+        if (request.password != request.rePassword) {
+          baseResponse.message = 'Password and re-password not match !';
+        } else {
+          // CREATE USER BY EMAIL AND PASSWORD
+          final credential =
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: request.email!.trim(),
+            password: request.password!.trim(),
+          );
+          if (credential.user != null) {
+            // SEND EMAIL VERIFICATION
+            var responseSendEmail = await sendEmailVerification();
+            if (responseSendEmail.statusAction == StatusAction.success &&
+                responseSendEmail.data != null) {
+              // SIGN IN USER BY EMAIL AND PASSWORD
+              // SignInRequest signInRequest = SignInRequest(
+              //   email: request.email,
+              //   password: request.password,
+              // );
+              // var userFirebase = await AuthRepository().signInWithEmailPassword(
+              //   request: signInRequest,
+              // );
+              // CREATE USER IN FIREBASE FIRESTORE
+              final userEntity = user_entity.User(
+                createdAt: DateTime.now(),
+                email: request.email,
+                password: request.password,
+                fullName: request.email,
+                signInByGoogle: false,
+                username: request.email,
+                status: Status.empty,
+                gender: Gender.empty,
+                statusAccount: StatusAccount.active,
+                image:
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+                phone: "",
+              );
+              // userEntity.password = request.password;
+              BaseResponse responseCreateUserInFireBase =
+                  await UserRepository().createUserInFirebase(user: userEntity);
+              if (responseCreateUserInFireBase.statusAction ==
+                  StatusAction.success) {
+                var responseLocal = LocalStorageService.setUser(userEntity);
+                if (responseLocal.statusAction == StatusAction.success) {
+                  baseResponse.data = userEntity;
+                  baseResponse.statusAction = StatusAction.success;
+                  baseResponse.message =
+                      'Sign up success. Please verify your email !';
+                } else {
+                  baseResponse.message = responseLocal.message;
+                }
+              } else {
+                baseResponse.message =
+                    responseCreateUserInFireBase.message.toString();
+              }
+            } else {
+              baseResponse.message = responseSendEmail.message.toString();
+            }
+          }
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        baseResponse.message = 'The password is too week !';
+      } else if (e.code == 'email-already-in-use') {
+        baseResponse.message = 'This email already exist !';
+      } else {
+        baseResponse.message = e.message;
+        log(e.message.toString());
+      }
+    } catch (e) {
+      baseResponse.message = e.toString();
+    }
+    return baseResponse;
+  }
+
+  // GET USER BY EMAIL AND PASSWORD
+  @override
+  Future<BaseResponse> signInWithEmailPassword({
+    required SignInRequest request,
+  }) async {
+    BaseResponse baseResponse = BaseResponse(
+      data: null,
+      message: 'Sign in with email and password failed !',
+      statusAction: StatusAction.failure,
+      statusCode: null,
+    );
+    try {
+      var checkUserCreateWithGoogle = await FirebaseFirestore.instance
+          .collection("users")
+          .where("email", isEqualTo: request.email)
+          .get();
+
+      var userTmp = user_entity.User.fromJson(
+        checkUserCreateWithGoogle.docs.first.data(),
+        true,
+      );
+      if (userTmp.signInByGoogle == true) {
+        baseResponse.message = "This email sign in with google !";
+      } else {
+        final credential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: request.email!.trim(),
+          password: request.password!.trim(),
+        );
+        if (credential.user != null) {
+          var user = credential.user as User;
+          if (user.emailVerified == false) {
+            baseResponse.message = 'Please verify your email !';
+          } else {
+            if (checkUserCreateWithGoogle.docs.isNotEmpty) {
+              var docUser = await FirebaseFirestore.instance
+                  .collection("users")
+                  .where("email", isEqualTo: request.email)
+                  .where("password", isEqualTo: request.password)
+                  .get();
+              if (docUser.docs.isNotEmpty) {
+                baseResponse.data = user_entity.User.fromJson(
+                  docUser.docs.first.data(),
+                  true,
+                );
+                baseResponse.message = "SIGN IN SUCCESS !";
+                baseResponse.statusAction = StatusAction.success;
+              }
+            }
+          }
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        baseResponse.message = e.message.toString();
+      } else if (e.code == 'wrong-password') {
+        baseResponse.message = e.message.toString();
+      } else {
+        baseResponse.message = e.message.toString();
+      }
+    } catch (e) {
+      baseResponse.message = e.toString();
+    }
+    return baseResponse;
+  }
+
+  // SIGN OUT
   @override
   Future<BaseResponse> signOut() async {
     var baseResponse = BaseResponse(
@@ -101,41 +267,12 @@ class AuthRepository extends IAuthRepository {
       baseResponse.statusAction = StatusAction.success;
       baseResponse.message = 'SIGN OUT SUCCESS !';
     } catch (e) {
-      baseResponse.message = e.toString().toUpperCase();
+      baseResponse.message = e.toString();
     }
     return baseResponse;
   }
 
-  @override
-  Future<BaseResponse> signInWithEmailPassword({
-    required SignInRequest request,
-  }) async {
-    var baseResponse = BaseResponse(
-      data: null,
-      statusCode: null,
-      statusAction: StatusAction.failure,
-      message: 'SIGN IN FAILURE',
-    );
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: request.email!,
-        password: request.password!,
-      );
-      baseResponse.data = credential.user;
-      baseResponse.statusAction = StatusAction.success;
-      baseResponse.message = 'SIGN IN SUCCESS';
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        baseResponse.message = e.message.toString().toUpperCase();
-      } else if (e.code == 'wrong-password') {
-        baseResponse.message = e.message.toString().toUpperCase();
-      } else {
-        baseResponse.message = e.message.toString().toUpperCase();
-      }
-    }
-    return baseResponse;
-  }
-
+  // SEND MAIL VERIFICATION
   @override
   Future<BaseResponse> sendEmailVerification() async {
     var baseResponse = BaseResponse(
@@ -151,7 +288,7 @@ class AuthRepository extends IAuthRepository {
       baseResponse.data = user;
       baseResponse.message = 'SEND EMAIL VERIFICATION SUCCESS';
     } catch (e) {
-      baseResponse.message = e.toString().toUpperCase();
+      baseResponse.message = e.toString();
     }
     return baseResponse;
   }

@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/components/list_discover_component.dart';
 import 'package:thanh_pho_bao_loc/app/components/post_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/home_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../core/utils/export.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
   const HomeScreen({super.key});

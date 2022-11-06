@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:get/get.dart';
-import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
+import '../../core/utils/export.dart';
+
 class IntroduceController extends GetxController {
   var listTitle = [
     'Fresh ingredients for tasty, home-cooked dinners',

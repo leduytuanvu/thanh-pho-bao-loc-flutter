@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/modules/intro/introduce_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+import '../../core/utils/export.dart';
 
 class IntroduceScreen extends GetWidget<IntroduceController> {
   const IntroduceScreen({super.key});

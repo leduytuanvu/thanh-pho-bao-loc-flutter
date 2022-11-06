@@ -1,3 +1,3 @@
-import 'package:get/get.dart';
+import '../../core/utils/export.dart';
 
 class MessageController extends GetxController {}

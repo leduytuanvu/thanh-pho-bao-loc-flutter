@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import '../../../core/utils/export.dart';
 
 class ProfileBodyComponent extends GetWidget<ProfileController> {
   const ProfileBodyComponent({super.key});

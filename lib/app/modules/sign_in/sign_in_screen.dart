@@ -1,13 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_icons.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_controller.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_text_field_component.dart';
+
+import '../../core/utils/export.dart';
 
 class SignInScreen extends GetWidget<SignInController> {
   const SignInScreen({super.key});
@@ -58,7 +55,7 @@ class SignInScreen extends GetWidget<SignInController> {
                       fontSize: 15.sp,
                       title: 'SIGN IN',
                       function: () {
-                        controller.signInByEmailPassword();
+                        controller.signInWithEmailPassword();
                       },
                     ),
                   ),
@@ -112,7 +109,7 @@ class SignInScreen extends GetWidget<SignInController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () async => await controller.signInGoogle(),
+                        onTap: () async => await controller.signInWithGoogle(),
                         child: Container(
                           color: Colors.transparent,
                           height: 45.w,

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import '../../core/utils/export.dart';
 
 class ProfileScreen extends GetWidget<ProfileController> {
   const ProfileScreen({super.key});

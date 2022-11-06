@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_text_field_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/sign_up/sign_up_controller.dart';
+import '../../core/utils/export.dart';
 
 class SignUpScreen extends GetWidget<SignUpController> {
   const SignUpScreen({super.key});
@@ -69,7 +65,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
                         fontSize: 15.sp,
                         title: 'SIGN UP',
                         function: () {
-                          controller.signUpByEmailPassword();
+                          controller.signUpWithEmailPassword();
                         }),
                     SizedBox(height: 5.h),
                     Row(

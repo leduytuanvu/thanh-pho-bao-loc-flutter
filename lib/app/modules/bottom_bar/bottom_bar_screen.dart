@@ -1,12 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
 import 'package:thanh_pho_bao_loc/app/components/bottom_bar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/home_screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/message_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/search_screen.dart';
+import '../../core/utils/export.dart';
 
 class BottomBarScreen extends GetWidget<BottomBarController> {
   const BottomBarScreen({super.key});

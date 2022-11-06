@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/modules/forgot_password/forgot_password_controller.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_text_field_component.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+import '../../core/utils/export.dart';
 
 class ForgotPasswordScreen extends GetWidget<ForgotPasswordController> {
   const ForgotPasswordScreen({super.key});

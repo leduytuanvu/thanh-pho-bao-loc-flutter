@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Utils {
   static String getImagePath(String name, {String format = 'png'}) {
     return 'assets/images/$name.$format';

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:thanh_pho_bao_loc/app/components/bottom_icon_button_component.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../core/utils/export.dart';
 
 class BottomBarWidget extends StatelessWidget {
   const BottomBarWidget({super.key});

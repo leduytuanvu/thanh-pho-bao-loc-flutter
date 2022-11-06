@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import '../../core/utils/export.dart';
 
 class ProfileController extends GetxController {
   final scrollController = ScrollController();

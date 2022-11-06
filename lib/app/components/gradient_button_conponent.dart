@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:thanh_pho_bao_loc/app/core/config/app_colors.dart';
+import '../core/utils/export.dart';
 
 class GradientButtonWidget extends StatelessWidget {
   final String title;

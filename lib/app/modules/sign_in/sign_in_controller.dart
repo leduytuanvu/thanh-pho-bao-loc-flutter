@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
-import 'package:thanh_pho_bao_loc/app/core/utils/show_snack_bar.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/user_repository.dart';
 import 'package:thanh_pho_bao_loc/app/domain/requests/sign_in_request.dart';
 import 'package:thanh_pho_bao_loc/app/domain/responses/base_response.dart';
-import 'package:thanh_pho_bao_loc/app/routes/routers.dart';
+import '../../core/utils/export.dart';
 
 // SIGN IN STATE
 enum SignInState {
@@ -37,11 +34,10 @@ class SignInController extends GetxController {
   void goToSignUpScreen() => Get.offAllNamed(Routers.signUpScreen);
 
   // SIGN IN WITH GOOGLE
-  Future<void> signInGoogle() async {
+  Future<void> signInWithGoogle() async {
     signInState(SignInState.loading);
     var baseResponse = await authRepository.signInWithGoogle();
-    if (baseResponse.statusAction == StatusAction.success &&
-        baseResponse.data != null) {
+    if (baseResponse.statusAction == StatusAction.success) {
       Get.offAllNamed(Routers.bottomBarScreen);
     }
     showSnackBar(
@@ -55,7 +51,7 @@ class SignInController extends GetxController {
   }
 
   // SIGN IN WITH EMAIL PASSWORD
-  Future<void> signInByEmailPassword() async {
+  Future<void> signInWithEmailPassword() async {
     FocusManager.instance.primaryFocus?.unfocus();
     signInState(SignInState.loading);
     SignInRequest signInRequest = SignInRequest(
@@ -63,9 +59,8 @@ class SignInController extends GetxController {
       password: passwordTextController.text,
     );
     BaseResponse baseResponse =
-        await userRepository.getUserByEmailAndPassword(signInRequest);
-    if (baseResponse.statusAction == StatusAction.success &&
-        baseResponse.data != null) {
+        await authRepository.signInWithEmailPassword(request: signInRequest);
+    if (baseResponse.statusAction == StatusAction.success) {
       Get.offAllNamed(Routers.bottomBarScreen);
     }
     showSnackBar(
