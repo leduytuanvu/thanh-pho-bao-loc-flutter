@@ -13,59 +13,77 @@ class SearchScreen extends GetWidget<SearchController> {
     return Column(
       children: [
         SizedBox(height: 15.h),
-        // EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
+        // EdgeInsets.symmetric(horizontal: 10.w, verical: 15.h),
         SizedBox(
           height: 45.h,
           child: Row(
             children: [
               SizedBox(width: 10.w),
               Expanded(
-                  child: Obx(
-                () => TextField(
-                  onTap: (() => controller.showSuffixIcon(true)),
-                  autofocus: true,
-                  onChanged: ((value) {
-                    controller.search(value);
-                  }),
-                  controller: controller.searchKey,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 15.w,
-                      // vertical: 10.w,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey.shade200,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(100),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: " Search by name, email, phone number ...",
-                    hintStyle: TextStyle(
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
-                      color: Colors.black26,
-                    ),
-                    suffixIcon: controller.showSuffixIcon.value
-                        ? GestureDetector(
-                            onTap: () {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              controller.showSuffixIcon(false);
-                            },
-                            child: const Icon(
-                              Icons.close,
-                              color: Colors.black54,
+                child: Obx(
+                  () => TextField(
+                    // onSubmitted: ((value) => controller.showSuffixIcon(false)),
+                    onTap: (() => controller.showSuffixIcon(true)),
+                    autofocus: controller.autofocus.value,
+                    onChanged: ((value) {
+                      controller.search(value);
+                    }),
+                    controller: controller.searchKey,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            // horizontal: 15.w,
+                            // vertical: 1.h,
                             ),
-                          )
-                        : null,
+                        filled: true,
+                        fillColor: Colors.grey.shade200,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: "Search by email",
+                        hintStyle: TextStyle(
+                          fontFamily: GoogleFonts.montserrat().fontFamily,
+                          color: Colors.black26,
+                        ),
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(left: 14.w, right: 8.w),
+                          child: const Icon(
+                            Icons.search,
+                            color: Colors.black26,
+                          ),
+                        ),
+                        prefixIconConstraints: const BoxConstraints(),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            controller.showSuffixIcon(false);
+                            controller.autofocus(false);
+                          },
+                          child: controller.search.isNotEmpty
+                              ? GestureDetector(
+                                  onTap: () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    controller.searchKey.clear();
+                                    controller.search("");
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    color: Colors.black26,
+                                  ),
+                                )
+                              : const SizedBox(),
+                        )),
+                    cursorColor: Colors.black12,
+                    cursorWidth: 0.8.w,
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      color: Colors.black87,
+                    ),
+                    // cursorHeight: ,
                   ),
-                  cursorColor: Colors.black12,
-                  cursorWidth: 1.w,
-                  style: TextStyle(
-                    fontFamily: GoogleFonts.montserrat().fontFamily,
-                    color: Colors.black87,
-                  ),
-                  // cursorHeight: ,
                 ),
-              )),
+              ),
               SizedBox(width: 10.w),
             ],
           ),
@@ -84,6 +102,7 @@ class SearchScreen extends GetWidget<SearchController> {
                 if (snapshot.data!.docs.isNotEmpty) {
                   log("${snapshot.data!.docs} lenght ne");
                   return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       Map<String, dynamic> data =
@@ -107,6 +126,7 @@ class SearchScreen extends GetWidget<SearchController> {
                                 //   fit: BoxFit.cover,
                                 // ),
                                 child: CachedNetworkImage(
+                                  fit: BoxFit.cover,
                                   imageUrl: data['image'],
                                   height: 50.w,
                                   width: 50.w,

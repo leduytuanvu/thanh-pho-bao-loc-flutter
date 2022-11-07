@@ -27,6 +27,14 @@ class SignUpController extends GetxController {
 
   void goToSignInScreen() => Get.toNamed(Routers.signInScreen);
 
+  @override
+  void dispose() {
+    super.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
+    rePasswordTextController.dispose();
+  }
+
   Future<void> signUpWithEmailPassword() async {
     FocusManager.instance.primaryFocus?.unfocus();
     signUpState(SignUpState.loading);

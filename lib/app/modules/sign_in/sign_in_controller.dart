@@ -25,6 +25,7 @@ class SignInController extends GetxController {
   // OBSERVABLES
   var signInState = SignInState.initial.obs;
   var isShowPassword = false.obs;
+  var shouldPop = true.obs;
 
   // TEXT CONTROLLER
   final emailTextController = TextEditingController();
@@ -32,6 +33,13 @@ class SignInController extends GetxController {
 
   // GO TO SIGN UP SCREEN
   void goToSignUpScreen() => Get.offAllNamed(Routers.signUpScreen);
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailTextController.dispose();
+    passwordTextController.dispose();
+  }
 
   // SIGN IN WITH GOOGLE
   Future<void> signInWithGoogle() async {

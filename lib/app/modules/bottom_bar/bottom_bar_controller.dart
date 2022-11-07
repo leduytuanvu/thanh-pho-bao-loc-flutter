@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+
 import '../../core/utils/export.dart';
 
 class BottomBarController extends GetxController {
@@ -6,11 +8,25 @@ class BottomBarController extends GetxController {
   final ScrollController scrollController = ScrollController();
   final ValueNotifier<bool> visible = ValueNotifier<bool>(true);
 
-  // final AuthRepository authRepository;
-  // BottomBarController({required this.authRepository});
-  // signOut({BuildContext? context}) {
-  //   try {
-  //     authRepository.signOut(context: context!);
-  //   } catch (e) {}
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    scrollController.addListener(() {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        visible.value = false;
+      }
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        visible.value = true;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+    visible.dispose();
+  }
 }

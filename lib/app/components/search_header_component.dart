@@ -35,7 +35,7 @@ class SearchHeaderComponent extends StatelessWidget {
                       SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
-                          'Search by name, email, phone number ...',
+                          'Search by email',
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
                             color: Colors.black26,

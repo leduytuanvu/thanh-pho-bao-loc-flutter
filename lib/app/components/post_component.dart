@@ -43,7 +43,7 @@ class PostComponent extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Le Duy Tuan Vu',
+                                  'Thảo Như Xinh Đẹp',
                                   style: TextStyle(
                                     fontFamily:
                                         GoogleFonts.montserrat().fontFamily,

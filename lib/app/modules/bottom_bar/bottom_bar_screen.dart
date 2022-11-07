@@ -87,9 +87,11 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return Obx(() => SizedBox(
-                          child: listScreen[controller.index.value],
-                        ));
+                    return Obx(
+                      () => SizedBox(
+                        child: listScreen[controller.index.value],
+                      ),
+                    );
                   },
                   childCount: 1,
                 ),
@@ -100,7 +102,7 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
         bottomNavigationBar: ValueListenableBuilder(
           valueListenable: controller.visible,
           builder: (context, bool value, child) => AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 300),
             height: value ? kBottomNavigationBarHeight.h : 0.0,
             child: Wrap(
               children: const [

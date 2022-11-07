@@ -7,7 +7,7 @@ class BottomBarBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => BottomBarController());
-    Get.lazyPut(() => ProfileController());
+    Get.lazyPut(() => ProfileController(authRepository: Get.find()));
     Get.lazyPut(() => UserRepository());
   }
 }

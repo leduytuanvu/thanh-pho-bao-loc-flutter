@@ -4,6 +4,6 @@ import '../../core/utils/export.dart';
 class ProfileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ProfileController());
+    Get.lazyPut(() => ProfileController(authRepository: Get.find()));
   }
 }

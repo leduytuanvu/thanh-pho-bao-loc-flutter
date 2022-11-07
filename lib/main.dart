@@ -26,6 +26,7 @@ class ThanhPhoBaoLoc extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
+          scrollBehavior: MyCustomScrollBehavior(),
           debugShowCheckedModeBanner: false,
           initialRoute: Routers.splashScreen,
           initialBinding: SplashBinding(),
@@ -40,4 +41,12 @@ initServices() async {
   log('STARTING SERVICES ...');
   await Get.putAsync(() => LocalStorageService.init());
   log('ALL SERVICE STARTED ...');
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
 }

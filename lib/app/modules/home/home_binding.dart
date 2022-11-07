@@ -10,6 +10,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => HomeController(authRepository: Get.find()));
     Get.lazyPut(() => AuthRepository());
     Get.lazyPut(() => UserRepository());
-    Get.lazyPut(() => ProfileController());
+    Get.lazyPut(() => ProfileController(authRepository: Get.find()));
   }
 }

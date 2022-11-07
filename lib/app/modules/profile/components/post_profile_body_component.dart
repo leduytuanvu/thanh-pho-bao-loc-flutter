@@ -1,33 +1,16 @@
-import 'package:thanh_pho_bao_loc/app/components/list_discover_component.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thanh_pho_bao_loc/app/components/post_component.dart';
-import 'package:thanh_pho_bao_loc/app/modules/home/home_controller.dart';
-import '../../core/utils/export.dart';
 
-class HomeScreen extends GetWidget<HomeController> {
-  const HomeScreen({super.key});
+import '../../../core/utils/export.dart';
+
+class PostProfileBodyComponent extends StatelessWidget {
+  const PostProfileBodyComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      physics: const BouncingScrollPhysics(),
       children: [
-        // SearchHeaderComponent(),
-        SizedBox(height: 20.h),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: Text(
-            'Discover',
-            style: TextStyle(
-              fontFamily: GoogleFonts.montserrat().fontFamily,
-              fontSize: 28.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        SizedBox(height: 15.h),
-        const ListDiscoverComponent(),
         SizedBox(height: 15.h),
         const Divider(
           color: Colors.black12,
