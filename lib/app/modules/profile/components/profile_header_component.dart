@@ -1,3 +1,4 @@
+import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 import '../../../core/utils/export.dart';
 
@@ -7,37 +8,92 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150.h,
+      height: 200.h,
       child: Stack(
         children: [
           Positioned.fill(
-            bottom: 30.r,
+            bottom: 50.r,
             child: Container(
               color: Colors.grey.shade200,
               child: Image.network(
                 "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000",
                 fit: BoxFit.cover,
               ),
-              // child: CachedNetworkImage(
-              //   fit: BoxFit.cover,
-              //   imageUrl:
-              //       "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000",
-              //   height: 50.w,
-              //   width: 50.w,
-              //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-              //       CircularProgressIndicator(
-              //     value: downloadProgress.progress,
-              //   ),
-              //   errorWidget: (context, url, error) => const Icon(Icons.error),
-              // ),
             ),
           ),
           Positioned(
             top: 15.w,
             right: 15.w,
             child: GestureDetector(
-              onTap: () async {
-                await controller.signOut();
+              onTap: () {
+                // await controller.signOut();
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text(
+                      'Are you sure to logout ?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: GoogleFonts.montserrat().fontFamily,
+                        fontSize: 18.sp,
+                      ),
+                    ),
+                    // content: const Text('AlertDialog description'),
+                    actions: <Widget>[
+                      // TextButton(
+                      //   onPressed: () => Get.back(),
+                      //   child: Text(
+                      //     'Cancel',
+                      //     style: TextStyle(
+                      //       fontFamily: GoogleFonts.montserrat().fontFamily,
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 14.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 35.w,
+                              width: 90.w,
+                              child: GradientButtonWidget(
+                                title: 'Cancle',
+                                function: (() => Get.back()),
+                                fontSize: 15.sp,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            SizedBox(
+                              height: 35.w,
+                              width: 90.w,
+                              child: GradientButtonWidget(
+                                title: 'OK',
+                                function: (() async {
+                                  await controller.signOut();
+                                }),
+                                fontSize: 15.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      // TextButton(
+                      //   onPressed: () async {
+                      //     await controller.signOut();
+                      //   },
+                      //   child: Text(
+                      //     'OK',
+                      //     style: TextStyle(
+                      //       fontFamily: GoogleFonts.montserrat().fontFamily,
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                );
               },
               child: Container(
                 // color: Colors.grey.shade200,
@@ -60,8 +116,8 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                 ),
                 child: CircleAvatar(
                   radius: 48.r,
-                  backgroundImage: const NetworkImage(
-                    "https://static.remove.bg/remove-bg-web/ea3c274e1b7f6fbbfe93fad8b2b13d7ef352f09c/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg",
+                  backgroundImage: NetworkImage(
+                    controller.user.value.image!,
                   ),
                 ),
               ),

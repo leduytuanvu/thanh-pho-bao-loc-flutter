@@ -41,16 +41,18 @@ class SignInScreen extends GetWidget<SignInController> {
                     SizedBox(height: 8.h),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 32.w),
-                      child: Obx(() => CustomTextFieldWidget(
-                            hint: 'Password',
-                            controller: controller.passwordTextController,
-                            obscureText:
-                                controller.isShowPassword.value ? false : true,
-                            function: () => controller.setIsShowPassword(),
-                            icon: controller.isShowPassword.value
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          )),
+                      child: Obx(
+                        () => CustomTextFieldWidget(
+                          hint: 'Password',
+                          controller: controller.passwordTextController,
+                          obscureText:
+                              controller.isShowPassword.value ? false : true,
+                          function: () => controller.setIsShowPassword(),
+                          icon: controller.isShowPassword.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 35.h),
                     Padding(

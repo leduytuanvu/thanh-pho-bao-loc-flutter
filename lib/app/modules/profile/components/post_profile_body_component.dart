@@ -9,6 +9,7 @@ class PostProfileBodyComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
         SizedBox(height: 15.h),

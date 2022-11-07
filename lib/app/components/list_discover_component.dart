@@ -26,7 +26,7 @@ class ListDiscoverComponent extends StatelessWidget {
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              width: 135.w,
+              width: 130.w,
               height: 180.h,
               child: Stack(
                 children: [
@@ -101,14 +101,14 @@ class ListDiscoverComponent extends StatelessWidget {
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(10.r),
               ),
-              width: 135.w,
+              width: 130.w,
               height: 180.h,
               child: Center(
                 child: Text(
-                  "See more",
+                  "More",
                   style: TextStyle(
                     fontFamily: GoogleFonts.montserrat().fontFamily,
-                    color: Colors.black54,
+                    color: Colors.black87,
                   ),
                 ),
               ),
@@ -121,7 +121,7 @@ class ListDiscoverComponent extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: i == 0 ? 10.w : 8.w, right: i == 4 ? 8.w : 0),
             child: Container(
-              width: 135.w,
+              width: 130.w,
               height: 180.h,
               decoration: BoxDecoration(
                 // color: i % 2 == 0 ? Colors.green : Colors.blue,
@@ -148,7 +148,7 @@ class ListDiscoverComponent extends StatelessWidget {
                   ),
                   SizedBox(width: 5.w),
                   SizedBox(
-                    width: 135.w,
+                    width: 130.w,
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 10.w, bottom: 8.w, top: 8.w),

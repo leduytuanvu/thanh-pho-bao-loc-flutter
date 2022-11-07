@@ -39,7 +39,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               color: Colors.black26,
             ),
             border: InputBorder.none,
-            hintText: ' ${widget.hint}',
+            hintText: widget.hint,
             suffixIcon: GestureDetector(
               onTap: widget.function,
               child: Container(
@@ -58,8 +58,8 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             color: Colors.black87,
           ),
           cursorColor: Colors.black26,
-          cursorWidth: 1.w,
-          cursorHeight: 15.h,
+          cursorWidth: 0.6.w,
+          // cursorHeight: 15.h,
           textAlignVertical: TextAlignVertical.center,
         ),
       ),

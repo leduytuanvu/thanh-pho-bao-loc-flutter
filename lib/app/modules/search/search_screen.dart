@@ -30,52 +30,49 @@ class SearchScreen extends GetWidget<SearchController> {
                     }),
                     controller: controller.searchKey,
                     decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            // horizontal: 15.w,
-                            // vertical: 1.h,
-                            ),
-                        filled: true,
-                        fillColor: Colors.grey.shade200,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(100),
-                          borderSide: BorderSide.none,
-                        ),
-                        hintText: "Search by email",
-                        hintStyle: TextStyle(
-                          fontFamily: GoogleFonts.montserrat().fontFamily,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 5.h),
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(100),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "Search by email",
+                      hintStyle: TextStyle(
+                        fontFamily: GoogleFonts.montserrat().fontFamily,
+                        color: Colors.black26,
+                      ),
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.only(left: 14.w, right: 8.w),
+                        child: const Icon(
+                          Icons.search,
                           color: Colors.black26,
                         ),
-                        prefixIcon: Padding(
-                          padding: EdgeInsets.only(left: 14.w, right: 8.w),
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.black26,
-                          ),
-                        ),
-                        prefixIconConstraints: const BoxConstraints(),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            controller.showSuffixIcon(false);
-                            controller.autofocus(false);
-                          },
-                          child: controller.search.isNotEmpty
-                              ? GestureDetector(
-                                  onTap: () {
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                    controller.searchKey.clear();
-                                    controller.search("");
-                                  },
-                                  child: const Icon(
-                                    Icons.close,
-                                    color: Colors.black26,
-                                  ),
-                                )
-                              : const SizedBox(),
-                        )),
+                      ),
+                      prefixIconConstraints: const BoxConstraints(),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          controller.showSuffixIcon(false);
+                          controller.autofocus(false);
+                        },
+                        child: controller.search.isNotEmpty
+                            ? GestureDetector(
+                                onTap: () {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  controller.searchKey.clear();
+                                  controller.search("");
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  color: Colors.black26,
+                                ),
+                              )
+                            : const SizedBox(),
+                      ),
+                    ),
                     cursorColor: Colors.black12,
-                    cursorWidth: 0.8.w,
+                    cursorWidth: 0.6.w,
                     style: TextStyle(
                       fontFamily: GoogleFonts.montserrat().fontFamily,
                       color: Colors.black87,
