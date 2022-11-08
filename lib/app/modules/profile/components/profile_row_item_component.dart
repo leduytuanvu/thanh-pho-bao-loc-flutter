@@ -16,6 +16,24 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
   Widget build(BuildContext context) {
     // controller.textController.text = value;
     // log("$value value nef");
+    var textController = TextEditingController();
+    textController.text = value;
+    var typeTextInput = TextInputType.name;
+    switch (title) {
+      case "Email":
+        typeTextInput = TextInputType.emailAddress;
+        break;
+      case "Phone":
+        typeTextInput = TextInputType.phone;
+        break;
+      case "Full name":
+        typeTextInput = TextInputType.name;
+        break;
+      case "Birthday":
+        typeTextInput = TextInputType.datetime;
+        break;
+    }
+
     return Container(
       color: Colors.grey.shade100.withOpacity(0.6),
       child: Padding(
@@ -52,18 +70,20 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
-                    // insetPadding: EdgeInsets.zero,
-                    // contentPadding: EdgeInsets.zero,
-                    // clipBehavior: Clip.antiAliasWithSaveLayer,
-                    title: Padding(
-                      padding: EdgeInsets.only(bottom: 4.h),
-                      child: Text(
-                        'Please enter new ${title.toLowerCase()}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.montserrat().fontFamily,
-                          fontSize: 18.sp,
-                        ),
+                    insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
+                    actionsPadding: EdgeInsets.only(
+                      left: 20.w,
+                      right: 20.w,
+                      bottom: 4.w,
+                      top: 2.w,
+                    ),
+                    titlePadding: EdgeInsets.only(top: 16.w),
+                    title: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: GoogleFonts.montserrat().fontFamily,
+                        fontSize: 17.sp,
                       ),
                     ),
                     content: SizedBox(
@@ -72,20 +92,19 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
 
                       child: TextField(
                         onTap: () {
-                          controller.textController.selection =
-                              TextSelection.collapsed(
-                            offset: controller.textController.text.length,
-                          );
+                          // controller.textController.selection =
+                          //     TextSelection.collapsed(
+                          //   offset: controller.textController.text.length,
+                          // );
                         },
                         // autofocus: true,
                         onChanged: ((value) {
                           // controller.textController.text = value;
                         }),
-                        controller: value == ""
-                            ? controller.textController
-                            : controller.textController
-                          ..text = value,
+                        // controller: controller.textController..text = value,
+                        controller: textController,
 
+                        keyboardType: typeTextInput,
                         decoration: InputDecoration(
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 15.w),
@@ -107,10 +126,16 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                         style: TextStyle(
                           fontFamily: GoogleFonts.montserrat().fontFamily,
                           color: Colors.black87,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                         ),
                         // cursorHeight: ,
                       ),
+                    ),
+                    contentPadding: EdgeInsets.only(
+                      left: 20.w,
+                      right: 20.w,
+                      bottom: 12.w,
+                      top: 18.w,
                     ),
                     actions: <Widget>[
                       Padding(
@@ -118,27 +143,31 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                              height: 35.w,
-                              width: 90.w,
-                              child: GradientButtonWidget(
-                                title: 'Cancle',
-                                function: (() => Get.back()),
-                                fontSize: 15.sp,
-                                radius: 8.r,
+                            Expanded(
+                              child: SizedBox(
+                                height: 35.w,
+                                width: 90.w,
+                                child: GradientButtonWidget(
+                                  title: 'Cancle',
+                                  function: (() => Get.back()),
+                                  fontSize: 15.sp,
+                                  radius: 8.r,
+                                ),
                               ),
                             ),
-                            SizedBox(width: 10.w),
-                            SizedBox(
-                              height: 35.w,
-                              width: 90.w,
-                              child: GradientButtonWidget(
-                                title: 'Save',
-                                function: (() async {
-                                  await controller.signOut();
-                                }),
-                                fontSize: 15.sp,
-                                radius: 8.r,
+                            SizedBox(width: 6.w),
+                            Expanded(
+                              child: SizedBox(
+                                height: 35.w,
+                                width: 90.w,
+                                child: GradientButtonWidget(
+                                  title: 'Save',
+                                  function: (() async {
+                                    await controller.signOut();
+                                  }),
+                                  fontSize: 15.sp,
+                                  radius: 8.r,
+                                ),
                               ),
                             ),
                           ],

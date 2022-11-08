@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/friends_profile_body_component.dart';
@@ -14,29 +15,61 @@ enum SignOutState {
 class ProfileController extends GetxController {
   final AuthRepository authRepository;
   ProfileController({required this.authRepository});
+
+  // Index of tabbar in profile screen
   var intdexTabBar = 0.obs;
+  // Width of tabbar positioned animation
   var num = 0.0.obs;
   var title = "Post".obs;
-  final scrollController = ScrollController();
   var search = "".obs;
   var user = user_entity.User().obs;
   var signOutState = SignOutState.initial.obs;
   var shouldPop = false.obs;
+  var birthday = "".obs;
+  var gender = "".obs;
 
-  final PageController pageController = PageController();
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
+
   var textController = TextEditingController();
-
-  @override
-  void onInit() {
-    user(LocalStorageService.getUser().data);
-    super.onInit();
-  }
+  final scrollController = ScrollController();
+  final PageController pageController = PageController();
 
   List<Widget> listTabBar = [
     const PostProfileBodyComponent(),
     const FriendProfileBodyComponent(),
     const ProfileProfileBodyComponent(),
   ];
+
+  @override
+  void onInit() {
+    user(LocalStorageService.getUser().data);
+    birthday(formatter.format(user.value.birthday!));
+    switch (user.value.gender) {
+      case Gender.empty:
+        gender("");
+        break;
+      case Gender.femail:
+        gender("Female");
+        break;
+      case Gender.male:
+        gender("Male");
+        break;
+      case Gender.other:
+        gender("Other");
+        break;
+      case null:
+        break;
+    }
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+    scrollController.dispose();
+    pageController.dispose();
+  }
 
   // SIGN OUT
   Future<void> signOut({BuildContext? context}) async {
