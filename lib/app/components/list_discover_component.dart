@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/custom_circle_camera_component.dart';
 import '../core/utils/export.dart';
 
@@ -11,9 +12,14 @@ class ListDiscoverComponent extends StatelessWidget {
       "assets/images/demo3.png",
       "assets/images/demo4.png",
       "assets/images/demo5.png",
+      "assets/images/demo1.png",
+      "assets/images/demo2.png",
+      "assets/images/demo3.png",
+      "assets/images/demo4.png",
+      "assets/images/demo5.png",
     ];
     List<Widget> list = [];
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i <= listImage.length; i++) {
       if (i == 0) {
         list.add(
           Padding(
@@ -65,22 +71,16 @@ class ListDiscoverComponent extends StatelessWidget {
                           CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 20.h,
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 54, 142, 214),
-                                radius: 18.h,
-                                // backgroundImage: Icon(Icons)
-                                child: Icon(
-                                  Icons.add,
-                                  size: 20.sp,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            // backgroundImage: Icon(Icons)
+                            // child: Icon(
+                            //   Icons.add,
+                            //   size: 20.sp,
+                            //   color: Colors.white,
+                            // ),
+                            child: Lottie.asset(
+                              'assets/videos/add1.json',
+                              height: 200.w,
+                              width: 200.w,
                             ),
                           ),
                         ],
@@ -92,10 +92,10 @@ class ListDiscoverComponent extends StatelessWidget {
             ),
           ),
         );
-      } else if (i == 5) {
+      } else if (i == listImage.length) {
         list.add(
           Padding(
-            padding: EdgeInsets.only(right: 10.w),
+            padding: EdgeInsets.only(right: 10.w, left: 8.w),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.black12,

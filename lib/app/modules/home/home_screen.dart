@@ -8,9 +8,9 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
       children: [
         // SearchHeaderComponent(),
         SizedBox(height: 20.h),
@@ -26,7 +26,7 @@ class HomeScreen extends GetWidget<HomeController> {
           ),
         ),
 
-        SizedBox(height: 15.h),
+        SizedBox(height: 14.h),
         const ListDiscoverComponent(),
         SizedBox(height: 15.h),
         const Divider(

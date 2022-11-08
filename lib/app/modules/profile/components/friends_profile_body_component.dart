@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
@@ -37,7 +38,7 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                         SizedBox(height: 10.h),
                         Row(
                           children: [
-                            SizedBox(width: 10.w),
+                            SizedBox(width: 25.w),
                             ClipRRect(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(100),
@@ -54,15 +55,19 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                                 height: 50.w,
                                 width: 50.w,
                                 progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        CircularProgressIndicator(
-                                  value: downloadProgress.progress,
+                                    (context, url, downloadProgress) => Padding(
+                                  padding: EdgeInsets.all(18.0.w),
+                                  child: CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    strokeWidth: 1.w,
+                                    color: Colors.black38,
+                                  ),
                                 ),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
                             ),
-                            SizedBox(width: 15.w),
+                            SizedBox(width: 17.w),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,9 +99,13 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                             SizedBox(
                               height: 30.h,
                               width: 80.w,
-                              child: Image.asset("assets/images/message.png"),
+                              child: Lottie.asset(
+                                'assets/videos/send.json',
+                                height: 250.w,
+                                width: 250.w,
+                              ),
                             ),
-                            SizedBox(width: 10.w),
+                            // SizedBox(width: 10.w),
                           ],
                         ),
                         SizedBox(height: 10.h),

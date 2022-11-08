@@ -24,6 +24,7 @@ class ProfileController extends GetxController {
   var shouldPop = false.obs;
 
   final PageController pageController = PageController();
+  var textController = TextEditingController();
 
   @override
   void onInit() {

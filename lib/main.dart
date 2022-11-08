@@ -26,6 +26,8 @@ class ThanhPhoBaoLoc extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
+          defaultTransition: Transition.fadeIn,
+          transitionDuration: const Duration(milliseconds: 150),
           scrollBehavior: MyCustomScrollBehavior(),
           debugShowCheckedModeBanner: false,
           initialRoute: Routers.splashScreen,

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/search_controller.dart';
 import '../../core/utils/export.dart';
 
@@ -10,7 +10,9 @@ class SearchScreen extends GetWidget<SearchController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
       children: [
         SizedBox(height: 15.h),
         // EdgeInsets.symmetric(horizontal: 10.w, verical: 15.h),
@@ -30,7 +32,7 @@ class SearchScreen extends GetWidget<SearchController> {
                     }),
                     controller: controller.searchKey,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 5.h),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 5.w),
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       border: OutlineInputBorder(
@@ -43,10 +45,11 @@ class SearchScreen extends GetWidget<SearchController> {
                         color: Colors.black26,
                       ),
                       prefixIcon: Padding(
-                        padding: EdgeInsets.only(left: 14.w, right: 8.w),
-                        child: const Icon(
-                          Icons.search,
-                          color: Colors.black26,
+                        padding: EdgeInsets.only(left: 15.w, right: 11.w),
+                        child: Lottie.asset(
+                          'assets/videos/search1.json',
+                          height: 19.w,
+                          width: 19.w,
                         ),
                       ),
                       prefixIconConstraints: const BoxConstraints(),
@@ -63,9 +66,10 @@ class SearchScreen extends GetWidget<SearchController> {
                                   controller.searchKey.clear();
                                   controller.search("");
                                 },
-                                child: const Icon(
+                                child: Icon(
                                   Icons.close,
-                                  color: Colors.black26,
+                                  color: Colors.black54,
+                                  size: 21.sp,
                                 ),
                               )
                             : const SizedBox(),
@@ -74,9 +78,9 @@ class SearchScreen extends GetWidget<SearchController> {
                     cursorColor: Colors.black12,
                     cursorWidth: 0.6.w,
                     style: TextStyle(
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
-                      color: Colors.black87,
-                    ),
+                        fontFamily: GoogleFonts.montserrat().fontFamily,
+                        color: Colors.black87,
+                        fontSize: 16.sp),
                     // cursorHeight: ,
                   ),
                 ),
@@ -92,8 +96,12 @@ class SearchScreen extends GetWidget<SearchController> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Padding(
-                  padding: EdgeInsets.only(top: 133.h),
-                  child: const Center(child: CircularProgressIndicator()),
+                  padding: EdgeInsets.only(top: 64.5.h),
+                  child: Lottie.asset(
+                    'assets/videos/loading.json',
+                    height: 120.w,
+                    width: 120.w,
+                  ),
                 );
               } else if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.data!.docs.isNotEmpty) {
@@ -111,7 +119,7 @@ class SearchScreen extends GetWidget<SearchController> {
                           SizedBox(height: 10.h),
                           Row(
                             children: [
-                              SizedBox(width: 10.w),
+                              SizedBox(width: 16.w),
                               ClipRRect(
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
@@ -129,8 +137,13 @@ class SearchScreen extends GetWidget<SearchController> {
                                   width: 50.w,
                                   progressIndicatorBuilder:
                                       (context, url, downloadProgress) =>
-                                          CircularProgressIndicator(
-                                    value: downloadProgress.progress,
+                                          Padding(
+                                    padding: EdgeInsets.all(18.0.w),
+                                    child: CircularProgressIndicator(
+                                      value: downloadProgress.progress,
+                                      strokeWidth: 1.w,
+                                      color: Colors.black38,
+                                    ),
                                   ),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
@@ -166,15 +179,15 @@ class SearchScreen extends GetWidget<SearchController> {
                               ),
                               SizedBox(width: 10.w),
                               SizedBox(
-                                height: 30.h,
-                                width: 80.w,
-                                child: GradientButtonWidget(
-                                  fontSize: 12.sp,
-                                  title: 'Add friend',
-                                  function: () {},
+                                // height: 30.h,
+                                // width: 30.w,
+                                child: Lottie.asset(
+                                  'assets/videos/add_friend.json',
+                                  height: 45.w,
+                                  width: 45.w,
                                 ),
                               ),
-                              SizedBox(width: 10.w),
+                              SizedBox(width: 3.w),
                             ],
                           ),
                           SizedBox(height: 10.h),
@@ -189,13 +202,15 @@ class SearchScreen extends GetWidget<SearchController> {
                   );
                 } else {
                   return Padding(
-                    padding: EdgeInsets.only(top: 140.h),
-                    child: Text(
-                      "Not found !",
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.montserrat().fontFamily,
-                        fontSize: 14.sp,
-                        // color: Colors.red,
+                    padding: EdgeInsets.only(top: 120.h),
+                    child: Center(
+                      child: Text(
+                        "Not found !",
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.montserrat().fontFamily,
+                          fontSize: 14.sp,
+                          // color: Colors.red,
+                        ),
                       ),
                     ),
                   );

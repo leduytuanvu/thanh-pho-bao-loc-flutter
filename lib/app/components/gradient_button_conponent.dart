@@ -6,6 +6,7 @@ class GradientButtonWidget extends StatelessWidget {
   final double height;
   final double width;
   final double fontSize;
+  final double radius;
 
   const GradientButtonWidget({
     super.key,
@@ -13,6 +14,7 @@ class GradientButtonWidget extends StatelessWidget {
     required this.function,
     this.height = 50,
     this.width = 100,
+    this.radius = 100,
     required this.fontSize,
   });
 
@@ -26,7 +28,7 @@ class GradientButtonWidget extends StatelessWidget {
         minimumSize: Size(100.0.w, 50.0.h),
         padding: const EdgeInsets.all(0.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100.0.r),
+          borderRadius: BorderRadius.circular(radius),
         ),
       ),
       child: Ink(
@@ -40,13 +42,13 @@ class GradientButtonWidget extends StatelessWidget {
               AppColors.buttonRadient3,
             ],
           ),
-          borderRadius: BorderRadius.all(Radius.circular(100.r)),
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
         ),
         child: Container(
           constraints: BoxConstraints(minWidth: 100.w, minHeight: 50.0.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100.r),
+            borderRadius: BorderRadius.circular(radius),
           ),
           child: Text(
             title,

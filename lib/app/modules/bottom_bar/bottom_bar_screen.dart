@@ -29,61 +29,12 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: RefreshIndicator(
-          displacement: 10.h,
+          displacement: 8.5.h,
           onRefresh: () => loadMore(),
           child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             controller: controller.scrollController,
             slivers: <Widget>[
-              // SliverAppBar(
-              //   elevation: 0,
-              //   backgroundColor: Colors.white,
-              //   toolbarHeight: 50.h,
-              //   collapsedHeight: 56.h,
-              //   // expandedHeight: 30.h,
-              //   pinned: false,
-              //   floating: true,
-              //   flexibleSpace: Padding(
-              //     padding: EdgeInsets.only(
-              //         right: 10.w, left: 10.w, top: 15.h, bottom: 5.h),
-              //     child: Container(
-              //       // height: 45.w,
-              //       decoration: BoxDecoration(
-              //         color: Colors.grey.shade200,
-              //         borderRadius: BorderRadius.circular(100.0.r),
-              //       ),
-              //       alignment: Alignment.center,
-              //       child: Padding(
-              //         padding: EdgeInsets.only(
-              //           right: 6.w,
-              //           left: 6.w,
-              //         ),
-              //         child: Row(
-              //           children: [
-              //             SizedBox(width: 4.w),
-              //             Icon(
-              //               Icons.search,
-              //               color: Colors.black26,
-              //               size: 20.sp,
-              //             ),
-              //             SizedBox(width: 8.w),
-              //             Expanded(
-              //               child: Text(
-              //                 'Search by name, email, phone number ...',
-              //                 style: TextStyle(
-              //                   fontFamily: GoogleFonts.montserrat().fontFamily,
-              //                   color: Colors.black26,
-              //                   fontSize: 15.sp,
-              //                 ),
-              //                 maxLines: 1,
-              //                 overflow: TextOverflow.ellipsis,
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
@@ -102,7 +53,7 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
         bottomNavigationBar: ValueListenableBuilder(
           valueListenable: controller.visible,
           builder: (context, bool value, child) => AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 200),
             height: value ? kBottomNavigationBarHeight.h : 0.0,
             child: Wrap(
               children: const [

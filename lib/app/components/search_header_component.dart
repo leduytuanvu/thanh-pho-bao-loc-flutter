@@ -30,7 +30,7 @@ class SearchHeaderComponent extends StatelessWidget {
                       Icon(
                         Icons.search,
                         color: Colors.black26,
-                        size: 22.sp,
+                        size: 20.sp,
                       ),
                       SizedBox(width: 8.w),
                       Expanded(

@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 import '../../../core/utils/export.dart';
@@ -22,8 +24,8 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
             ),
           ),
           Positioned(
-            top: 15.w,
-            right: 15.w,
+            top: 14.w,
+            right: 12.5.w,
             child: GestureDetector(
               onTap: () {
                 // await controller.signOut();
@@ -62,6 +64,7 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                                 title: 'Cancle',
                                 function: (() => Get.back()),
                                 fontSize: 15.sp,
+                                radius: 8.r,
                               ),
                             ),
                             SizedBox(width: 10.w),
@@ -74,6 +77,7 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                                   await controller.signOut();
                                 }),
                                 fontSize: 15.sp,
+                                radius: 8.r,
                               ),
                             ),
                           ],
@@ -97,9 +101,10 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
               },
               child: Container(
                 // color: Colors.grey.shade200,
-                child: const Icon(
-                  Icons.logout,
-                  color: Colors.black54,
+                child: Lottie.asset(
+                  'assets/videos/logout.json',
+                  height: 30.w,
+                  width: 30.w,
                 ),
               ),
             ),
@@ -114,10 +119,22 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                   shape: BoxShape.circle,
                   color: Colors.white,
                 ),
-                child: CircleAvatar(
-                  radius: 48.r,
-                  backgroundImage: NetworkImage(
-                    controller.user.value.image!,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100.r),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: controller.user.value.image!,
+                    // height: 50.r,
+                    // width: 50.r,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                      strokeWidth: 1.w,
+                      color: Colors.black38,
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
               ),

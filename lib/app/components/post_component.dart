@@ -55,7 +55,7 @@ class PostComponent extends StatelessWidget {
                                   "assets/images/menu.png",
                                   height: 20.w,
                                   width: 20.w,
-                                  color: Colors.black45,
+                                  color: Colors.black38,
                                 ),
                               ],
                             ),
@@ -126,7 +126,7 @@ class PostComponent extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 6.w, top: 5.h),
+              padding: EdgeInsets.only(left: 6.w, top: 5.5.h),
               child: Text(
                 '234',
                 style: TextStyle(

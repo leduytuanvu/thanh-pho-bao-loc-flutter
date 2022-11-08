@@ -75,7 +75,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
                           'You already have an account.',
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
-                            color: Colors.black87,
+                            color: Colors.black45,
                             fontSize: 15,
                           ),
                         ),

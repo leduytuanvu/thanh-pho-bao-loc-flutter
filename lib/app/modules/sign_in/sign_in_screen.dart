@@ -73,7 +73,7 @@ class SignInScreen extends GetWidget<SignInController> {
                           'You do not have account.',
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
-                            color: Colors.black87,
+                            color: Colors.black45,
                             fontSize: 15.sp,
                           ),
                         ),
