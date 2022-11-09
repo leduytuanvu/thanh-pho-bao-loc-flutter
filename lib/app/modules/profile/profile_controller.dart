@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 import 'package:thanh_pho_bao_loc/app/data/repositories/auth_repository.dart';
@@ -31,7 +34,7 @@ class ProfileController extends GetxController {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
   var textController = TextEditingController();
-  final scrollController = ScrollController();
+  late final ScrollController scrollController;
   final PageController pageController = PageController();
 
   List<Widget> listTabBar = [
@@ -41,7 +44,32 @@ class ProfileController extends GetxController {
   ];
 
   @override
+  void onReady() {
+    // scrollController.addListener(() {
+    //   if (scrollController.position.userScrollDirection ==
+    //       ScrollDirection.reverse) {
+    //     log("Scrolling down");
+    //   } else {
+    //     log("Scrolling up");
+    //   }
+    //   log("Scrolling up");
+    // });
+    super.onInit();
+  }
+
+  @override
   void onInit() {
+    log("init");
+    scrollController = ScrollController()
+      ..addListener(() {
+        log("Scrolling up");
+        if (scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse) {
+          log("Scrolling down");
+        } else {
+          log("Scrolling up");
+        }
+      });
     user(LocalStorageService.getUser().data);
     birthday(formatter.format(user.value.birthday!));
     switch (user.value.gender) {

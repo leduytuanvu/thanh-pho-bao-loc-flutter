@@ -2,7 +2,9 @@ import 'package:thanh_pho_bao_loc/app/components/bottom_icon_button_component.da
 import '../core/utils/export.dart';
 
 class BottomBarWidget extends StatelessWidget {
-  const BottomBarWidget({super.key});
+  const BottomBarWidget({super.key, this.onChanageIndex});
+
+  final ValueChanged<int>? onChanageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -14,32 +16,78 @@ class BottomBarWidget extends StatelessWidget {
       height: 55.0.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          BottomIconBottomComponent(
-            index: 0,
-            image: 'house_solid.svg',
-            lable: 'Home',
+        children: [
+          GestureDetector(
+            onTap: () {
+              onChanageIndex?.call(0);
+              print("object");
+            },
+            child: const BottomIconBottomComponent(
+              index: 0,
+              image: 'house_solid.svg',
+              lable: 'Home',
+            ),
           ),
-          BottomIconBottomComponent(
-            index: 1,
-            image: 'search_solid.svg',
-            lable: 'Search',
+          GestureDetector(
+            onTap: () {
+              onChanageIndex?.call(1);
+            },
+            child: const BottomIconBottomComponent(
+              index: 0,
+              image: 'house_solid.svg',
+              lable: 'Home',
+            ),
           ),
-          BottomIconBottomComponent(
-            index: 2,
-            image: 'plus.svg',
-            lable: 'Post',
+          GestureDetector(
+            onTap: () {
+              onChanageIndex!(2);
+            },
+            child: const BottomIconBottomComponent(
+              index: 0,
+              image: 'house_solid.svg',
+              lable: 'Home',
+            ),
           ),
-          BottomIconBottomComponent(
-            index: 3,
-            image: 'cart_shopping_solid.svg',
-            lable: 'Order',
+          GestureDetector(
+            onTap: () {
+              onChanageIndex!(3);
+            },
+            child: const BottomIconBottomComponent(
+              index: 0,
+              image: 'house_solid.svg',
+              lable: 'Home',
+            ),
           ),
-          BottomIconBottomComponent(
-            index: 4,
-            image: 'user_solid.svg',
-            lable: 'Profile',
+          GestureDetector(
+            onTap: () {
+              onChanageIndex!(4);
+            },
+            child: const BottomIconBottomComponent(
+              index: 0,
+              image: 'house_solid.svg',
+              lable: 'Home',
+            ),
           ),
+          // const BottomIconBottomComponent(
+          //   index: 1,
+          //   image: 'search_solid.svg',
+          //   lable: 'Search',
+          // ),
+          // const BottomIconBottomComponent(
+          //   index: 2,
+          //   image: 'plus.svg',
+          //   lable: 'Post',
+          // ),
+          // const BottomIconBottomComponent(
+          //   index: 3,
+          //   image: 'cart_shopping_solid.svg',
+          //   lable: 'Order',
+          // ),
+          // const BottomIconBottomComponent(
+          //   index: 4,
+          //   image: 'user_solid.svg',
+          //   lable: 'Profile',
+          // ),
         ],
       ),
     );

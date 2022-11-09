@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:thanh_pho_bao_loc/app/components/bottom_bar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/home_screen.dart';
@@ -28,40 +29,78 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: RefreshIndicator(
-          displacement: 8.5.h,
-          onRefresh: () => loadMore(),
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            controller: controller.scrollController,
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Obx(
-                      () => SizedBox(
-                        child: listScreen[controller.index.value],
-                      ),
-                    );
-                  },
-                  childCount: 1,
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: ValueListenableBuilder(
-          valueListenable: controller.visible,
-          builder: (context, bool value, child) => AnimatedContainer(
+        body: NotificationListener<UserScrollNotification>(
+            onNotification: (scrollController) {
+              if (scrollController.direction == ScrollDirection.reverse) {
+                controller.visible.value = false;
+              }
+              if (scrollController.direction == ScrollDirection.forward) {
+                controller.visible.value = true;
+              }
+              // if (scrollController..position.userScrollDirection ==
+              //     ScrollDirection.reverse) {
+              //   print('scrolled down');
+              //   //the setState function
+              // } else if (scrollController.position.userScrollDirection ==
+              //     ScrollDirection.forward) {
+              //   print('scrolled up');
+              //   //setState function
+              // }
+              return true;
+            },
+            child: Obx(() => IndexedStack(
+                  index: controller.indexSelect.value,
+                  children: listScreen,
+                ))),
+        //   child: RefreshIndicator(
+        //     displacement: 8.5.h,
+        //     onRefresh: () => loadMore(),
+        //     child: CustomScrollView(
+        //       physics: const BouncingScrollPhysics(),
+        //       // controller: controller.scrollController,
+        //       slivers: <Widget>[
+        //         SliverList(
+        //           delegate: SliverChildBuilderDelegate(
+        //             (BuildContext context, int index) {
+        //               return Obx(
+        //                 () => SizedBox(
+        //                   child: listScreen[controller.index.value],
+        //                 ),
+        //               );
+        //             },
+        //             childCount: 1,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        bottomNavigationBar: Obx(
+          () => AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            height: value ? kBottomNavigationBarHeight.h : 0.0,
+            height:
+                controller.visible.value ? kBottomNavigationBarHeight.h : 0.0,
             child: Wrap(
-              children: const [
-                BottomBarWidget(),
+              children: [
+                BottomBarWidget(
+                  onChanageIndex: controller.onChangeIndex,
+                ),
               ],
             ),
           ),
         ),
+        // bottomNavigationBar: ValueListenableBuilder(
+        //   valueListenable: controller.visible,
+        //   builder: (context, bool value, child) => AnimatedContainer(
+        //     duration: const Duration(milliseconds: 200),
+        //     height: value ? kBottomNavigationBarHeight.h : 0.0,
+        //     child: Wrap(
+        //       children: const [
+        //         BottomBarWidget(),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }
