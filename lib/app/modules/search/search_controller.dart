@@ -12,7 +12,6 @@ class SearchController extends GetxController {
 
   var search = "".obs;
   var showSuffixIcon = true.obs;
-  var autofocus = true.obs;
 
   final UserRepository userRepository;
   var searchKey = TextEditingController();

@@ -1,6 +1,7 @@
+import 'dart:developer';
 import 'package:flutter/rendering.dart';
-import 'package:thanh_pho_bao_loc/app/components/bottom_bar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/components/icon_bottom_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/home_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/message_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_screen.dart';
@@ -12,12 +13,6 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> loadMore() async {
-      // controller.loadMore(true);
-      await Future.delayed(const Duration(seconds: 2));
-      // controller.loadMore(false);
-    }
-
     var listScreen = [
       const HomeScreen(),
       const SearchScreen(),
@@ -25,82 +20,86 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
       const ProfileScreen(),
       const ProfileScreen(),
     ];
-
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: NotificationListener<UserScrollNotification>(
-            onNotification: (scrollController) {
-              if (scrollController.direction == ScrollDirection.reverse) {
-                controller.visible.value = false;
-              }
-              if (scrollController.direction == ScrollDirection.forward) {
-                controller.visible.value = true;
-              }
-              // if (scrollController..position.userScrollDirection ==
-              //     ScrollDirection.reverse) {
-              //   print('scrolled down');
-              //   //the setState function
-              // } else if (scrollController.position.userScrollDirection ==
-              //     ScrollDirection.forward) {
-              //   print('scrolled up');
-              //   //setState function
-              // }
-              return true;
-            },
-            child: Obx(() => IndexedStack(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            NotificationListener<UserScrollNotification>(
+              onNotification: (scrollController) {
+                if (scrollController.metrics.pixels ==
+                    scrollController.metrics.maxScrollExtent) {
+                  log('bottom');
+                } else {
+                  log('${scrollController.metrics.pixels}');
+                  log('${scrollController.metrics.maxScrollExtent}');
+                }
+                if (scrollController.direction == ScrollDirection.reverse) {
+                  controller.isVisible.value = false;
+                }
+                if (scrollController.direction == ScrollDirection.forward) {
+                  controller.isVisible.value = true;
+                }
+                return true;
+              },
+              child: Obx(
+                () => IndexedStack(
                   index: controller.indexSelect.value,
                   children: listScreen,
-                ))),
-        //   child: RefreshIndicator(
-        //     displacement: 8.5.h,
-        //     onRefresh: () => loadMore(),
-        //     child: CustomScrollView(
-        //       physics: const BouncingScrollPhysics(),
-        //       // controller: controller.scrollController,
-        //       slivers: <Widget>[
-        //         SliverList(
-        //           delegate: SliverChildBuilderDelegate(
-        //             (BuildContext context, int index) {
-        //               return Obx(
-        //                 () => SizedBox(
-        //                   child: listScreen[controller.index.value],
-        //                 ),
-        //               );
-        //             },
-        //             childCount: 1,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
-        bottomNavigationBar: Obx(
-          () => AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            height:
-                controller.visible.value ? kBottomNavigationBarHeight.h : 0.0,
-            child: Wrap(
-              children: [
-                BottomBarWidget(
-                  onChanageIndex: controller.onChangeIndex,
                 ),
-              ],
+              ),
             ),
-          ),
+            Obx(
+              () => AnimatedPositioned(
+                duration: const Duration(milliseconds: 200),
+                bottom: controller.isVisible.value ? 0.0 : -56.h,
+                left: 0.0,
+                right: 0.0,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 6.w),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100.0.r),
+                    ),
+                    height: 50.0.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        IconBottomComponent(
+                          index: 0,
+                          icon: 'house_solid.svg',
+                          lable: 'Home',
+                        ),
+                        IconBottomComponent(
+                          index: 1,
+                          icon: 'search_solid.svg',
+                          lable: 'Search',
+                        ),
+                        IconBottomComponent(
+                          index: 2,
+                          icon: 'star_solid.svg',
+                          lable: 'Message',
+                        ),
+                        IconBottomComponent(
+                          index: 3,
+                          icon: 'cart_shopping_solid.svg',
+                          lable: 'Home',
+                        ),
+                        IconBottomComponent(
+                          index: 4,
+                          icon: 'user_solid.svg',
+                          lable: 'Profile',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        // bottomNavigationBar: ValueListenableBuilder(
-        //   valueListenable: controller.visible,
-        //   builder: (context, bool value, child) => AnimatedContainer(
-        //     duration: const Duration(milliseconds: 200),
-        //     height: value ? kBottomNavigationBarHeight.h : 0.0,
-        //     child: Wrap(
-        //       children: const [
-        //         BottomBarWidget(),
-        //       ],
-        //     ),
-        //   ),
-        // ),
       ),
     );
   }

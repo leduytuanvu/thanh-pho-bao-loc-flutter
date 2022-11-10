@@ -26,14 +26,14 @@ class ThanhPhoBaoLoc extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-          defaultTransition: Transition.fadeIn,
-          transitionDuration: const Duration(milliseconds: 150),
-          scrollBehavior: MyCustomScrollBehavior(),
-          debugShowCheckedModeBanner: false,
-          initialRoute: Routers.splashScreen,
-          initialBinding: SplashBinding(),
-          getPages: Pages.allPage,
-        );
+            defaultTransition: Transition.upToDown,
+            transitionDuration: const Duration(milliseconds: 200),
+            // scrollBehavior: MyCustomScrollBehavior(),
+            debugShowCheckedModeBanner: false,
+            initialRoute: Routers.splashScreen,
+            initialBinding: SplashBinding(),
+            getPages: Pages.allPage,
+            scrollBehavior: const ScrollBehavior().copyWith(overscroll: false));
       },
     );
   }
@@ -45,10 +45,10 @@ initServices() async {
   log('ALL SERVICE STARTED ...');
 }
 
-class MyCustomScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
-  }
-}
+// class MyCustomScrollBehavior extends MaterialScrollBehavior {
+//   @override
+//   Widget buildOverscrollIndicator(
+//       BuildContext context, Widget child, ScrollableDetails details) {
+//     return child;
+//   }
+// }

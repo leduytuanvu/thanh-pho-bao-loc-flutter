@@ -1,4 +1,7 @@
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_date_component.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_phone_component.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_text_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
@@ -14,22 +17,25 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    // controller.textController.text = value;
-    // log("$value value nef");
     var textController = TextEditingController();
     textController.text = value;
+    late Widget content;
     var typeTextInput = TextInputType.name;
     switch (title) {
       case "Email":
+        content = ContentDialogTextComponent(textController: textController);
         typeTextInput = TextInputType.emailAddress;
         break;
       case "Phone":
+        content = ContentDialogPhoneComponent(textController: textController);
         typeTextInput = TextInputType.phone;
         break;
       case "Full name":
+        content = ContentDialogTextComponent(textController: textController);
         typeTextInput = TextInputType.name;
         break;
       case "Birthday":
+        content = ContentDialogDateComponent(textController: textController);
         typeTextInput = TextInputType.datetime;
         break;
     }
@@ -75,7 +81,6 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                       left: 20.w,
                       right: 20.w,
                       bottom: 4.w,
-                      top: 2.w,
                     ),
                     titlePadding: EdgeInsets.only(top: 16.w),
                     title: Text(
@@ -86,57 +91,13 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                         fontSize: 17.sp,
                       ),
                     ),
-                    content: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      // color: Colors.red,
-
-                      child: TextField(
-                        onTap: () {
-                          // controller.textController.selection =
-                          //     TextSelection.collapsed(
-                          //   offset: controller.textController.text.length,
-                          // );
-                        },
-                        // autofocus: true,
-                        onChanged: ((value) {
-                          // controller.textController.text = value;
-                        }),
-                        // controller: controller.textController..text = value,
-                        controller: textController,
-
-                        keyboardType: typeTextInput,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 15.w),
-                          filled: true,
-                          fillColor: Colors.grey.shade200,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.r),
-                            borderSide: BorderSide.none,
-                          ),
-                          // hintText: "Enter new ${title.toLowerCase()}",
-                          hintStyle: TextStyle(
-                            fontFamily: GoogleFonts.montserrat().fontFamily,
-                            color: Colors.black26,
-                          ),
-                          prefixIconConstraints: const BoxConstraints(),
-                        ),
-                        cursorColor: Colors.black12,
-                        cursorWidth: 0.6.w,
-                        style: TextStyle(
-                          fontFamily: GoogleFonts.montserrat().fontFamily,
-                          color: Colors.black87,
-                          fontSize: 14.sp,
-                        ),
-                        // cursorHeight: ,
-                      ),
-                    ),
-                    contentPadding: EdgeInsets.only(
-                      left: 20.w,
-                      right: 20.w,
-                      bottom: 12.w,
-                      top: 18.w,
-                    ),
+                    content: content,
+                    // contentPadding: EdgeInsets.only(
+                    //   left: 20.w,
+                    //   right: 20.w,
+                    //   bottom: 12.w,
+                    //   top: 20.w,
+                    // ),
                     actions: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(bottom: 14.w),

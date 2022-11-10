@@ -1,45 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/rendering.dart';
 
 import '../../core/utils/export.dart';
 
 class BottomBarController extends GetxController {
-  var index = 0.obs;
-
-  final ScrollController scrollController = ScrollController();
-  // final ValueNotifier<bool> visible = ValueNotifier<bool>(true);
-  RxBool visible = true.obs;
-  RxInt indexSelect = 0.obs;
+  var isVisible = true.obs;
+  var indexSelect = 0.obs;
+  final scrollController = ScrollController();
 
   @override
-  void onInit() {
-    super.onInit();
+  void onInit() async {
     scrollController.addListener(() {
-      log("MMMMMMMMMMMMMMMMMMMMMMMM");
       if (scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
-        visible.value = false;
-        log("MMMMMMMMMMMMMMMMMMMMMMMM");
+        isVisible.value = false;
       }
       if (scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
-        visible.value = true;
+        isVisible.value = true;
       }
     });
-  }
-
-  void logggg() {
-    log("VUUVU");
-  }
-
-  void onChangeIndex(int index) {
-    indexSelect.value = index;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    scrollController.dispose();
+    super.onInit();
   }
 }
