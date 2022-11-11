@@ -1,4 +1,5 @@
 import 'package:date_time_picker/date_time_picker.dart';
+
 import '../../../core/utils/export.dart';
 
 class ContentDialogDateComponent extends StatelessWidget {
@@ -11,58 +12,43 @@ class ContentDialogDateComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = TextEditingController();
-    return Column(
-      children: [
-        DateTimePicker(
-          textAlign: TextAlign.center,
-          initialValue: '',
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2100),
-          onChanged: (val) => print(val),
-          validator: (val) {
-            print(val);
-            return null;
-          },
-          onSaved: (val) => print(val),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          // color: Colors.red,
+    return SizedBox(
+      height: 50.h,
+      width: MediaQuery.of(context).size.width,
+      child: DateTimePicker(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(top: 0, bottom: 40.h),
+          filled: true,
+          fillColor: Colors.grey.shade200,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.r),
+            borderSide: BorderSide.none,
+          ),
+          // hintText: "Enter new ${title.toLowerCase()}",
 
-          child: TextField(
-            onTap: () async {},
-            // autofocus: true,
-            onChanged: ((value) {}),
-            // controller: controller.textController..text = value,
-            controller: textController,
-
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 15.w, right: 15.w),
-              filled: true,
-              fillColor: Colors.grey.shade200,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.r),
-                borderSide: BorderSide.none,
-              ),
-              // hintText: "Enter new ${title.toLowerCase()}",
-              hintStyle: TextStyle(
-                fontFamily: GoogleFonts.montserrat().fontFamily,
-                color: Colors.black26,
-              ),
-              prefixIconConstraints: const BoxConstraints(),
+          prefixIconConstraints: const BoxConstraints(),
+          prefixIcon: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 14.0.r),
+            child: const Icon(
+              Icons.calendar_month,
+              color: Colors.black38,
             ),
-            cursorColor: Colors.black12,
-            cursorWidth: 0.6.w,
-            style: TextStyle(
-              fontFamily: GoogleFonts.montserrat().fontFamily,
-              color: Colors.black87,
-              fontSize: 15.sp,
-            ),
-            // cursorHeight: ,
           ),
         ),
-      ],
+        initialValue: '',
+        style: TextStyle(
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+          color: Colors.black87,
+          fontSize: 15.sp,
+        ),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100),
+        onChanged: (val) => print(val),
+        validator: (val) {
+          return null;
+        },
+        onSaved: (val) => print(val),
+      ),
     );
   }
 }

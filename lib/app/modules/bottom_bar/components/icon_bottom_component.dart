@@ -1,5 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/controller/bottom_bar_controller.dart';
 import '../../../core/utils/export.dart';
 
 class IconBottomComponent extends GetWidget<BottomBarController> {

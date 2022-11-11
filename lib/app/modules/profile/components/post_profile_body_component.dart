@@ -12,11 +12,11 @@ class PostProfileBodyComponent extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
-        SizedBox(height: 15.h),
-        const Divider(
-          color: Colors.black12,
-          thickness: 10,
-        ),
+        SizedBox(height: 16.h),
+        // const Divider(
+        //   color: Colors.black12,
+        //   thickness: 0.2,
+        // ),
         const PostComponent(image: 'demo'),
         const Divider(
           color: Colors.black12,

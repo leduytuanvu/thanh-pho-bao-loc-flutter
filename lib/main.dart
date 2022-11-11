@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/services.dart';
-import 'package:thanh_pho_bao_loc/app/modules/splash/splash_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/splash/binding/splash_binding.dart';
 import 'package:thanh_pho_bao_loc/app/routes/pages.dart';
 import 'app/core/utils/export.dart';
 

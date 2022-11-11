@@ -55,9 +55,10 @@ class ContentDialogPhoneComponent extends StatelessWidget {
               // cursorHeight: ,
             ),
           ),
-          SizedBox(width: 1.w),
+          SizedBox(width: 6.w),
           Expanded(
             child: TextField(
+              enableInteractiveSelection: false,
               onTap: () {
                 // controller.textController.selection =
                 //     TextSelection.collapsed(

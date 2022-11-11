@@ -1,5 +1,5 @@
 import 'package:lottie/lottie.dart';
-import 'package:thanh_pho_bao_loc/app/modules/search/search_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/search/controller/search_controller.dart';
 
 import '../../../core/utils/export.dart';
 

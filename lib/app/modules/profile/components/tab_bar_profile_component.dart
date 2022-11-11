@@ -1,4 +1,4 @@
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
 
@@ -26,7 +26,7 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                       onTap: (() {
                         if (controller.intdexTabBar.value != 0) {
                           controller.intdexTabBar(0);
-                          controller.title("Post");
+                          controller.title("POST (12)");
                         }
                       }),
                       child: Container(
@@ -40,10 +40,11 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                         // width: 100.w,
 
                         child: Text(
-                          'Post',
+                          'POST (12)',
                           style: TextStyle(
-                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            // fontFamily: GoogleFonts.poppins().fontFamily,
                             fontWeight: FontWeight.bold,
+                            fontSize: 13.sp, letterSpacing: 0.7,
                             // color: Colors.white,
                           ),
                         ),
@@ -54,7 +55,7 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                       onTap: (() {
                         if (controller.intdexTabBar.value != 1) {
                           controller.intdexTabBar(1);
-                          controller.title("Friends");
+                          controller.title("FRIENDS (256)");
                         }
                       }),
                       child: Container(
@@ -68,10 +69,11 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                         // width: 100.w,
 
                         child: Text(
-                          'Friends',
+                          'FRIENDS (256)',
                           style: TextStyle(
-                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            // fontFamily: GoogleFonts.poppins().fontFamily,
                             fontWeight: FontWeight.bold,
+                            fontSize: 13.sp, letterSpacing: 0.7,
                             // color: Colors.white,
                           ),
                         ),
@@ -82,7 +84,7 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                       onTap: (() {
                         if (controller.intdexTabBar.value != 2) {
                           controller.intdexTabBar(2);
-                          controller.title("Profile");
+                          controller.title("PROFILE");
                         }
                       }),
                       child: Container(
@@ -96,10 +98,11 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                         // width: 100.w,
 
                         child: Text(
-                          'Profile',
+                          'PROFILE',
                           style: TextStyle(
-                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            // fontFamily: GoogleFonts.poppins().fontFamily,
                             fontWeight: FontWeight.bold,
+                            fontSize: 13.sp, letterSpacing: 0.7,
                             // color: Colors.white,
                           ),
                         ),
@@ -129,9 +132,11 @@ class TabBarProfileComponent extends GetWidget<ProfileController> {
                     child: Text(
                       controller.title.value,
                       style: TextStyle(
-                        fontFamily: GoogleFonts.montserrat().fontFamily,
+                        // fontFamily: GoogleFonts.montserrat().fontFamily,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        fontSize: 13.sp,
+                        letterSpacing: 0.7,
                       ),
                     ),
                   ),

@@ -1,5 +1,5 @@
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/profile_row_item_component.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
 
@@ -12,7 +12,7 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
-        SizedBox(height: 25.h),
+        SizedBox(height: 26.h),
         ProfileRowItemComponent(
           title: "Full name",
           value: controller.user.value.fullName!,

@@ -14,6 +14,7 @@ class ContentDialogTextComponent extends StatelessWidget {
       // color: Colors.red,
 
       child: TextField(
+        enableInteractiveSelection: false,
         onTap: () {
           // controller.textController.selection =
           //     TextSelection.collapsed(

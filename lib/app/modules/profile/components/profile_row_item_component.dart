@@ -1,8 +1,9 @@
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_date_component.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_gender_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_phone_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_text_component.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
 
@@ -36,6 +37,10 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
         break;
       case "Birthday":
         content = ContentDialogDateComponent(textController: textController);
+        typeTextInput = TextInputType.datetime;
+        break;
+      case "Gender":
+        content = ContentDialogGenderComponent(textController: textController);
         typeTextInput = TextInputType.datetime;
         break;
     }
@@ -100,7 +105,8 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                     // ),
                     actions: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(bottom: 14.w),
+                        padding: EdgeInsets.only(
+                            bottom: 14.w, left: 3.w, right: 3.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

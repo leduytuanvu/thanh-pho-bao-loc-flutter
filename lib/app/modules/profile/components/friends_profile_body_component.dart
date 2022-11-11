@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
 
@@ -35,7 +35,7 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                     // var date = DateFormat("yyyy-MM-dd hh:mm:ss").format(dt);
                     return Column(
                       children: [
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 16.h),
                         Row(
                           children: [
                             SizedBox(width: 25.w),

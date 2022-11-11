@@ -1,20 +1,21 @@
-import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/bottom_bar_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/forgot_password/forgot_password_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/home/home_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/home/home_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/message/message_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/message/message_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/search/search_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/search/search_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/sign_in/sign_in_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/sign_up/sign_up_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/sign_up/sign_up_screen.dart';
-import 'package:thanh_pho_bao_loc/app/modules/splash/splash_binding.dart';
-import 'package:thanh_pho_bao_loc/app/modules/splash/splash_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/binding/bottom_bar_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/screen/bottom_bar_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/create_post/binding/create_post_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/create_post/screen/create_post_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/home/binding/home_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/home/screen/home_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/message/binding/message_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/message/screen/message_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/binding/profile_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/screen/profile_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/search/binding/search_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/search/screen/search_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/sign_in/binding/sign_in_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/sign_in/screen/sign_in_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/sign_up/binding/sign_up_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/sign_up/screen/sign_up_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/splash/binding/splash_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/splash/screen/splash_screen.dart';
 import '../core/utils/export.dart';
 
 class Pages {
@@ -33,11 +34,6 @@ class Pages {
       name: Routers.signUpScreen,
       page: () => const SignUpScreen(),
       binding: SignUpBinding(),
-    ),
-    GetPage(
-      name: Routers.forgotPasswordScreen,
-      page: () => const ForgotPasswordScreen(),
-      binding: SignInBinding(),
     ),
     GetPage(
       name: Routers.homeScreen,
@@ -63,6 +59,11 @@ class Pages {
       name: Routers.messageScreen,
       page: () => const MessageScreen(),
       binding: MessageBinding(),
+    ),
+    GetPage(
+      name: Routers.createPostScreen,
+      page: () => const CreatePostScreen(),
+      binding: CreatePostBinding(),
     ),
   ];
 }

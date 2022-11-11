@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/profile_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 import '../../../core/utils/export.dart';
 
 class ProfileHeaderComponent extends GetWidget<ProfileController> {
@@ -14,9 +14,12 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
       child: Stack(
         children: [
           Positioned.fill(
-            bottom: 50.r,
+            bottom: 30.r,
             child: Container(
-              color: Colors.grey.shade200,
+              child: Image.asset(
+                "assets/images/demo.png",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Positioned(
@@ -96,11 +99,19 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                 );
               },
               child: Container(
-                // color: Colors.grey.shade200,
-                child: Lottie.asset(
-                  'assets/videos/logout.json',
-                  height: 30.w,
-                  width: 30.w,
+                height: 36.w,
+                width: 36.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(118.r),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(5.0.r),
+                  child: Lottie.asset(
+                    'assets/videos/logout.json',
+                    height: 30.w,
+                    width: 30.w,
+                  ),
                 ),
               ),
             ),
