@@ -16,6 +16,8 @@ import 'package:thanh_pho_bao_loc/app/modules/sign_up/binding/sign_up_binding.da
 import 'package:thanh_pho_bao_loc/app/modules/sign_up/screen/sign_up_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/splash/binding/splash_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/splash/screen/splash_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/view_other_profile/binding/view_other_profile_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/view_other_profile/screen/view_other_profile_screen.dart';
 import '../core/utils/export.dart';
 
 class Pages {
@@ -64,6 +66,11 @@ class Pages {
       name: Routers.createPostScreen,
       page: () => const CreatePostScreen(),
       binding: CreatePostBinding(),
+    ),
+    GetPage(
+      name: Routers.viewOtherProfileScreen,
+      page: () => const ViewOtherProfileScreen(),
+      binding: ViewOtherProfileBinding(),
     ),
   ];
 }

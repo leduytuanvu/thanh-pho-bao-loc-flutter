@@ -6,7 +6,7 @@ import 'app/core/utils/export.dart';
 
 Future main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
+    statusBarColor: Colors.black,
   ));
   // DependencyCreator.init();
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,14 +26,14 @@ class ThanhPhoBaoLoc extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-            defaultTransition: Transition.upToDown,
-            transitionDuration: const Duration(milliseconds: 200),
-            // scrollBehavior: MyCustomScrollBehavior(),
-            debugShowCheckedModeBanner: false,
-            initialRoute: Routers.splashScreen,
-            initialBinding: SplashBinding(),
-            getPages: Pages.allPage,
-            scrollBehavior: const ScrollBehavior().copyWith(overscroll: false));
+          defaultTransition: Transition.upToDown,
+          transitionDuration: const Duration(milliseconds: 300),
+          debugShowCheckedModeBanner: false,
+          initialRoute: Routers.splashScreen,
+          initialBinding: SplashBinding(),
+          getPages: Pages.allPage,
+          scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+        );
       },
     );
   }
@@ -44,11 +44,3 @@ initServices() async {
   await Get.putAsync(() => LocalStorageService.init());
   log('ALL SERVICE STARTED ...');
 }
-
-// class MyCustomScrollBehavior extends MaterialScrollBehavior {
-//   @override
-//   Widget buildOverscrollIndicator(
-//       BuildContext context, Widget child, ScrollableDetails details) {
-//     return child;
-//   }
-// }

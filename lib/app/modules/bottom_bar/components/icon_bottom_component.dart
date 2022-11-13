@@ -33,7 +33,7 @@ class IconBottomComponent extends GetWidget<BottomBarController> {
           children: [
             SizedBox(height: 2.0.h),
             SizedBox(
-              height: 18.0..w,
+              height: 18.0.h,
               width: 18.0.w,
               child: Center(
                 child: Obx(

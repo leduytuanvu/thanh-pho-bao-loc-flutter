@@ -8,13 +8,12 @@ class PostContentComponent extends StatelessWidget {
     return SizedBox(
       child: TextField(
         maxLines: 20,
-
         enableInteractiveSelection: false,
         onTap: () {},
         onChanged: ((value) {}),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(left: 15.w, right: 15.w, top: 25.h),
+          contentPadding: EdgeInsets.only(left: 14.w, right: 15.w, top: 25.h),
           filled: true,
           fillColor: Colors.grey.shade200,
           border: const OutlineInputBorder(

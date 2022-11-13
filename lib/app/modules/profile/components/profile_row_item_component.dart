@@ -79,6 +79,7 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
             GestureDetector(
               onTap: () {
                 showDialog<String>(
+                  barrierColor: Colors.black87.withOpacity(0.8),
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     insetPadding: EdgeInsets.symmetric(horizontal: 20.w),

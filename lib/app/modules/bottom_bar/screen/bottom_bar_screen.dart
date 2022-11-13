@@ -30,7 +30,6 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
               onNotification: (scrollController) {
                 if (scrollController.metrics.pixels ==
                     scrollController.metrics.maxScrollExtent) {
-                  log('bottom');
                 } else {
                   log('${scrollController.metrics.pixels}');
                   log('${scrollController.metrics.maxScrollExtent}');
@@ -57,7 +56,7 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
                 left: 0.0,
                 right: 0.0,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 6.w),
+                  padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 6.h),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,

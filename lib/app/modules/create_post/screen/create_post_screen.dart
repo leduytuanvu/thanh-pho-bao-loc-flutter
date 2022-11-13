@@ -1,6 +1,6 @@
-import 'package:thanh_pho_bao_loc/app/modules/create_post/controller/create_post_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/create_post/components/header_post_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/create_post/components/post_content_component.dart';
+import 'package:thanh_pho_bao_loc/app/modules/create_post/controller/create_post_controller.dart';
 
 import '../../../core/utils/export.dart';
 
@@ -13,6 +13,7 @@ class CreatePostScreen extends GetWidget<CreatePostController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.2,
@@ -36,7 +37,7 @@ class CreatePostScreen extends GetWidget<CreatePostController> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(top: 12.w, bottom: 12.w, right: 10.w),
+            padding: EdgeInsets.only(top: 12.w, bottom: 12.w, right: 16.w),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade300,

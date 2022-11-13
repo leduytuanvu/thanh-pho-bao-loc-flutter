@@ -20,6 +20,7 @@ class SearchHeaderComponent extends GetWidget<SearchController> {
                 onChanged: ((value) {
                   controller.search(value);
                 }),
+                autofocus: false,
                 controller: controller.searchKey,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(horizontal: 5.w),

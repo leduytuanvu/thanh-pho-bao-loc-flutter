@@ -7,6 +7,6 @@ class Routers {
   static const String searchScreen = '/searchScreen';
   static const String profileScreen = '/profileScreen';
   static const String messageScreen = '/messageScreen';
-  //
+  static const String viewOtherProfileScreen = '/viewOtherProfileScreen';
   static const String createPostScreen = '/createPostScreen';
 }
