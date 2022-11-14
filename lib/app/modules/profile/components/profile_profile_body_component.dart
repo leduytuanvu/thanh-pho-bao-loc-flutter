@@ -14,31 +14,31 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
       physics: const BouncingScrollPhysics(),
       children: [
         SizedBox(height: 26.h),
-        ProfileRowItemComponent(
+        const ProfileRowItemComponent(
           title: "Full name",
-          value: controller.user.value.fullName!,
+          // value: controller.user.value.fullName!,
         ),
         SizedBox(height: 10.h),
-        ProfileRowItemComponent(
+        const ProfileRowItemComponent(
           title: "Email",
-          value: controller.user.value.email!,
+          // value: controller.user.value.email!,
         ),
         SizedBox(height: 10.h),
-        ProfileRowItemComponent(
+        const ProfileRowItemComponent(
           title: "Phone",
-          value: controller.user.value.phone == ""
-              ? ""
-              : controller.user.value.phone!,
+          // value: controller.user.value.phone == ""
+          //     ? ""
+          //     : controller.user.value.phone!,
         ),
         SizedBox(height: 10.h),
-        ProfileRowItemComponent(
+        const ProfileRowItemComponent(
           title: "Birthday",
-          value: controller.birthday.value,
+          // value: controller.birthday.value,
         ),
         SizedBox(height: 10.h),
-        ProfileRowItemComponent(
+        const ProfileRowItemComponent(
           title: "Gender",
-          value: controller.gender.value,
+          // value: controller.gender.value,
         ),
         SizedBox(height: 10.h),
         Padding(
@@ -111,9 +111,9 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
         SizedBox(height: 120.h),
         controller.user.value.signInByGoogle == true
             ? const SizedBox.shrink()
-            : ProfileRowItemComponent(
+            : const ProfileRowItemComponent(
                 title: "Password",
-                value: controller.user.value.password!,
+                // value: controller.user.value.password!,
               ),
       ],
     );

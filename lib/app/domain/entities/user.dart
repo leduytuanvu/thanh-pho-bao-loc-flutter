@@ -11,6 +11,7 @@ class User {
   String? email;
   String? phone;
   String? image;
+  String? wallpaper;
   String? username;
   String? password;
   Status? status;
@@ -35,6 +36,7 @@ class User {
     this.statusAccount,
     this.createdAt,
     this.gender,
+    this.wallpaper,
     this.signInByGoogle,
   });
 
@@ -84,6 +86,7 @@ class User {
     email = json['email'];
     phone = json['phone'];
     image = json['image'];
+    wallpaper = json['wallpaper'];
     createdAt = datetimeCreateAt;
     username = json['username'];
     password = json['password'];
@@ -105,6 +108,8 @@ class User {
       image: user.photoURL ??
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
       statusAccount: StatusAccount.active,
+      wallpaper:
+          "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000",
       birthday: null,
       gender: Gender.empty,
       lastSignIn: null,
@@ -124,6 +129,7 @@ class User {
     data['email'] = email;
     data['phone'] = phone;
     data['image'] = image;
+    data['wallpaper'] = wallpaper;
     // data['createdAt'] = dateFormat.format(createdAt!).toString();
     data['createdAt'] = createdAt!.toString();
     data['username'] = username;
@@ -145,6 +151,7 @@ class User {
     data['email'] = email;
     data['phone'] = phone;
     data['image'] = image;
+    data['wallpaper'] = wallpaper;
     data['createdAt'] = createdAt;
     data['username'] = username;
     data['password'] = password;

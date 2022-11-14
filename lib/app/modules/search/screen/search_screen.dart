@@ -3,7 +3,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/components/search_header_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/controller/search_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/view_other_profile/screen/view_other_profile_screen.dart';
 import '../../../core/utils/export.dart';
+import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 
 class SearchScreen extends GetWidget<SearchController> {
   const SearchScreen({super.key});
@@ -40,6 +42,8 @@ class SearchScreen extends GetWidget<SearchController> {
                     itemBuilder: (BuildContext context, int index) {
                       Map<String, dynamic> data =
                           snapshot.data!.docs[index].data();
+                      user_entity.User newUser =
+                          user_entity.User.fromJson(data, true);
                       // DateTime dt = (data['createdAt'] as Timestamp).toDate();
                       // var date = DateFormat("yyyy-MM-dd hh:mm:ss").format(dt);
                       return Column(
@@ -48,33 +52,41 @@ class SearchScreen extends GetWidget<SearchController> {
                           Row(
                             children: [
                               SizedBox(width: 16.w),
-                              ClipRRect(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
-                                ),
-                                // child: Image(
-                                //   image: NetworkImage(data['image']),
-                                //   width: 55.w,
-                                //   height: 55.w,
-                                //   fit: BoxFit.cover,
-                                // ),
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: data['image'],
-                                  height: 50.w,
-                                  width: 50.w,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Padding(
-                                    padding: EdgeInsets.all(18.0.w),
-                                    child: CircularProgressIndicator(
-                                      value: downloadProgress.progress,
-                                      strokeWidth: 1.w,
-                                      color: Colors.black38,
-                                    ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    () => ViewOtherProfileScreen(),
+                                    arguments: newUser,
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(100),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                                  // child: Image(
+                                  //   image: NetworkImage(data['image']),
+                                  //   width: 55.w,
+                                  //   height: 55.w,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                  child: CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: newUser.image!,
+                                    height: 50.w,
+                                    width: 50.w,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            Padding(
+                                      padding: EdgeInsets.all(18.0.w),
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        strokeWidth: 1.w,
+                                        color: Colors.black38,
+                                      ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
                                 ),
                               ),
                               SizedBox(width: 10.w),
@@ -83,7 +95,7 @@ class SearchScreen extends GetWidget<SearchController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      data['fullName'] ?? "",
+                                      newUser.fullName ?? "",
                                       style: TextStyle(
                                         fontFamily:
                                             GoogleFonts.montserrat().fontFamily,
@@ -93,7 +105,7 @@ class SearchScreen extends GetWidget<SearchController> {
                                     ),
                                     SizedBox(height: 4.h),
                                     Text(
-                                      data['email'] ?? "",
+                                      newUser.email ?? "",
                                       style: TextStyle(
                                         fontFamily:
                                             GoogleFonts.montserrat().fontFamily,

@@ -21,7 +21,24 @@ class ProfileScreen extends GetWidget<ProfileController> {
               child: Column(
                 children: [
                   const ProfileHeaderComponent(),
-                  SizedBox(height: 12.h),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Icon(
+                  //       Icons.camera_alt,
+                  //       color: Colors.black45,
+                  //       size: 16.sp,
+                  //     ),
+                  //     SizedBox(width: 5.w),
+                  //     Text(
+                  //       "Change avatar",
+                  //       style: TextStyle(
+                  //         fontFamily: GoogleFonts.montserrat().fontFamily,
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  SizedBox(height: 16.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Text(
@@ -40,7 +57,7 @@ class ProfileScreen extends GetWidget<ProfileController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 5.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Text(
@@ -62,6 +79,23 @@ class ProfileScreen extends GetWidget<ProfileController> {
             ),
             Obx(() => SizedBox(
                   child: controller.signOutState.value == SignOutState.loading
+                      ? Container(
+                          height: size.height,
+                          width: size.width,
+                          color: Colors.black.withOpacity(0.6),
+                          child: Center(
+                            child: Lottie.asset(
+                              'assets/videos/loading.json',
+                              height: 250.w,
+                              width: 250.w,
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                )),
+            Obx(() => SizedBox(
+                  child: controller.updateProfileState.value ==
+                          UpdateProfileState.loading
                       ? Container(
                           height: size.height,
                           width: size.width,

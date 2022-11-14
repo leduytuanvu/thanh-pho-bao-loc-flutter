@@ -69,7 +69,7 @@ class Pages {
     ),
     GetPage(
       name: Routers.viewOtherProfileScreen,
-      page: () => const ViewOtherProfileScreen(),
+      page: () => ViewOtherProfileScreen(),
       binding: ViewOtherProfileBinding(),
     ),
   ];

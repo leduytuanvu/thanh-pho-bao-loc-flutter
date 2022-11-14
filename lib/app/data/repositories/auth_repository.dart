@@ -72,15 +72,29 @@ class AuthRepository extends IAuthRepository {
               }
             } else {
               // SAVE USER TO LOCAL STORAGE
-              var responseLocal = LocalStorageService.setUser(userEntity);
-              // SET RESULT
-              if (responseLocal.statusAction == StatusAction.failure) {
-                baseResponse.message = responseLocal.message;
-              } else {
-                baseResponse.data = userEntity;
-                baseResponse.statusAction = StatusAction.success;
-                baseResponse.message = 'Sign in with google success !';
+              BaseResponse responseGetUserFromEmail = await UserRepository()
+                  .getUserByEmail(email: userFirebase.email!);
+              if (responseGetUserFromEmail.statusAction ==
+                  StatusAction.success) {
+                var responseLocal =
+                    LocalStorageService.setUser(responseGetUserFromEmail.data);
+                if (responseLocal.statusAction == StatusAction.failure) {
+                  baseResponse.message = responseLocal.message;
+                } else {
+                  baseResponse.data = responseGetUserFromEmail.data;
+                  baseResponse.statusAction = StatusAction.success;
+                  baseResponse.message = 'Sign in with google success !';
+                }
               }
+              // var responseLocal = LocalStorageService.setUser(userEntity);
+              // SET RESULT
+              // if (responseLocal.statusAction == StatusAction.failure) {
+              //   baseResponse.message = responseLocal.message;
+              // } else {
+              //   baseResponse.data = userEntity;
+              //   baseResponse.statusAction = StatusAction.success;
+              //   baseResponse.message = 'Sign in with google success !';
+              // }
             }
           }
         }
@@ -143,6 +157,8 @@ class AuthRepository extends IAuthRepository {
                 status: Status.empty,
                 gender: Gender.empty,
                 statusAccount: StatusAccount.active,
+                wallpaper:
+                    "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000",
                 image:
                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
                 phone: "",

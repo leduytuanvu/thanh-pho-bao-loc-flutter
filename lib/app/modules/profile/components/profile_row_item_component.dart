@@ -1,4 +1,5 @@
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+// import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_change_avatar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_date_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_gender_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_phone_component.dart';
@@ -9,40 +10,59 @@ import '../../../core/utils/export.dart';
 
 class ProfileRowItemComponent extends GetWidget<ProfileController> {
   final String title;
-  final String value;
+  // final String value;
   const ProfileRowItemComponent({
     super.key,
     required this.title,
-    required this.value,
+    // required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    var textController = TextEditingController();
-    textController.text = value;
+    var value = "";
+    // log("$value VALIEJEAFDF");
+    // var textController = TextEditingController();
+    // textController.text = value;
     late Widget content;
     var typeTextInput = TextInputType.name;
     switch (title) {
       case "Email":
-        content = ContentDialogTextComponent(textController: textController);
+        content = ContentDialogTextComponent(
+            textController: controller.textController);
         typeTextInput = TextInputType.emailAddress;
+        value = controller.emailTextController.text;
         break;
       case "Phone":
-        content = ContentDialogPhoneComponent(textController: textController);
+        content = ContentDialogPhoneComponent(
+            textController: controller.textController);
         typeTextInput = TextInputType.phone;
+        value = controller.phoneTextController.text;
         break;
       case "Full name":
-        content = ContentDialogTextComponent(textController: textController);
+        content = ContentDialogTextComponent(
+          textController: controller.fullNameTextController,
+        );
+        value = controller.fullNameTextController.text;
         typeTextInput = TextInputType.name;
         break;
       case "Birthday":
-        content = ContentDialogDateComponent(textController: textController);
+        content = ContentDialogDateComponent(
+            textController: controller.textController);
         typeTextInput = TextInputType.datetime;
         break;
       case "Gender":
-        content = ContentDialogGenderComponent(textController: textController);
+        content = ContentDialogGenderComponent(
+            textController: controller.textController);
         typeTextInput = TextInputType.datetime;
         break;
+      // case "Change avatar":
+      //   content = const ContentDialogChangeAvatarComponent();
+      //   typeTextInput = TextInputType.datetime;
+      //   break;
+      // case "Change wallpaper":
+      //   content = const ContentDialogChangeAvatarComponent();
+      //   typeTextInput = TextInputType.datetime;
+      //   break;
     }
 
     return Container(
@@ -131,7 +151,8 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                                 child: GradientButtonWidget(
                                   title: 'Save',
                                   function: (() async {
-                                    await controller.signOut();
+                                    Get.back();
+                                    controller.updateUser(title: title);
                                   }),
                                   fontSize: 15.sp,
                                   radius: 8.r,

@@ -36,11 +36,11 @@ class SearchHeaderComponent extends GetWidget<SearchController> {
                     color: Colors.black26,
                   ),
                   prefixIcon: Padding(
-                    padding: EdgeInsets.only(left: 15.w, right: 11.w),
+                    padding: EdgeInsets.only(left: 15.w, right: 12.w),
                     child: Lottie.asset(
                       'assets/videos/search1.json',
-                      height: 19.w,
-                      width: 19.w,
+                      height: 18.w,
+                      width: 18.w,
                     ),
                   ),
                   prefixIconConstraints: const BoxConstraints(),

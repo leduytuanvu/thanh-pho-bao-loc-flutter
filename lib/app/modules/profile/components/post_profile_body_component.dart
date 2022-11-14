@@ -15,7 +15,7 @@ class PostProfileBodyComponent extends StatelessWidget {
         SizedBox(height: 16.h),
         // const Divider(
         //   color: Colors.black12,
-        //   thickness: 0.2,
+        //   thickness: 10,
         // ),
         const PostComponent(image: 'demo'),
         const Divider(

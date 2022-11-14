@@ -1,8 +1,10 @@
 import 'package:lottie/lottie.dart';
+import 'package:thanh_pho_bao_loc/app/modules/home/controller/home_controller.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
 
-class AddDiscoverComponent extends StatelessWidget {
+class AddDiscoverComponent extends GetWidget<HomeController> {
   const AddDiscoverComponent({super.key});
 
   @override
@@ -27,10 +29,10 @@ class AddDiscoverComponent extends StatelessWidget {
                     topLeft: Radius.circular(10.r),
                     topRight: Radius.circular(10.r),
                   ),
-                  child: Image.asset(
-                    "assets/images/demo5.png",
-                    fit: BoxFit.cover,
-                  ),
+                  child: Obx(() => Image.network(
+                        Get.find<ProfileController>().user.value.image!,
+                        fit: BoxFit.cover,
+                      )),
                 ),
               ),
               Align(
