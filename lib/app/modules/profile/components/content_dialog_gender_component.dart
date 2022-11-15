@@ -29,7 +29,7 @@ class ContentDialogGenderComponent extends GetWidget<ProfileController> {
             child: DropdownButton<String>(
               onTap: (() {}),
               borderRadius: BorderRadius.circular(4.r),
-              value: controller.dropdownValue.value,
+              value: controller.gender.value,
               isExpanded: true,
               icon: const Icon(Icons.arrow_drop_down),
               elevation: 0,
@@ -39,7 +39,7 @@ class ContentDialogGenderComponent extends GetWidget<ProfileController> {
                 fontFamily: GoogleFonts.montserrat().fontFamily,
               ),
               onChanged: (String? value) {
-                controller.dropdownValue(value);
+                controller.gender(value);
               },
               underline: const SizedBox.shrink(),
               items:

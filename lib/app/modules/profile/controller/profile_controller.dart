@@ -51,7 +51,7 @@ class ProfileController extends GetxController {
     'Female',
     'Other'
   ];
-  var dropdownValue = "Choose gender".obs;
+  // var dropdownValue = "Choose gender".obs;
 
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
@@ -94,6 +94,9 @@ class ProfileController extends GetxController {
     fullName(user.value.fullName!);
     email(user.value.email!);
     phone(user.value.phone!);
+    if (user.value.gender != Gender.empty) {
+      gender(user.value.gender.toString());
+    }
     // selectedDate = DateTime.parse(user.value.birthday!);
 
     birthday(formatter.format(user.value.birthday!));
@@ -147,9 +150,10 @@ class ProfileController extends GetxController {
           user.value.birthday = formatter.parse(birthday.value);
           break;
         case "Gender":
-          // content = ContentDialogGenderComponent(
-          //     textController: controller.textController);
-          // typeTextInput = TextInputType.datetime;
+          switch (gender) {
+            case Gender.femail:
+          }
+          user.value.gender = Gender;
           break;
       }
       log("${user.value.birthday} OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
