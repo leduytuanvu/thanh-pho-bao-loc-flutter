@@ -33,6 +33,7 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
                                   contentPadding: EdgeInsets.zero,
+                                  insetPadding: EdgeInsets.zero,
                                   content: Image.network(
                                     controller.user.value.wallpaper!,
                                     fit: BoxFit.cover,
@@ -179,6 +180,7 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                                     builder: (BuildContext context) =>
                                         AlertDialog(
                                       contentPadding: EdgeInsets.zero,
+                                      insetPadding: EdgeInsets.zero,
                                       content: Image.network(
                                         controller.user.value.image!,
                                         fit: BoxFit.cover,
@@ -281,24 +283,26 @@ class ProfileHeaderComponent extends GetWidget<ProfileController> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: Obx(() => ClipRRect(
-                            borderRadius: BorderRadius.circular(100.r),
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: controller.user.value.image!,
-                              height: 95.r,
-                              width: 95.r,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      CircularProgressIndicator(
-                                value: downloadProgress.progress,
-                                strokeWidth: 1.w,
-                                color: Colors.black38,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                      child: Obx(
+                        () => ClipRRect(
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: controller.user.value.image!,
+                            height: 95.r,
+                            width: 95.r,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                              strokeWidth: 1.w,
+                              color: Colors.black38,
                             ),
-                          )),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

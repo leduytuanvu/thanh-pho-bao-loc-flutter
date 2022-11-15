@@ -4,6 +4,7 @@ import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/controller/bottom_bar_c
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/components/icon_bottom_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/screen/home_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/screen/message_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/notify/screen/notify_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/screen/profile_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/screen/search_screen.dart';
@@ -18,7 +19,7 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
       const HomeScreen(),
       const SearchScreen(),
       const MessageScreen(),
-      const ProfileScreen(),
+      const NotifyScreen(),
       const ProfileScreen(),
     ];
     return Scaffold(
@@ -50,74 +51,66 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
                 ),
               ),
             ),
-            Obx(
-              () => AnimatedPositioned(
-                duration: const Duration(milliseconds: 200),
-                bottom: controller.isVisible.value ? 0.0 : -56.h,
-                left: 0.0,
-                right: 0.0,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 6.h),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(100.0.r),
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 200),
+              // bottom: controller.isVisible.value ? 0.0 : -56.h,
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(color: Colors.white),
+                    height: 55.0.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        IconBottomComponent(
+                          index: 0,
+                          icon: 'house_solid.svg',
+                          lable: 'Home',
                         ),
-                        height: 50.0.h,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            IconBottomComponent(
-                              index: 0,
-                              icon: 'house_solid.svg',
-                              lable: 'Home',
-                            ),
-                            IconBottomComponent(
-                              index: 1,
-                              icon: 'search_solid.svg',
-                              lable: 'Search',
-                            ),
-                            IconBottomComponent(
-                              index: 2,
-                              icon: 'star_solid.svg',
-                              lable: 'Message',
-                            ),
-                            IconBottomComponent(
-                              index: 3,
-                              icon: 'cart_shopping_solid.svg',
-                              lable: 'Home',
-                            ),
-                            IconBottomComponent(
-                              index: 4,
-                              icon: 'user_solid.svg',
-                              lable: 'Profile',
-                            ),
-                          ],
+                        IconBottomComponent(
+                          index: 1,
+                          icon: 'search_solid.svg',
+                          lable: 'Search',
                         ),
-                      ),
-                      Obx(() {
-                        return Get.find<ProfileController>()
-                                    .updateProfileState
-                                    .value ==
-                                UpdateProfileState.loading
-                            ? Positioned.fill(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(100.0.r),
-                                    color: Colors.black.withOpacity(0.6),
-                                  ),
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                ),
-                              )
-                            : const SizedBox.shrink();
-                      })
-                    ],
+                        IconBottomComponent(
+                          index: 2,
+                          icon: 'star_solid.svg',
+                          lable: 'Message',
+                        ),
+                        IconBottomComponent(
+                          index: 3,
+                          icon: 'cart_shopping_solid.svg',
+                          lable: 'Home',
+                        ),
+                        IconBottomComponent(
+                          index: 4,
+                          icon: 'user_solid.svg',
+                          lable: 'Profile',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  Obx(() {
+                    return Get.find<ProfileController>()
+                                .updateProfileState
+                                .value ==
+                            UpdateProfileState.loading
+                        ? Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100.0.r),
+                                color: Colors.black.withOpacity(0.6),
+                              ),
+                              height: double.infinity,
+                              width: double.infinity,
+                            ),
+                          )
+                        : const SizedBox.shrink();
+                  })
+                ],
               ),
             ),
           ],

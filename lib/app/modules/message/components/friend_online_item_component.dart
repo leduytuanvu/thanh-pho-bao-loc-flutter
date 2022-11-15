@@ -32,7 +32,12 @@ class FriendOnlineItemComponent extends GetWidget<MessageController> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(100.r),
-                  child: Image.network(image),
+                  child: Image.network(
+                    image,
+                    height: 64.w,
+                    width: 64.w,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Positioned(
                   right: 2.5.w,

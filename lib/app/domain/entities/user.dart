@@ -60,8 +60,9 @@ class User {
         dateTimeBirthday = (json['birthday'] as Timestamp).toDate();
         log("$dateTimeBirthday TRUE");
       } else {
-        dateTimeBirthday =
-            DateFormat("yyyy-MM-dd hh:mm:ss").parse(json['birthday']);
+        dateTimeBirthday = DateFormat("yyyy-MM-dd hh:mm:ss").parse(
+          json['birthday'].toString(),
+        );
         log("$dateTimeBirthday FALSE");
       }
     }
@@ -135,12 +136,13 @@ class User {
     data['username'] = username;
     data['password'] = password;
     data['status'] = status!.statusToString;
-    data['birthday'] = birthday != null ? null : null;
+    data['birthday'] = birthday!.toString();
     data['lastSignIn'] = lastSignIn != null ? null : null;
     data['statusAccount'] = statusAccount!.statusAccountToString;
     data['gender'] = gender!.genderToString;
     data['signInByGoogle'] = signInByGoogle;
     log("${data['createdAt']} to map");
+    log("${data['birthday']} to map birthsy");
     return data;
   }
 

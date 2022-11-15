@@ -86,15 +86,6 @@ class AuthRepository extends IAuthRepository {
                   baseResponse.message = 'Sign in with google success !';
                 }
               }
-              // var responseLocal = LocalStorageService.setUser(userEntity);
-              // SET RESULT
-              // if (responseLocal.statusAction == StatusAction.failure) {
-              //   baseResponse.message = responseLocal.message;
-              // } else {
-              //   baseResponse.data = userEntity;
-              //   baseResponse.statusAction = StatusAction.success;
-              //   baseResponse.message = 'Sign in with google success !';
-              // }
             }
           }
         }
@@ -279,6 +270,8 @@ class AuthRepository extends IAuthRepository {
     );
     try {
       await FirebaseAuth.instance.signOut();
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      googleSignIn.signOut();
       LocalStorageService.clearAllData();
       baseResponse.statusAction = StatusAction.success;
       baseResponse.message = 'SIGN OUT SUCCESS !';

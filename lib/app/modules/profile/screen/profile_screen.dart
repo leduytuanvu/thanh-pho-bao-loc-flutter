@@ -21,23 +21,6 @@ class ProfileScreen extends GetWidget<ProfileController> {
               child: Column(
                 children: [
                   const ProfileHeaderComponent(),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Icon(
-                  //       Icons.camera_alt,
-                  //       color: Colors.black45,
-                  //       size: 16.sp,
-                  //     ),
-                  //     SizedBox(width: 5.w),
-                  //     Text(
-                  //       "Change avatar",
-                  //       style: TextStyle(
-                  //         fontFamily: GoogleFonts.montserrat().fontFamily,
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                   SizedBox(height: 16.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),

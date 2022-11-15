@@ -13,18 +13,8 @@ class ContentDialogPhoneComponent extends StatelessWidget {
     controller.text = "+84";
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      // color: Colors.red,
-
       child: Row(
         children: [
-          // Text(
-          //   '+84',
-          //   style: TextStyle(
-          //     fontFamily: GoogleFonts.montserrat().fontFamily,
-          //     fontSize: 15.sp,
-          //     // fontWeight: FontWeight.bold,
-          //   ),
-          // ),
           SizedBox(
             width: 45.w,
             child: TextField(
@@ -38,7 +28,6 @@ class ContentDialogPhoneComponent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                   borderSide: BorderSide.none,
                 ),
-                // hintText: "Enter new ${title.toLowerCase()}",
                 hintStyle: TextStyle(
                   fontFamily: GoogleFonts.montserrat().fontFamily,
                   color: Colors.black26,
@@ -52,26 +41,15 @@ class ContentDialogPhoneComponent extends StatelessWidget {
                 color: Colors.black87,
                 fontSize: 15.sp,
               ),
-              // cursorHeight: ,
             ),
           ),
           SizedBox(width: 6.w),
           Expanded(
             child: TextField(
               enableInteractiveSelection: false,
-              onTap: () {
-                // controller.textController.selection =
-                //     TextSelection.collapsed(
-                //   offset: controller.textController.text.length,
-                // );
-              },
-              // autofocus: true,
-              onChanged: ((value) {
-                // controller.textController.text = value;
-              }),
-              // controller: controller.textController..text = value,
+              onTap: () {},
+              onChanged: ((value) {}),
               controller: textController,
-
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(left: 15.w, right: 15.w),
@@ -81,32 +59,11 @@ class ContentDialogPhoneComponent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                   borderSide: BorderSide.none,
                 ),
-                // hintText: "Enter new ${title.toLowerCase()}",
                 hintStyle: TextStyle(
                   fontFamily: GoogleFonts.montserrat().fontFamily,
                   color: Colors.black26,
                 ),
                 prefixIconConstraints: const BoxConstraints(),
-                // alignLabelWithHint: true,
-                // floatingLabelAlignment: FloatingLabelAlignment.center,
-
-                // prefixIcon: widget.title == "Phone"
-                //     ? Padding(
-                //         padding: EdgeInsets.only(
-                //           left: 15.w,
-                //           right: 6.w,
-                //           bottom: 1.w,
-                //         ),
-                //         child: Text(
-                //           '+84  |',
-                //           style: TextStyle(
-                //             fontFamily: GoogleFonts.montserrat().fontFamily,
-                //             color: Colors.black87,
-                //             fontSize: 15.sp,
-                //           ),
-                //         ),
-                //       )
-                //     : null,
               ),
               cursorColor: Colors.black12,
               cursorWidth: 0.6.w,

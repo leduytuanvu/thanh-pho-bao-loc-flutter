@@ -1,8 +1,7 @@
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
-// import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_change_avatar_component.dart';
-import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_date_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_gender_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_phone_component.dart';
+// import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_change_avatar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_text_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
@@ -10,68 +9,97 @@ import '../../../core/utils/export.dart';
 
 class ProfileRowItemComponent extends GetWidget<ProfileController> {
   final String title;
-  // final String value;
   const ProfileRowItemComponent({
     super.key,
     required this.title,
-    // required this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    var value = "";
-    // log("$value VALIEJEAFDF");
-    // var textController = TextEditingController();
-    // textController.text = value;
-    late Widget content;
-    var typeTextInput = TextInputType.name;
+    Widget content = const SizedBox.shrink();
+    Widget value = const SizedBox.shrink();
     switch (title) {
-      case "Email":
-        content = ContentDialogTextComponent(
-            textController: controller.textController);
-        typeTextInput = TextInputType.emailAddress;
-        value = controller.emailTextController.text;
-        break;
-      case "Phone":
-        content = ContentDialogPhoneComponent(
-            textController: controller.textController);
-        typeTextInput = TextInputType.phone;
-        value = controller.phoneTextController.text;
-        break;
       case "Full name":
         content = ContentDialogTextComponent(
           textController: controller.fullNameTextController,
         );
-        value = controller.fullNameTextController.text;
-        typeTextInput = TextInputType.name;
+        value = Obx(() => Text(
+              controller.fullName.value,
+              style: TextStyle(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                fontSize: 15.sp,
+              ),
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ));
         break;
-      case "Birthday":
-        content = ContentDialogDateComponent(
-            textController: controller.textController);
-        typeTextInput = TextInputType.datetime;
+      case "Email":
+        content = ContentDialogTextComponent(
+          textController: controller.emailTextController,
+        );
+        value = Obx(() => Text(
+              controller.email.value,
+              style: TextStyle(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                fontSize: 15.sp,
+              ),
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ));
         break;
+      case "Phone":
+        content = ContentDialogPhoneComponent(
+          textController: controller.phoneTextController,
+        );
+        value = Obx(() => Text(
+              controller.phone.value,
+              style: TextStyle(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                fontSize: 15.sp,
+              ),
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ));
+        break;
+      // case "Birthday":
+      //   content = ContentDialogDateComponent(
+      //     textController: controller.textController,
+      //   );
+      //   value = Obx(() => Text(
+      //         controller.birthday.value,
+      //         style: TextStyle(
+      //           fontFamily: GoogleFonts.montserrat().fontFamily,
+      //           fontSize: 15.sp,
+      //         ),
+      //         textAlign: TextAlign.right,
+      //         maxLines: 1,
+      //         overflow: TextOverflow.ellipsis,
+      //       ));
+      //   break;
       case "Gender":
         content = ContentDialogGenderComponent(
-            textController: controller.textController);
-        typeTextInput = TextInputType.datetime;
+          textController: controller.textController,
+        );
+        value = Obx(() => Text(
+              controller.gender.value,
+              style: TextStyle(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                fontSize: 15.sp,
+              ),
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ));
         break;
-      // case "Change avatar":
-      //   content = const ContentDialogChangeAvatarComponent();
-      //   typeTextInput = TextInputType.datetime;
-      //   break;
-      // case "Change wallpaper":
-      //   content = const ContentDialogChangeAvatarComponent();
-      //   typeTextInput = TextInputType.datetime;
-      //   break;
     }
 
     return Container(
       color: Colors.grey.shade100.withOpacity(0.6),
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 13.w,
-          // right: 11.w,
-        ),
+        padding: EdgeInsets.only(left: 13.w),
         child: Row(
           children: [
             Text(
@@ -81,21 +109,8 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                 fontSize: 15.sp,
               ),
             ),
-            // const Spacer(),
             SizedBox(width: 10.w),
-            Expanded(
-              child: Text(
-                value,
-                style: TextStyle(
-                  fontFamily: GoogleFonts.montserrat().fontFamily,
-                  fontSize: 15.sp,
-                ),
-                textAlign: TextAlign.right,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            // SizedBox(width: 5.w),
+            Expanded(child: value),
             GestureDetector(
               onTap: () {
                 showDialog<String>(
@@ -118,12 +133,6 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                       ),
                     ),
                     content: content,
-                    // contentPadding: EdgeInsets.only(
-                    //   left: 20.w,
-                    //   right: 20.w,
-                    //   bottom: 12.w,
-                    //   top: 20.w,
-                    // ),
                     actions: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(

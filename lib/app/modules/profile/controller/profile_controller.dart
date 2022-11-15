@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
@@ -39,8 +38,12 @@ class ProfileController extends GetxController {
   var updateProfileState = UpdateProfileState.initial.obs;
   var shouldPop = false.obs;
 
+  var fullName = "".obs;
+  var email = "".obs;
+  var phone = "".obs;
   var birthday = "".obs;
   var gender = "Choose gender".obs;
+  DateTime selectedDate = DateTime.now();
 
   final List<String> list = <String>[
     'Choose gender',
@@ -72,35 +75,29 @@ class ProfileController extends GetxController {
   ];
 
   @override
-  void onReady() {
-    // scrollController.addListener(() {
-    //   if (scrollController.position.userScrollDirection ==
-    //       ScrollDirection.reverse) {
-    //     log("Scrolling down");
-    //   } else {
-    //     log("Scrolling up");
-    //   }
-    //   log("Scrolling up");
-    // });
-    super.onInit();
-  }
-
-  @override
   void onInit() {
-    log("init");
-    scrollController = ScrollController()
-      ..addListener(() {
-        log("Scrolling up");
-        if (scrollController.position.userScrollDirection ==
-            ScrollDirection.reverse) {
-          log("Scrolling down");
-        } else {
-          log("Scrolling up");
-        }
-      });
+    // scrollController = ScrollController()
+    //   ..addListener(() {
+    //     log("Scrolling up");
+    //     if (scrollController.position.userScrollDirection ==
+    //         ScrollDirection.reverse) {
+    //       log("Scrolling down");
+    //     } else {
+    //       log("Scrolling up");
+    //     }
+    //   });
+
     user(LocalStorageService.getUser().data);
     fullNameTextController.text = user.value.fullName!;
+    emailTextController.text = user.value.email!;
+    phoneTextController.text = user.value.phone!;
+    fullName(user.value.fullName!);
+    email(user.value.email!);
+    phone(user.value.phone!);
+    // selectedDate = DateTime.parse(user.value.birthday!);
+
     birthday(formatter.format(user.value.birthday!));
+    log("$birthday SINH NHAT NE ===========================");
     switch (user.value.gender) {
       case Gender.empty:
         gender("");
@@ -117,6 +114,7 @@ class ProfileController extends GetxController {
       case null:
         break;
     }
+    log("$gender GENDER");
     super.onInit();
   }
 
@@ -133,16 +131,20 @@ class ProfileController extends GetxController {
     try {
       switch (title) {
         case "Email":
-          user.value.email = textController.text;
-          break;
-        case "Phone":
-          user.value.phone = textController.text;
+          user.value.email = emailTextController.text;
+          email(emailTextController.text);
           break;
         case "Full name":
           user.value.fullName = fullNameTextController.text;
+          fullName(fullNameTextController.text);
+          break;
+
+        case "Phone":
+          user.value.phone = phoneTextController.text;
+          phone(phoneTextController.text);
           break;
         case "Birthday":
-          user.value.birthday = formatter.parse(textController.text);
+          user.value.birthday = formatter.parse(birthday.value);
           break;
         case "Gender":
           // content = ContentDialogGenderComponent(
@@ -150,7 +152,8 @@ class ProfileController extends GetxController {
           // typeTextInput = TextInputType.datetime;
           break;
       }
-
+      log("${user.value.birthday} OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+      log("${birthday.value} OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.value.id)

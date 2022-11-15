@@ -6,6 +6,8 @@ import 'package:thanh_pho_bao_loc/app/modules/home/binding/home_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/home/screen/home_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/binding/message_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/message/screen/message_screen.dart';
+import 'package:thanh_pho_bao_loc/app/modules/notify/binding/notify_binding.dart';
+import 'package:thanh_pho_bao_loc/app/modules/notify/screen/notify_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/binding/profile_binding.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/screen/profile_screen.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/binding/search_binding.dart';
@@ -71,6 +73,11 @@ class Pages {
       name: Routers.viewOtherProfileScreen,
       page: () => ViewOtherProfileScreen(),
       binding: ViewOtherProfileBinding(),
+    ),
+    GetPage(
+      name: Routers.notifyScreen,
+      page: () => const NotifyScreen(),
+      binding: NotifyBinding(),
     ),
   ];
 }

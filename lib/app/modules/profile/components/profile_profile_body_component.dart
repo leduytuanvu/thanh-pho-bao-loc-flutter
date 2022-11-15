@@ -1,7 +1,6 @@
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/profile_row_item_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
-
 import '../../../core/utils/export.dart';
 
 class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
@@ -16,30 +15,29 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
         SizedBox(height: 26.h),
         const ProfileRowItemComponent(
           title: "Full name",
-          // value: controller.user.value.fullName!,
         ),
         SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Email",
-          // value: controller.user.value.email!,
         ),
         SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Phone",
-          // value: controller.user.value.phone == ""
-          //     ? ""
-          //     : controller.user.value.phone!,
         ),
-        SizedBox(height: 10.h),
-        const ProfileRowItemComponent(
-          title: "Birthday",
-          // value: controller.birthday.value,
-        ),
+        // SizedBox(height: 10.h),
+        // const ProfileRowItemComponent(
+        //   title: "Birthday",
+        // ),
         SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Gender",
-          // value: controller.gender.value,
         ),
+        // SizedBox(height: 10.h),
+        controller.user.value.signInByGoogle == true
+            ? const SizedBox.shrink()
+            : const ProfileRowItemComponent(
+                title: "Password",
+              ),
         SizedBox(height: 10.h),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -58,18 +56,7 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
                       fontSize: 18.sp,
                     ),
                   ),
-                  // content: const Text('AlertDialog description'),
                   actions: <Widget>[
-                    // TextButton(
-                    //   onPressed: () => Get.back(),
-                    //   child: Text(
-                    //     'Cancel',
-                    //     style: TextStyle(
-                    //       fontFamily: GoogleFonts.montserrat().fontFamily,
-                    //       color: Colors.black,
-                    //     ),
-                    //   ),
-                    // ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 14.w),
                       child: Row(
@@ -109,12 +96,6 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
           ),
         ),
         SizedBox(height: 120.h),
-        controller.user.value.signInByGoogle == true
-            ? const SizedBox.shrink()
-            : const ProfileRowItemComponent(
-                title: "Password",
-                // value: controller.user.value.password!,
-              ),
       ],
     );
   }
