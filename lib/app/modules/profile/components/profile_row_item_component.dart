@@ -1,7 +1,9 @@
+import 'package:intl/intl.dart';
 import 'package:thanh_pho_bao_loc/app/components/gradient_button_conponent.dart';
+import 'package:thanh_pho_bao_loc/app/core/extensions/extensions.dart';
+import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_date_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_gender_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_phone_component.dart';
-// import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_change_avatar_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/components/content_dialog_text_component.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
@@ -64,21 +66,25 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
               overflow: TextOverflow.ellipsis,
             ));
         break;
-      // case "Birthday":
-      //   content = ContentDialogDateComponent(
-      //     textController: controller.textController,
-      //   );
-      //   value = Obx(() => Text(
-      //         controller.birthday.value,
-      //         style: TextStyle(
-      //           fontFamily: GoogleFonts.montserrat().fontFamily,
-      //           fontSize: 15.sp,
-      //         ),
-      //         textAlign: TextAlign.right,
-      //         maxLines: 1,
-      //         overflow: TextOverflow.ellipsis,
-      //       ));
-      //   break;
+      case "Birthday":
+        content = const ContentDialogDateComponent();
+        value = Obx(
+          () => Text(
+            // controller.birthday.value,
+            DateFormat.yMMMMd('en_US').format(
+              DateFormat("dd-MM-yyyy").parse(controller.birthday.value),
+            ),
+            // controller.birthday.value,
+            style: TextStyle(
+              fontFamily: GoogleFonts.montserrat().fontFamily,
+              fontSize: 15.sp,
+            ),
+            textAlign: TextAlign.right,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        );
+        break;
       case "Gender":
         content = ContentDialogGenderComponent(
           textController: controller.textController,
@@ -113,6 +119,31 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
             Expanded(child: value),
             GestureDetector(
               onTap: () {
+                switch (title) {
+                  case "Full name":
+                    controller.fullNameTextController.text =
+                        controller.fullName.value;
+                    break;
+                  case "Email":
+                    controller.emailTextController.text =
+                        controller.email.value;
+                    break;
+                  case "Phone":
+                    controller.phoneTextController.text =
+                        controller.phone.value;
+                    break;
+                  case "Gender":
+                    String tmp = controller.user.value.gender!.genderToString
+                        .capitalizeFirstLetter;
+                    tmp == "Empty"
+                        ? controller.genderTmp("Choose gender")
+                        : controller.genderTmp(tmp);
+                    break;
+                  case "Birthday":
+                    // controller.phoneTextController.text =
+                    //     controller.phone.value;
+                    break;
+                }
                 showDialog<String>(
                   barrierColor: Colors.black87.withOpacity(0.8),
                   context: context,

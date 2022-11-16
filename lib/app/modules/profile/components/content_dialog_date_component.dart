@@ -6,20 +6,18 @@ import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_control
 import '../../../core/utils/export.dart';
 
 class ContentDialogDateComponent extends GetWidget<ProfileController> {
-  final TextEditingController textController;
   const ContentDialogDateComponent({
     super.key,
-    required this.textController,
   });
 
   @override
   Widget build(BuildContext context) {
-    DateTime birthday =
-        DateFormat("dd-MM-yyyy").parse(controller.birthday.value);
+    // DateTime birthday =
+    //     DateFormat("dd-MM-yyyy").parse(controller.birthday.value);
     // var controller = TextEditingController();
-    log(birthday.toString());
-    log(birthday.toIso8601String());
-    log('=====================================================');
+    // log(birthday.toString());
+    // log(birthday.toIso8601String());
+    // log('=====================================================');
     return SizedBox(
       height: 50.h,
       width: MediaQuery.of(context).size.width,
@@ -43,7 +41,10 @@ class ContentDialogDateComponent extends GetWidget<ProfileController> {
             ),
           ),
         ),
-        initialValue: birthday.toIso8601String(),
+        initialValue: DateFormat("dd-MM-yyyy")
+            .parse(controller.birthday.value)
+            .toIso8601String(),
+        // initialValue: birthday.toIso8601String(),
         style: TextStyle(
           fontFamily: GoogleFonts.montserrat().fontFamily,
           color: Colors.black87,
@@ -52,8 +53,16 @@ class ContentDialogDateComponent extends GetWidget<ProfileController> {
         firstDate: DateTime(1900),
         lastDate: DateTime(2100),
         onChanged: (val) => {
-          controller.birthday(val),
-          log("$val OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"),
+          // log("${birthday.toIso8601String()} BEFORE"),
+          log("${controller.birthday.value} BEFORE"),
+          log(DateFormat("dd-MM-yyyy")
+              .parse(controller.birthday.value)
+              .toIso8601String()),
+          log(val),
+          controller.birthdayTmp(val),
+          // log(controller.birthday.value),
+          // log("==============================================="),
+          // log("${birthday.toIso8601String()} AFTER"),
         },
         validator: (val) {
           return null;

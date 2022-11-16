@@ -1,3 +1,4 @@
+import 'package:thanh_pho_bao_loc/app/core/extensions/extensions.dart';
 import 'package:thanh_pho_bao_loc/app/modules/profile/controller/profile_controller.dart';
 
 import '../../../core/utils/export.dart';
@@ -27,9 +28,12 @@ class ContentDialogGenderComponent extends GetWidget<ProfileController> {
           child: Padding(
             padding: EdgeInsets.only(left: 6.w),
             child: DropdownButton<String>(
+              hint: const Text("Choose gender"),
               onTap: (() {}),
               borderRadius: BorderRadius.circular(4.r),
-              value: controller.gender.value,
+              value: controller.genderTmp.value == ""
+                  ? null
+                  : controller.genderTmp.value,
               isExpanded: true,
               icon: const Icon(Icons.arrow_drop_down),
               elevation: 0,
@@ -39,23 +43,40 @@ class ContentDialogGenderComponent extends GetWidget<ProfileController> {
                 fontFamily: GoogleFonts.montserrat().fontFamily,
               ),
               onChanged: (String? value) {
-                controller.gender(value);
+                controller.genderTmp(value);
               },
               underline: const SizedBox.shrink(),
-              items:
-                  controller.list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(
-                      fontFamily: GoogleFonts.montserrat().fontFamily,
-                      color: Colors.black87,
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                );
-              }).toList(),
+              items: controller.user.value.gender!.genderToString
+                          .capitalizeFirstLetter ==
+                      "Empty"
+                  ? controller.listEmpty
+                      .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            color: Colors.black87,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      );
+                    }).toList()
+                  : controller.list
+                      .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            color: Colors.black87,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      );
+                    }).toList(),
             ),
           ),
         ),

@@ -12,7 +12,7 @@ enum StatusAccount {
 
 enum Gender {
   male,
-  femail,
+  female,
   other,
   empty,
 }

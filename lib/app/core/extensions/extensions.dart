@@ -3,7 +3,7 @@ import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
 extension StringX on String {
   Gender get stringToGender {
     var tmp = {
-      "femail": Gender.femail,
+      "female": Gender.female,
       "male": Gender.male,
       "other": Gender.other,
       "empty": Gender.empty
@@ -29,6 +29,9 @@ extension StringX on String {
     };
     return tmp[this] ?? StatusAccount.inactive;
   }
+
+  String get capitalizeFirstLetter =>
+      "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
 }
 
 extension GenderX on Gender {

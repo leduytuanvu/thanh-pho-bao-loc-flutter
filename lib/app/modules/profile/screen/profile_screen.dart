@@ -24,32 +24,32 @@ class ProfileScreen extends GetWidget<ProfileController> {
                   SizedBox(height: 16.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    child: Text(
-                      controller.user.value.fullName!,
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.montserrat().fontFamily,
-                        fontSize: 18.sp,
-                        shadows: [
-                          Shadow(
-                            color: Colors.black.withOpacity(0.5),
-                            offset: const Offset(0.5, 0.5),
-                            blurRadius: 1,
+                    child: Obx(() => Text(
+                          controller.fullName.value,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            fontSize: 18.sp,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.5),
+                                offset: const Offset(0.5, 0.5),
+                                blurRadius: 1,
+                              ),
+                            ],
+                            // fontWeight: FontWeight.bold,
                           ),
-                        ],
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                        )),
                   ),
                   SizedBox(height: 5.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    child: Text(
-                      controller.user.value.email!,
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.montserrat().fontFamily,
-                        fontSize: 14.sp,
-                      ),
-                    ),
+                    child: Obx(() => Text(
+                          controller.email.value,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.montserrat().fontFamily,
+                            fontSize: 14.sp,
+                          ),
+                        )),
                   ),
                   SizedBox(height: 30.h),
                   const TabBarProfileComponent(),
@@ -92,9 +92,35 @@ class ProfileScreen extends GetWidget<ProfileController> {
                           ),
                         )
                       : const SizedBox.shrink(),
-                ))
+                )),
+            // TmpDialog(
+            //   name: "test",
+            //   onChangeName: (value) {
+            //     print(value);
+            //   },
+            // )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TmpDialog extends StatelessWidget {
+  const TmpDialog(
+      {super.key, required this.name, this.onChangeName, this.onSubmit});
+  final String name;
+  final ValueChanged<String>? onChangeName;
+  final ValueChanged<String>? onSubmit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: TextField(
+        textInputAction: TextInputAction.next,
+        decoration: const InputDecoration(),
+        controller: TextEditingController(text: name),
+        onChanged: (value) => onChangeName?.call(value),
       ),
     );
   }

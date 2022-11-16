@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import '../../../core/utils/export.dart';
 import 'package:thanh_pho_bao_loc/app/domain/entities/user.dart' as user_entity;
 
@@ -34,9 +33,29 @@ class ViewOtherProfileScreen extends StatelessWidget {
               children: [
                 Positioned.fill(
                   bottom: 30.r,
-                  child: Image.network(
-                    user.wallpaper!,
+                  child: CachedNetworkImage(
                     fit: BoxFit.cover,
+                    imageUrl: user.wallpaper!,
+                    // height: 94.r,
+                    // width: 94.r,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Padding(
+                      padding: EdgeInsets.only(top: 40.0.r),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          height: 20.r,
+                          width: 20.r,
+                          child: CircularProgressIndicator(
+                            value: downloadProgress.progress,
+                            strokeWidth: 1.w,
+                            color: Colors.black38,
+                          ),
+                        ),
+                      ),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
                 Align(

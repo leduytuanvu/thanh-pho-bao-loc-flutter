@@ -24,10 +24,10 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
         const ProfileRowItemComponent(
           title: "Phone",
         ),
-        // SizedBox(height: 10.h),
-        // const ProfileRowItemComponent(
-        //   title: "Birthday",
-        // ),
+        SizedBox(height: 10.h),
+        const ProfileRowItemComponent(
+          title: "Birthday",
+        ),
         SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Gender",

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 import 'package:thanh_pho_bao_loc/app/modules/search/components/search_header_component.dart';
@@ -35,7 +34,7 @@ class SearchScreen extends GetWidget<SearchController> {
                 );
               } else if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.data!.docs.isNotEmpty) {
-                  log("${snapshot.data!.docs} lenght ne");
+                  // log("${snapshot.data!.docs} lenght ne");
                   return ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,

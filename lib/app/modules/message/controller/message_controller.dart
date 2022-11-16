@@ -8,14 +8,14 @@ class MessageController extends GetxController {
 
   @override
   void onInit() {
-    log("init");
+    // log("init");
     user(LocalStorageService.getUser().data);
     super.onInit();
   }
 
   @override
   void onReady() {
-    log("ready");
+    // log("ready");
     user(LocalStorageService.getUser().data);
     super.onReady();
   }

@@ -54,8 +54,8 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                                 child: CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   imageUrl: data['image'],
-                                  height: 50.w,
-                                  width: 50.w,
+                                  height: 55.w,
+                                  width: 55.w,
                                   progressIndicatorBuilder:
                                       (context, url, downloadProgress) =>
                                           Padding(
@@ -111,10 +111,10 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                               // SizedBox(width: 10.w),
                             ],
                           ),
-                          SizedBox(height: 10.h),
+                          // SizedBox(height: 14.h),
                           // Divider(
                           //   color: Colors.black12,
-                          //   thickness: 10.h,
+                          //   thickness: 0.2.h,
                           // ),
                         ],
                       );

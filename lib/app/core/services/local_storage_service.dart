@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:get/state_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
@@ -27,12 +26,12 @@ class LocalStorageService extends GetxService {
     try {
       var userString =
           sharedPreferences!.getString(AppString.sharedReferenceUser);
-      log("User string get in local >>>>> $userString");
+      // log("User string get in local >>>>> $userString");
       if (userString == null) {
         response.message == "User in local is empty !";
       } else {
         Map<String, dynamic> userMap = jsonDecode(userString);
-        log("User map get in local >>>>> $userMap");
+        // log("User map get in local >>>>> $userMap");
         // userMap.
         user_entity.User user = user_entity.User.fromJson(userMap, false);
         response.data = user;
@@ -54,7 +53,7 @@ class LocalStorageService extends GetxService {
     );
     try {
       var encodeResponse = jsonEncode(user.toMap());
-      log("$encodeResponse RESPONSE NE");
+      // log("$encodeResponse RESPONSE NE");
       sharedPreferences!.setString(
         AppString.sharedReferenceUser,
         encodeResponse,
@@ -63,7 +62,7 @@ class LocalStorageService extends GetxService {
       response.message = "Set user in local success !";
       response.statusAction = StatusAction.success;
       user_entity.User tmp = LocalStorageService.getUser().data;
-      log("${tmp.createdAt} SAVE LOCAL");
+      // log("${tmp.createdAt} SAVE LOCAL");
     } catch (e) {
       response.message = e.toString();
     }

@@ -42,15 +42,18 @@ class ProfileController extends GetxController {
   var email = "".obs;
   var phone = "".obs;
   var birthday = "".obs;
+  var birthdayTmp = "".obs;
+  var genderTmp = "Choose gender".obs;
   var gender = "Choose gender".obs;
   DateTime selectedDate = DateTime.now();
 
-  final List<String> list = <String>[
-    'Choose gender',
-    'Male',
-    'Female',
-    'Other'
+  final List<String> listEmpty = <String>[
+    "Choose gender",
+    "Male",
+    "Female",
+    "Other"
   ];
+  final List<String> list = <String>["Male", "Female", "Other"];
   // var dropdownValue = "Choose gender".obs;
 
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
@@ -76,43 +79,41 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    // scrollController = ScrollController()
-    //   ..addListener(() {
-    //     log("Scrolling up");
-    //     if (scrollController.position.userScrollDirection ==
-    //         ScrollDirection.reverse) {
-    //       log("Scrolling down");
-    //     } else {
-    //       log("Scrolling up");
-    //     }
-    //   });
-
     user(LocalStorageService.getUser().data);
+
     fullNameTextController.text = user.value.fullName!;
     emailTextController.text = user.value.email!;
     phoneTextController.text = user.value.phone!;
+
     fullName(user.value.fullName!);
     email(user.value.email!);
     phone(user.value.phone!);
+
     if (user.value.gender != Gender.empty) {
       gender(user.value.gender.toString());
     }
     // selectedDate = DateTime.parse(user.value.birthday!);
 
     birthday(formatter.format(user.value.birthday!));
-    log("$birthday SINH NHAT NE ===========================");
+    birthdayTmp(formatter.format(user.value.birthday!));
+
+    log("${user.value.gender} Gender cua user");
     switch (user.value.gender) {
       case Gender.empty:
         gender("");
+        genderTmp("Choose gender");
         break;
-      case Gender.femail:
+      case Gender.female:
         gender("Female");
+        genderTmp("Female");
         break;
       case Gender.male:
         gender("Male");
+        genderTmp("Male");
         break;
       case Gender.other:
         gender("Other");
+        genderTmp("Other");
         break;
       case null:
         break;
@@ -135,45 +136,85 @@ class ProfileController extends GetxController {
       switch (title) {
         case "Email":
           user.value.email = emailTextController.text;
-          email(emailTextController.text);
           break;
         case "Full name":
           user.value.fullName = fullNameTextController.text;
-          fullName(fullNameTextController.text);
           break;
-
         case "Phone":
           user.value.phone = phoneTextController.text;
-          phone(phoneTextController.text);
           break;
         case "Birthday":
-          user.value.birthday = formatter.parse(birthday.value);
+          log("${user.value.birthday} user birthday");
+          log("${birthday.value} birthday value");
+          log("${birthdayTmp.value} birthday tmp value");
+          // DateTime tmp = DateTime.parse(birthday.value);
+          // log("$tmp 222222222222222");
+          DateTime formatDate;
+          formatDate = DateFormat("yyyy-MM-dd").parse(
+            birthdayTmp.value,
+          );
+          log("$formatDate 111111111111111111111111111111dateTimeBirthday");
+          user.value.birthday = formatDate;
+          log("${user.value.birthday} 111111111111111111111111111111dateTimeBirthday");
           break;
         case "Gender":
-          switch (gender) {
-            case Gender.femail:
+          log("${genderTmp.value} Gender TMP");
+          log("${gender.value} Gender");
+          switch (genderTmp.value) {
+            case "female":
+            case "Female":
+              user.value.gender = Gender.female;
+              break;
+            case "male":
+            case "Male":
+              user.value.gender = Gender.male;
+              break;
+            case "other":
+            case "Other":
+              user.value.gender = Gender.other;
+              break;
+            case "Choose gender":
+              user.value.gender = Gender.empty;
+              break;
           }
-          user.value.gender = Gender;
           break;
       }
-      log("${user.value.birthday} OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-      log("${birthday.value} OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.value.id)
           .update(user.value.toJson());
       LocalStorageService.setUser(user.value);
+      updateProfileState(UpdateProfileState.initial);
+      switch (title) {
+        case "Email":
+          email(emailTextController.text);
+          break;
+        case "Full name":
+          fullName(fullNameTextController.text);
+          break;
+        case "Phone":
+          phone(phoneTextController.text);
+          break;
+        case "Birthday":
+          final DateFormat formatter = DateFormat('dd-MM-yyyy');
+          birthday(formatter.format(user.value.birthday!));
+          // birthday(user.value.birthday!.toIso8601String());
+          // log("${birthday.value} HEHEHEHEEH");
+          break;
+        case "Gender":
+          gender(genderTmp.value);
+          break;
+      }
     } catch (e) {
-      log(e.toString());
+      log("$e IN UPDATE USER");
     }
-    updateProfileState(UpdateProfileState.initial);
   }
 
   // SIGN OUT
   Future<void> signOut({BuildContext? context}) async {
     Get.back();
     signOutState(SignOutState.loading);
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     var baseResponse = await authRepository.signOut();
     await LocalStorageService.clearAllData();
     if (baseResponse.statusAction == StatusAction.success) {

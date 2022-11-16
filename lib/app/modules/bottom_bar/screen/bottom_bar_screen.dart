@@ -51,8 +51,8 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
                 ),
               ),
             ),
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
+            Positioned(
+              // duration: const Duration(milliseconds: 200),
               // bottom: controller.isVisible.value ? 0.0 : -56.h,
               bottom: 0.0,
               left: 0.0,
@@ -60,7 +60,9 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: const BoxDecoration(color: Colors.white),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                    ),
                     height: 55.0.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +103,21 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
                         ? Positioned.fill(
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100.0.r),
+                                color: Colors.black.withOpacity(0.6),
+                              ),
+                              height: double.infinity,
+                              width: double.infinity,
+                            ),
+                          )
+                        : const SizedBox.shrink();
+                  }),
+                  Obx(() {
+                    return Get.find<ProfileController>().signOutState.value ==
+                            SignOutState.loading
+                        ? Positioned.fill(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                // color: Colors.black.withOpacity(0.9),
                                 color: Colors.black.withOpacity(0.6),
                               ),
                               height: double.infinity,

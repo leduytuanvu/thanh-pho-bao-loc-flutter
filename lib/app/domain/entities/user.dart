@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart' as user_firebase;
 import 'package:intl/intl.dart';
 import 'package:thanh_pho_bao_loc/app/core/config/app_enums.dart';
@@ -41,15 +40,15 @@ class User {
   });
 
   User.fromJson(Map<String, dynamic> json, bool isTimeStamp) {
-    log("${json['createdAt']} create date");
+    // log("${json['createdAt']} create date");
     DateTime datetimeCreateAt;
     if (isTimeStamp) {
       datetimeCreateAt = (json['createdAt'] as Timestamp).toDate();
-      log("$datetimeCreateAt TRUE");
+      // log("$datetimeCreateAt TRUE");
     } else {
       datetimeCreateAt =
           DateFormat("yyyy-MM-dd hh:mm:ss").parse(json['createdAt']);
-      log("$datetimeCreateAt FALSE");
+      // log("$datetimeCreateAt FALSE");
     }
 
     DateTime dateTimeBirthday;
@@ -58,12 +57,12 @@ class User {
     } else {
       if (isTimeStamp) {
         dateTimeBirthday = (json['birthday'] as Timestamp).toDate();
-        log("$dateTimeBirthday TRUE");
+        // log("$dateTimeBirthday TRUE");
       } else {
         dateTimeBirthday = DateFormat("yyyy-MM-dd hh:mm:ss").parse(
           json['birthday'].toString(),
         );
-        log("$dateTimeBirthday FALSE");
+        // log("$dateTimeBirthday FALSE");
       }
     }
 
@@ -73,15 +72,15 @@ class User {
     } else {
       if (isTimeStamp) {
         dateTimeLastSignIn = (json['lastSignIn'] as Timestamp).toDate();
-        log("$dateTimeLastSignIn TRUE");
+        // log("$dateTimeLastSignIn TRUE");
       } else {
         dateTimeLastSignIn =
             DateFormat("yyyy-MM-dd hh:mm:ss").parse(json['lastSignIn']);
-        log("$dateTimeLastSignIn FALSE");
+        // log("$dateTimeLastSignIn FALSE");
       }
     }
 
-    log("$datetimeCreateAt DATE TIME NE");
+    // log("$datetimeCreateAt DATE TIME NE");
     id = json['id'];
     fullName = json['fullName'];
     email = json['email'];
@@ -100,7 +99,7 @@ class User {
   }
 
   factory User.fromFirebase(user_firebase.User user) {
-    log("${DateTime.now().toString()} from firebase");
+    // log("${DateTime.now().toString()} from firebase");
     return User(
       id: user.uid,
       email: user.email ?? "",
@@ -141,8 +140,8 @@ class User {
     data['statusAccount'] = statusAccount!.statusAccountToString;
     data['gender'] = gender!.genderToString;
     data['signInByGoogle'] = signInByGoogle;
-    log("${data['createdAt']} to map");
-    log("${data['birthday']} to map birthsy");
+    // log("${data['createdAt']} to map");
+    // log("${data['birthday']} to map birthsy");
     return data;
   }
 
@@ -163,7 +162,7 @@ class User {
     data['statusAccount'] = statusAccount!.statusAccountToString;
     data['gender'] = gender!.genderToString;
     data['signInByGoogle'] = signInByGoogle;
-    log("${data['createdAt']} to json");
+    // log("${data['createdAt']} to json");
     return data;
   }
 }
