@@ -14,8 +14,8 @@ class PostComponent extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                height: 42.w,
-                width: 42.w,
+                height: 45.w,
+                width: 45.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
                     100.r,
@@ -51,11 +51,14 @@ class PostComponent extends StatelessWidget {
                                     fontSize: 15.sp,
                                   ),
                                 ),
-                                Image.asset(
-                                  "assets/images/menu.png",
-                                  height: 20.w,
-                                  width: 20.w,
-                                  color: Colors.black38,
+                                Container(
+                                  color: Colors.transparent,
+                                  child: Image.asset(
+                                    "assets/images/menu.png",
+                                    height: 20.w,
+                                    width: 20.w,
+                                    color: Colors.black38,
+                                  ),
                                 ),
                               ],
                             ),

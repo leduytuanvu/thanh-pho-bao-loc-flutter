@@ -51,7 +51,7 @@ class NotifyScreen extends GetWidget<NotifyController> {
                           "Henry want to add friend with you, henry want to add friend with you, henry want to add friend with you, henry want to add friend with you",
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
-                            fontSize: 15.sp,
+                            fontSize: 13.sp,
                             // fontWeight: FontWeight.bold,
                           ),
                           maxLines: 2,
@@ -113,7 +113,7 @@ class NotifyScreen extends GetWidget<NotifyController> {
                           "Henry want to add friend with you, henry want to add friend with you, henry want to add friend with you, henry want to add friend with you",
                           style: TextStyle(
                             fontFamily: GoogleFonts.montserrat().fontFamily,
-                            fontSize: 15.sp,
+                            fontSize: 13.sp,
                             // fontWeight: FontWeight.bold,
                           ),
                           maxLines: 2,

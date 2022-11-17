@@ -14,7 +14,7 @@ class MessageScreen extends GetWidget<MessageController> {
     // controller.user(LocalStorageService.getUser().data);
     return SafeArea(
       child: ListView(
-        physics: const BouncingScrollPhysics(),
+        // physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         // crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.start,
@@ -112,6 +112,33 @@ class MessageScreen extends GetWidget<MessageController> {
               ],
             ),
           ),
+          SizedBox(height: 16.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Row(
+              children: const [
+                CircleAvatarHaveNumComponent(),
+                HaveNewMessageComponent(),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.h),
+          Divider(
+            height: 0.h,
+            thickness: 0.2.h,
+            color: Colors.black12,
+          ),
+          SizedBox(height: 16.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Row(
+              children: const [
+                CircleAvatarNotHaveNumComponent(),
+                NotHaveNewMessageComponent(),
+              ],
+            ),
+          ),
+          SizedBox(height: 100.h),
         ],
       ),
     );

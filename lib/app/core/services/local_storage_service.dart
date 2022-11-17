@@ -61,7 +61,6 @@ class LocalStorageService extends GetxService {
 
       response.message = "Set user in local success !";
       response.statusAction = StatusAction.success;
-      user_entity.User tmp = LocalStorageService.getUser().data;
       // log("${tmp.createdAt} SAVE LOCAL");
     } catch (e) {
       response.message = e.toString();

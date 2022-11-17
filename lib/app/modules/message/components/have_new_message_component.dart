@@ -26,7 +26,8 @@ class HaveNewMessageComponent extends StatelessWidget {
                   '12:00 AM',
                   style: TextStyle(
                     fontFamily: GoogleFonts.montserrat().fontFamily,
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -36,7 +37,7 @@ class HaveNewMessageComponent extends StatelessWidget {
               'What kind of food do you like? And What do you like to eat?',
               style: TextStyle(
                 fontFamily: GoogleFonts.montserrat().fontFamily,
-                fontSize: 14.sp,
+                fontSize: 13.sp,
                 height: 1.4,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,

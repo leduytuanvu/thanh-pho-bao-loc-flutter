@@ -16,19 +16,15 @@ class ProfileProfileBodyComponent extends GetWidget<ProfileController> {
         const ProfileRowItemComponent(
           title: "Full name",
         ),
-        SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Email",
         ),
-        SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Phone",
         ),
-        SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Birthday",
         ),
-        SizedBox(height: 10.h),
         const ProfileRowItemComponent(
           title: "Gender",
         ),

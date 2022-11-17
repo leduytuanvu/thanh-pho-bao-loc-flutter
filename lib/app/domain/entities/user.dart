@@ -50,10 +50,11 @@ class User {
           DateFormat("yyyy-MM-dd hh:mm:ss").parse(json['createdAt']);
       // log("$datetimeCreateAt FALSE");
     }
-
-    DateTime dateTimeBirthday;
+    bool checkDateIsNull = false;
+    DateTime? dateTimeBirthday;
     if (json['birthday'] == null) {
-      dateTimeBirthday = DateTime.now();
+      // dateTimeBirthday = DateTime();
+      checkDateIsNull = true;
     } else {
       if (isTimeStamp) {
         dateTimeBirthday = (json['birthday'] as Timestamp).toDate();
@@ -91,7 +92,7 @@ class User {
     username = json['username'];
     password = json['password'];
     status = json['status'].toString().stringToStatus;
-    birthday = dateTimeBirthday;
+    birthday = checkDateIsNull == true ? null : dateTimeBirthday;
     lastSignIn = dateTimeLastSignIn;
     signInByGoogle = json['signInByGoogle'];
     statusAccount = json['statusAccount'].toString().stringToStatusAccount;
@@ -135,8 +136,8 @@ class User {
     data['username'] = username;
     data['password'] = password;
     data['status'] = status!.statusToString;
-    data['birthday'] = birthday!.toString();
-    data['lastSignIn'] = lastSignIn != null ? null : null;
+    data['birthday'] = birthday == null ? null : birthday!.toString();
+    data['lastSignIn'] = lastSignIn == null ? null : lastSignIn!.toString();
     data['statusAccount'] = statusAccount!.statusAccountToString;
     data['gender'] = gender!.genderToString;
     data['signInByGoogle'] = signInByGoogle;

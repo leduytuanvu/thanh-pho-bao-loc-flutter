@@ -23,15 +23,14 @@ class ContentDialogDateComponent extends GetWidget<ProfileController> {
       width: MediaQuery.of(context).size.width,
       child: DateTimePicker(
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 0, bottom: 40.h),
+          contentPadding: EdgeInsets.only(top: 0, bottom: 0.h),
           filled: true,
           fillColor: Colors.grey.shade200,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.r),
             borderSide: BorderSide.none,
           ),
-          // hintText: "Enter new ${title.toLowerCase()}",
-
+          hintText: "Choose date",
           prefixIconConstraints: const BoxConstraints(),
           prefixIcon: Padding(
             padding: EdgeInsets.symmetric(horizontal: 14.0.r),
@@ -41,9 +40,11 @@ class ContentDialogDateComponent extends GetWidget<ProfileController> {
             ),
           ),
         ),
-        initialValue: DateFormat("dd-MM-yyyy")
-            .parse(controller.birthday.value)
-            .toIso8601String(),
+        initialValue: controller.birthday.value != ""
+            ? DateFormat("dd-MM-yyyy")
+                .parse(controller.birthday.value)
+                .toIso8601String()
+            : null,
         // initialValue: birthday.toIso8601String(),
         style: TextStyle(
           fontFamily: GoogleFonts.montserrat().fontFamily,
@@ -54,10 +55,10 @@ class ContentDialogDateComponent extends GetWidget<ProfileController> {
         lastDate: DateTime(2100),
         onChanged: (val) => {
           // log("${birthday.toIso8601String()} BEFORE"),
-          log("${controller.birthday.value} BEFORE"),
-          log(DateFormat("dd-MM-yyyy")
-              .parse(controller.birthday.value)
-              .toIso8601String()),
+          // log("${controller.birthday.value} BEFORE"),
+          // log(DateFormat("dd-MM-yyyy")
+          //     .parse(controller.birthday.value)
+          //     .toIso8601String()),
           log(val),
           controller.birthdayTmp(val),
           // log(controller.birthday.value),

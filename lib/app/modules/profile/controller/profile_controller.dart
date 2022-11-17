@@ -38,6 +38,7 @@ class ProfileController extends GetxController {
   var updateProfileState = UpdateProfileState.initial.obs;
   var shouldPop = false.obs;
 
+  var password = "".obs;
   var fullName = "".obs;
   var email = "".obs;
   var phone = "".obs;
@@ -45,6 +46,7 @@ class ProfileController extends GetxController {
   var birthdayTmp = "".obs;
   var genderTmp = "Choose gender".obs;
   var gender = "Choose gender".obs;
+
   DateTime selectedDate = DateTime.now();
 
   final List<String> listEmpty = <String>[
@@ -64,6 +66,7 @@ class ProfileController extends GetxController {
   final fullNameTextController = TextEditingController();
   final phoneTextController = TextEditingController();
   final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
 
   late final ScrollController scrollController;
   final PageController pageController = PageController();
@@ -84,18 +87,22 @@ class ProfileController extends GetxController {
     fullNameTextController.text = user.value.fullName!;
     emailTextController.text = user.value.email!;
     phoneTextController.text = user.value.phone!;
+    passwordTextController.text = user.value.password!;
 
     fullName(user.value.fullName!);
     email(user.value.email!);
     phone(user.value.phone!);
-
+    password(user.value.password!);
+    log("${user.value.password} passs");
     if (user.value.gender != Gender.empty) {
       gender(user.value.gender.toString());
     }
     // selectedDate = DateTime.parse(user.value.birthday!);
-
-    birthday(formatter.format(user.value.birthday!));
-    birthdayTmp(formatter.format(user.value.birthday!));
+    if (user.value.birthday != null) {
+      birthday(formatter.format(user.value.birthday!));
+      birthdayTmp(formatter.format(user.value.birthday!));
+    }
+    // birthday(formatter.format(user.value.birthday!));
 
     log("${user.value.gender} Gender cua user");
     switch (user.value.gender) {
@@ -144,22 +151,13 @@ class ProfileController extends GetxController {
           user.value.phone = phoneTextController.text;
           break;
         case "Birthday":
-          log("${user.value.birthday} user birthday");
-          log("${birthday.value} birthday value");
-          log("${birthdayTmp.value} birthday tmp value");
-          // DateTime tmp = DateTime.parse(birthday.value);
-          // log("$tmp 222222222222222");
           DateTime formatDate;
           formatDate = DateFormat("yyyy-MM-dd").parse(
             birthdayTmp.value,
           );
-          log("$formatDate 111111111111111111111111111111dateTimeBirthday");
           user.value.birthday = formatDate;
-          log("${user.value.birthday} 111111111111111111111111111111dateTimeBirthday");
           break;
         case "Gender":
-          log("${genderTmp.value} Gender TMP");
-          log("${gender.value} Gender");
           switch (genderTmp.value) {
             case "female":
             case "Female":
@@ -177,6 +175,9 @@ class ProfileController extends GetxController {
               user.value.gender = Gender.empty;
               break;
           }
+          break;
+        case "Password":
+          user.value.password = passwordTextController.text;
           break;
       }
       await FirebaseFirestore.instance
@@ -203,6 +204,9 @@ class ProfileController extends GetxController {
           break;
         case "Gender":
           gender(genderTmp.value);
+          break;
+        case "Password":
+          password(passwordTextController.text);
           break;
       }
     } catch (e) {

@@ -127,8 +127,7 @@ class AuthRepository extends IAuthRepository {
           if (credential.user != null) {
             // SEND EMAIL VERIFICATION
             var responseSendEmail = await sendEmailVerification();
-            if (responseSendEmail.statusAction == StatusAction.success &&
-                responseSendEmail.data != null) {
+            if (responseSendEmail.statusAction == StatusAction.success) {
               // SIGN IN USER BY EMAIL AND PASSWORD
               // SignInRequest signInRequest = SignInRequest(
               //   email: request.email,

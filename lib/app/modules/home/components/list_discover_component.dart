@@ -21,17 +21,11 @@ class ListDiscoverComponent extends StatelessWidget {
     List<Widget> list = [];
     for (int i = 0; i < listImage.length; i++) {
       if (i == 0) {
-        list.add(
-          const AddDiscoverComponent(),
-        );
+        list.add(const AddDiscoverComponent());
       } else if (i == listImage.length - 1) {
-        list.add(
-          DiscoverItemComponent(image: listImage[i], isEnd: true),
-        );
+        list.add(DiscoverItemComponent(image: listImage[i], isEnd: true));
       } else {
-        list.add(
-          DiscoverItemComponent(image: listImage[i]),
-        );
+        list.add(DiscoverItemComponent(image: listImage[i]));
       }
     }
     return list;
@@ -41,7 +35,6 @@ class ListDiscoverComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 185.h,
-      // color: Colors.red,
       child: Padding(
         padding: EdgeInsets.only(top: 2.h, bottom: 2.h),
         child: Theme(
@@ -51,7 +44,7 @@ class ListDiscoverComponent extends StatelessWidget {
           ),
           child: NotificationListener<UserScrollNotification>(
             onNotification: (scrollController) {
-              return true;
+              return false;
             },
             child: ListView(
               physics: const BouncingScrollPhysics(),

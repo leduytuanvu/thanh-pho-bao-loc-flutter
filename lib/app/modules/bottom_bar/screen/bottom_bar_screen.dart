@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/rendering.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/controller/bottom_bar_controller.dart';
 import 'package:thanh_pho_bao_loc/app/modules/bottom_bar/components/icon_bottom_component.dart';
@@ -60,9 +61,7 @@ class BottomBarScreen extends GetWidget<BottomBarController> {
               child: Stack(
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
+                    decoration: const BoxDecoration(color: Colors.white),
                     height: 55.0.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

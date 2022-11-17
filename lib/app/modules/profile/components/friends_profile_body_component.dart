@@ -13,7 +13,7 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Padding(
-        padding: EdgeInsets.only(top: 8.h),
+        padding: EdgeInsets.only(top: 10.h),
         child: StreamBuilder(
           stream: controller.searchUser(search: controller.search.value),
           builder: (context, snapshot) {
@@ -35,88 +35,81 @@ class FriendProfileBodyComponent extends GetWidget<ProfileController> {
                           snapshot.data!.docs[index].data();
                       // DateTime dt = (data['createdAt'] as Timestamp).toDate();
                       // var date = DateFormat("yyyy-MM-dd hh:mm:ss").format(dt);
-                      return Column(
-                        children: [
-                          SizedBox(height: 16.h),
-                          Row(
-                            children: [
-                              SizedBox(width: 25.w),
-                              ClipRRect(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(100),
+                      return Padding(
+                        padding: EdgeInsets.only(top: 16.h),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 25.w),
+                            ClipRRect(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(100),
+                              ),
+                              // child: Image(
+                              //   image: NetworkImage(data['image']),
+                              //   width: 55.w,
+                              //   height: 55.w,
+                              //   fit: BoxFit.cover,
+                              // ),
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: data['image'],
+                                height: 55.w,
+                                width: 55.w,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) => Padding(
+                                  padding: EdgeInsets.all(18.0.w),
+                                  child: CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    strokeWidth: 1.w,
+                                    color: Colors.black38,
+                                  ),
                                 ),
-                                // child: Image(
-                                //   image: NetworkImage(data['image']),
-                                //   width: 55.w,
-                                //   height: 55.w,
-                                //   fit: BoxFit.cover,
-                                // ),
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: data['image'],
-                                  height: 55.w,
-                                  width: 55.w,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Padding(
-                                    padding: EdgeInsets.all(18.0.w),
-                                    child: CircularProgressIndicator(
-                                      value: downloadProgress.progress,
-                                      strokeWidth: 1.w,
-                                      color: Colors.black38,
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                            ),
+                            SizedBox(width: 17.w),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    data['fullName'] ?? "",
+                                    style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.montserrat().fontFamily,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14.sp,
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                              ),
-                              SizedBox(width: 17.w),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data['fullName'] ?? "",
-                                      style: TextStyle(
-                                        fontFamily:
-                                            GoogleFonts.montserrat().fontFamily,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.sp,
-                                      ),
+                                  SizedBox(height: 4.h),
+                                  Text(
+                                    data['email'] ?? "",
+                                    style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.montserrat().fontFamily,
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: 13.sp,
                                     ),
-                                    SizedBox(height: 4.h),
-                                    Text(
-                                      data['email'] ?? "",
-                                      style: TextStyle(
-                                        fontFamily:
-                                            GoogleFonts.montserrat().fontFamily,
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 13.sp,
-                                      ),
-                                    ),
-                                    // Text(date),
-                                  ],
-                                ),
+                                  ),
+                                  // Text(date),
+                                ],
                               ),
-                              SizedBox(width: 10.w),
-                              SizedBox(
-                                height: 30.h,
-                                width: 80.w,
-                                child: Lottie.asset(
-                                  'assets/videos/send.json',
-                                  height: 250.w,
-                                  width: 250.w,
-                                ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Container(
+                              color: Colors.transparent,
+                              height: 40.h,
+                              width: 50.w,
+                              child: Lottie.asset(
+                                'assets/videos/send.json',
+                                height: 250.w,
+                                width: 250.w,
                               ),
-                              // SizedBox(width: 10.w),
-                            ],
-                          ),
-                          // SizedBox(height: 14.h),
-                          // Divider(
-                          //   color: Colors.black12,
-                          //   thickness: 0.2.h,
-                          // ),
-                        ],
+                            ),
+                            SizedBox(width: 14.w),
+                          ],
+                        ),
                       );
                     },
                     itemCount: snapshot.data!.docs.length,
