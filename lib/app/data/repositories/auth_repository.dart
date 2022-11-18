@@ -233,12 +233,22 @@ class AuthRepository extends IAuthRepository {
                   .where("password", isEqualTo: request.password)
                   .get();
               if (docUser.docs.isNotEmpty) {
-                baseResponse.data = user_entity.User.fromJson(
-                  docUser.docs.first.data(),
-                  true,
+                var localStorageResponse = LocalStorageService.setUser(
+                  user_entity.User.fromJson(
+                    docUser.docs.first.data(),
+                    true,
+                  ),
                 );
-                baseResponse.message = "SIGN IN SUCCESS !";
-                baseResponse.statusAction = StatusAction.success;
+                if (localStorageResponse.statusAction == StatusAction.failure) {
+                  baseResponse.message = localStorageResponse.message;
+                } else {
+                  baseResponse.data = user_entity.User.fromJson(
+                    docUser.docs.first.data(),
+                    true,
+                  );
+                  baseResponse.message = "SIGN IN SUCCESS !";
+                  baseResponse.statusAction = StatusAction.success;
+                }
               }
             }
           }

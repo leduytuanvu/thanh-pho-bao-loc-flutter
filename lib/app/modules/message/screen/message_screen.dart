@@ -22,13 +22,23 @@ class MessageScreen extends GetWidget<MessageController> {
           SizedBox(height: 20.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Text(
-              'Message',
-              style: TextStyle(
-                fontFamily: GoogleFonts.montserrat().fontFamily,
-                fontSize: 28.sp,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Message',
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.montserrat().fontFamily,
+                    fontSize: 28.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  "Create group chat",
+                  style: TextStyle(),
+                )
+              ],
             ),
           ),
           SizedBox(height: 16.h),

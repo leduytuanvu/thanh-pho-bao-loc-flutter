@@ -50,12 +50,15 @@ class GradientButtonWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(radius),
           ),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontFamily: GoogleFonts.montserrat().fontFamily,
-              fontWeight: FontWeight.bold,
-              fontSize: fontSize,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                fontWeight: FontWeight.bold,
+                fontSize: fontSize,
+              ),
             ),
           ),
         ),

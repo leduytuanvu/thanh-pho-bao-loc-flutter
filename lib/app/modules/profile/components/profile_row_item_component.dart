@@ -173,67 +173,92 @@ class ProfileRowItemComponent extends GetWidget<ProfileController> {
                   ),
                   content: content,
                   actions: <Widget>[
-                    Padding(
-                      padding:
-                          EdgeInsets.only(bottom: 14.w, left: 3.w, right: 3.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 35.w,
-                              width: 90.w,
-                              child: GradientButtonWidget(
-                                title: 'Cancle',
-                                function: (() => Get.back()),
-                                fontSize: 15.sp,
-                                radius: 8.r,
-                              ),
+                    title != "Email"
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 14.w, left: 3.w, right: 3.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 35.w,
+                                    width: 90.w,
+                                    child: GradientButtonWidget(
+                                      title: 'Cancle',
+                                      function: (() => Get.back()),
+                                      fontSize: 15.sp,
+                                      radius: 8.r,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 6.w),
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 35.w,
+                                    width: 90.w,
+                                    child: GradientButtonWidget(
+                                      title: 'Save',
+                                      function: (() async {
+                                        Get.back();
+                                        controller.updateUser(title: title);
+                                      }),
+                                      fontSize: 15.sp,
+                                      radius: 8.r,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          SizedBox(width: 6.w),
-                          Expanded(
-                            child: SizedBox(
-                              height: 35.w,
-                              width: 90.w,
-                              child: GradientButtonWidget(
-                                title: 'Save',
-                                function: (() async {
-                                  Get.back();
-                                  controller.updateUser(title: title);
-                                }),
-                                fontSize: 15.sp,
-                                radius: 8.r,
-                              ),
+                          )
+                        : Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 14.w, left: 3.w, right: 3.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 35.w,
+                                    width: 90.w,
+                                    child: GradientButtonWidget(
+                                      title: 'Cancle',
+                                      function: (() => Get.back()),
+                                      fontSize: 15.sp,
+                                      radius: 8.r,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    )
+                          )
                   ],
                 ),
               );
             },
-            child: Row(
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: GoogleFonts.montserrat().fontFamily,
-                    fontSize: 15.sp,
+            child: Container(
+              color: Colors.transparent,
+              child: Row(
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: GoogleFonts.montserrat().fontFamily,
+                      fontSize: 15.sp,
+                    ),
                   ),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(child: value),
-                SizedBox(
-                  height: 45.w,
-                  width: 40.w,
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12.sp,
-                  ),
-                )
-              ],
+                  SizedBox(width: 10.w),
+                  Expanded(child: value),
+                  SizedBox(
+                    height: 45.w,
+                    width: 40.w,
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12.sp,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
