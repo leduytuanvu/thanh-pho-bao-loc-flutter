@@ -1,28 +1,28 @@
 ## This is an social app
 ## Packages: 
-###get: ^4.6.5
-###lottie: ^1.4.3
-###google_fonts: ^3.0.1
-###flutter_screenutil: ^5.6.0
-###firebase_core: ^2.1.1
-###firebase_auth: ^4.1.0
-###google_sign_in: ^5.4.2
-###shared_preferences: ^2.0.15
-###firebase_storage: ^11.0.3
-###cloud_firestore: ^4.0.3
-###animated_snack_bar: ^0.3.0
-###flutter_svg: ^1.1.6
-###dropdown_button2: ^1.8.9
-###circular_profile_avatar: ^2.0.5
-###cached_network_image: ^3.2.2
-###intl: ^0.17.0
-###date_time_picker: ^2.1.0
-###image_picker: ^0.8.6
-###video_player: ^2.4.7
-###animated_text_kit: ^4.2.2
-###path: ^1.8.2
-###custom_refresh_indicator: ^2.0.1
-###rive: ^0.9.1
+### get: ^4.6.5
+### lottie: ^1.4.3
+### google_fonts: ^3.0.1
+### flutter_screenutil: ^5.6.0
+### firebase_core: ^2.1.1
+### firebase_auth: ^4.1.0
+### google_sign_in: ^5.4.2
+### shared_preferences: ^2.0.15
+### firebase_storage: ^11.0.3
+### cloud_firestore: ^4.0.3
+### animated_snack_bar: ^0.3.0
+### flutter_svg: ^1.1.6
+### dropdown_button2: ^1.8.9
+### circular_profile_avatar: ^2.0.5
+### cached_network_image: ^3.2.2
+### intl: ^0.17.0
+### date_time_picker: ^2.1.0
+### image_picker: ^0.8.6
+### video_player: ^2.4.7
+### animated_text_kit: ^4.2.2
+### path: ^1.8.2
+### custom_refresh_indicator: ^2.0.1
+### rive: ^0.9.1
 ## Screenshots
 
 ![z4018244861344_fd413b123490e8132452bb4f2959c546](https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg)
