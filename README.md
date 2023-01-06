@@ -23,6 +23,7 @@
 ### path: ^1.8.2
 ### custom_refresh_indicator: ^2.0.1
 ### rive: ^0.9.1
+## Architecture MVVM
 ## Screenshots
 
 ![z4018244861344_fd413b123490e8132452bb4f2959c546](https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg)
