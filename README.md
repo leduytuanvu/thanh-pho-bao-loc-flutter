@@ -2,10 +2,10 @@
 ## Architecture MVVM
 ## Screenshots
 <div display: inline>
-  <img src="https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg" alt="..." width="240" />
-  <img src="https://user-images.githubusercontent.com/81070850/210974801-a34e326c-3a91-4d39-9e75-5ad5a7fbf6a3.jpg" alt="..." width="240" />
-  <img src="https://user-images.githubusercontent.com/81070850/210974821-7cc742f9-5a77-42a9-ab50-d98017af1266.jpg" alt="..." width="240" />
-  <img src="https://user-images.githubusercontent.com/81070850/210974867-7b3f345a-dced-463d-9ded-eda6936427f7.jpg" alt="..." width="240" />
+  <img src="https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg" alt="..." width="242" />
+  <img src="https://user-images.githubusercontent.com/81070850/210974801-a34e326c-3a91-4d39-9e75-5ad5a7fbf6a3.jpg" alt="..." width="242" />
+  <img src="https://user-images.githubusercontent.com/81070850/210974821-7cc742f9-5a77-42a9-ab50-d98017af1266.jpg" alt="..." width="242" />
+  <img src="https://user-images.githubusercontent.com/81070850/210974867-7b3f345a-dced-463d-9ded-eda6936427f7.jpg" alt="..." width="242" />
 </div>
 
 
