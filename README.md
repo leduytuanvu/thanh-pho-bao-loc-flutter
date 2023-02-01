@@ -1,8 +1,11 @@
 ## This is an social app
 ## Architecture MVVM
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg" alt="..." width="250" />
-<img src="https://user-images.githubusercontent.com/81070850/210974801-a34e326c-3a91-4d39-9e75-5ad5a7fbf6a3.jpg" alt="..." width="250" />
+<div display: inline>
+  <img src="https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg" alt="..." width="250" />
+  <img src="https://user-images.githubusercontent.com/81070850/210974801-a34e326c-3a91-4d39-9e75-5ad5a7fbf6a3.jpg" alt="..." width="250" />
+</div>
+
 
 ![z4018244861344_fd413b123490e8132452bb4f2959c546](https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg)
 ![z4018244865842_c254356c84a9499a27f4edfb32d9fdb3](https://user-images.githubusercontent.com/81070850/210974801-a34e326c-3a91-4d39-9e75-5ad5a7fbf6a3.jpg)
