@@ -1,8 +1,8 @@
 ## This is an social app
 ## Architecture MVVM
 ## Screenshots
+<video src='https://user-images.githubusercontent.com/81070850/215925114-141a848a-e268-4ed4-ab41-1d24291a6043.mp4' width=998/>
 
-https://user-images.githubusercontent.com/81070850/215925114-141a848a-e268-4ed4-ab41-1d24291a6043.mp4
 
 <div display: inline>
   <img src="https://user-images.githubusercontent.com/81070850/210974795-d739c520-bd57-4f21-b833-aebc8041b039.jpg" alt="..." width="250" />
