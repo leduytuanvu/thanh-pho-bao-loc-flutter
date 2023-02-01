@@ -1,6 +1,14 @@
-## This is an social app
-## Architecture MVVM
-## Screenshots
+## Description
+- This is an social app
+
+## Technologies
+- Language: Dart
+- Architecture: MVVM
+- Manage state: GetX
+- Database: Firebase storage
+- Packages: path, video_player, image_picker, cached_network_image, cloud_firestore, firebase_storage, shared_preferences, google_sign_in, firebase_auth, firebase_core, get...
+
+## Video and Screenshots
 
 https://user-images.githubusercontent.com/81070850/215926998-118b1eda-c38f-4a61-ba82-ca8176256d19.mp4
 
